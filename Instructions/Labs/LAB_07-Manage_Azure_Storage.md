@@ -1,8 +1,8 @@
 ---
 lab:
-  title: 'Lab 07: Manage Azure storage'
-  module: Administer Azure Storage
-  description: Configure Azure storage accounts, blob storage, and files shares. 
+  title: 'Laboratório 07: Gerenciar Azure storage'
+  module: Administrar Azure Storage
+  description: Configurar storage accounts do Azure, blob storage e file shares.
   duration: 50 minutes
   level: 400
   islab: true
@@ -11,41 +11,42 @@ lab:
     - Azure storage
     - Blob storage
     - File shares
+layout: default
 ---
 
-# Lab 07 - Manage Azure Storage
+# Lab 07 - Gerenciar Azure Storage
 
-## Lab introduction
+## Introdução ao laboratório
 
-In this lab you learn to create storage accounts for Azure blobs and Azure files. You learn to configure and secure blob containers. You also learn to use Storage Browser to configure and secure Azure file shares. 
+Neste laboratório você aprenderá a criar storage accounts para Azure blobs e Azure files. Você aprenderá a configurar e proteger containers de blob. Também aprenderá a usar o Storage Browser para configurar e proteger file shares do Azure.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the region, but the steps are written using **East US**.
+Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas os passos foram escritos usando **East US**.
 
-## Estimated timing: 50 minutes
+## Tempo estimado: 50 minutos
 
-## Lab scenario
+## Cenário do laboratório
 
-Your organization is currently storing data in on-premises data stores. Most of these files are not accessed frequently. You would like to minimize the cost of storage by placing infrequently accessed files in lower-priced storage tiers. You also plan to explore different protection mechanisms that Azure Storage offers, including network access, authentication, authorization, and replication. Finally, you want to determine to what extent Azure Files is suitable for hosting your on-premises file shares.
+Sua organização atualmente armazena dados em repositórios on-premises. A maioria desses arquivos não é acessada com frequência. Você deseja minimizar o custo de armazenamento colocando arquivos acessados raramente em camadas de armazenamento com preço menor. Você também planeja explorar diferentes mecanismos de proteção que o Azure Storage oferece, incluindo acesso de rede, autenticação, autorização e replicação. Finalmente, você quer determinar em que medida o Azure Files é adequado para hospedar seus file shares on-premises.
 
-## Architecture diagram
+## Diagrama de arquitetura
 
-![Diagram of the tasks.](../media/az104-lab07-architecture.png)
+![Diagrama das tarefas.](../media/az104-lab07-architecture.png)
 
-## Job skills
+## Habilidades do trabalho
 
-+ Task 1: Create and configure a storage account. 
++ Task 1: Create and configure a storage account.
 + Task 2: Create and configure secure blob storage.
 + Task 3: Create and configure secure Azure file storage.
 
-## Task 1: Create and configure a storage account. 
+## Task 1: Create and configure a storage account.
 
-In this task, you will create and configure a storage account. The storage account will use geo-redundant storage and will not have public access. 
+Nesta tarefa, você criará e configurará uma storage account. A storage account usará geo-redundant storage e não terá acesso público.
 
-1. Sign in to the **Azure portal** - `https://portal.azure.com`.
+1. Faça logon no **Azure portal** - `https://portal.azure.com`.
 
-1. Search for and select `Storage accounts`, select **Storage accounts** in the results, and then click **+ Create**.
-   
-1. On the **Basics** tab of the **Create a storage account** blade, specify the following settings (leave others with their default values):
+1. Pesquise e selecione `Storage accounts`, selecione **Storage accounts** nos resultados e então clique em **+ Create**.
+
+1. Na guia **Basics** da lâmina **Create a storage account**, especifique as seguintes configurações (deixe as demais com os valores padrão):
 
     | Setting | Value |
     | --- | --- |
@@ -58,55 +59,55 @@ In this task, you will create and configure a storage account. The storage accou
     | Redundancy            | **Geo-redundant storage** (notice the other options)|
     | Make read access to data available in the event of regional unavailability. | Check the box |
 
-    >**Did you know?** You should use the Standard performance tier for most applications. Use the Premium performance tier for enterprise or high-performance applications. 
+    >**Did you know?** Você deve usar a camada de desempenho Standard para a maioria das aplicações. Use a camada Premium para aplicações corporativas ou de alto desempenho.
 
-1. On the **Advanced** and **Security** tabs, use the informational icons to learn more about the choices. Take the defaults.
-   
-1. On the **Networking** tab, in the **Public network access** section, select **Disable**. This will restrict inbound access while allowing outbound access. 
+1. Nas guias **Advanced** e **Security**, use os ícones informativos para saber mais sobre as opções. Aceite os padrões.
 
-1. Review the **Data protection** tab. Notice 7 days is the default soft delete retention policy. Note you can enable versioning for blobs. Accept the defaults.
+1. Na guia **Networking**, na seção **Public network access**, selecione **Disable**. Isso restringirá o acesso de entrada enquanto permite o acesso de saída.
 
-1. Review the **Encryption** tab. Notice the additional security options. Accept the defaults.
+1. Revise a guia **Data protection**. Observe que 7 dias é a política de retenção de soft delete padrão. Observe que você pode habilitar versioning para blobs. Aceite os padrões.
 
-1. Select **Review + create**, wait for the validation process to complete, and then click **Create**.
+1. Revise a guia **Encryption**. Observe as opções adicionais de segurança. Aceite os padrões.
 
-1. Once the storage account is deployed, select **Go to resource**.
+1. Selecione **Review + create**, aguarde o processo de validação terminar e então clique em **Create**.
 
-1. Review the **Overview** blade and the additional configurations that can be changed. These are global settings for the storage account. Notice the storage account can be used for Blob containers, File shares, Queues, and Tables.
+1. Depois que a storage account for implantada, selecione **Go to resource**.
 
-1. In the **Security + networking** blade, select **Networking**. Notice **Public network access** is disabled.
+1. Revise a lâmina **Overview** e as configurações adicionais que podem ser alteradas. Essas são configurações globais para a storage account. Observe que a storage account pode ser usada para Blob containers, File shares, Queues e Tables.
 
-    + Under Public network access, click **Manage** to open the Public network access configuration blade.
-      
-    + Set **Public network access** to **Enabled**. Set **Public network access scope** to **Enable from selected networks**.
-      
-    + In the **Resource settings: Virtual networks, IP Addresses and exceptions** section, Add your client IPv4 address.
-      
-    + Save your changes. If an informational banner appears suggesting you associate a network security perimeter, you can disregard it and continue.
-  
-1. In the **Data management** blade, select **Redundancy**. Notice the information about your primary and secondary data center locations.
+1. Na lâmina **Security + networking**, selecione **Networking**. Observe que **Public network access** está disabled.
 
-1. In the **Data management** blade, select **Lifecycle management**, and then select **Add a rule**.
+    + Em Public network access, clique **Manage** para abrir a lâmina de configuração Public network access.
 
-    + **Name** the rule `Movetocool`. Notice your options for limiting the scope of the rule. Click **Next**. 
-    
-    + On the **Add rule** page, *if* base blobs were last modified more than `30` days ago *then* **Move to cool storage**. Notice your other choices. 
-    
-    + Notice you can configure other conditions. Select **Add** when you are done exploring.
+    + Defina **Public network access** para **Enabled**. Defina **Public network access scope** para **Enable from selected networks**.
+
+    + Na seção **Resource settings: Virtual networks, IP Addresses and exceptions**, Adicione o endereço IPv4 do seu cliente.
+
+    + Salve suas alterações. Se um banner informativo aparecer sugerindo que você associe um perímetro de segurança de rede, você pode ignorá-lo e continuar.
+
+1. Na lâmina **Data management**, selecione **Redundancy**. Observe as informações sobre as localizações do seu data center primário e secundário.
+
+1. Na lâmina **Data management**, selecione **Lifecycle management**, e então selecione **Add a rule**.
+
+    + Nomeie a regra `Movetocool`. Observe suas opções para limitar o escopo da regra. Clique **Next**.
+
+    + Na página **Add rule**, *se* os base blobs foram modificados pela última vez há mais de `30` dias *então* **Move to cool storage**. Observe suas outras escolhas.
+
+    + Observe que você pode configurar outras condições. Selecione **Add** quando terminar de explorar.
 
     ![Screenshot move to cool rule conditions.](../media/az104-lab07-movetocool.png)
 
 ## Task 2: Create and configure secure blob storage
 
-In this task, you will create a blob container and upload an image. Blob containers are directory-like structures that store unstructured data.
+Nesta tarefa, você criará um container de blob e fará upload de uma imagem. Blob containers são estruturas semelhantes a diretórios que armazenam dados não estruturados.
 
 ### Create a blob container and a time-based retention policy
 
-1. Continue in the Azure portal, working with your storage account.
+1. Continue no Azure portal, trabalhando com sua storage account.
 
-1. In the **Data storage** blade, select **Containers**. 
+1. Na lâmina **Data storage**, selecione **Containers**.
 
-1. Click **+ Add container** and **Create** a container with the following settings:
+1. Clique **+ Add container** e **Create** um container com as seguintes configurações:
 
     | Setting | Value |
     | --- | --- |
@@ -115,32 +116,32 @@ In this task, you will create a blob container and upload an image. Blob contain
 
     ![Screenshot of create a container.](../media/az104-lab07-create-container.png)
 
-1. On your container, scroll to the ellipsis (...) on the far right, select **Access policy**.
+1. No seu container, role até o espaçador de reticências (...) à extrema direita, selecione **Access policy**.
 
-1. If a warning appears stating that authorization with Shared Key is disabled for the account, you can disregard it and continue. 
+1. Se um aviso aparecer afirmando que a autorização com Shared Key está desabilitada para a conta, você pode ignorá-lo e continuar.
 
-1. In the **Immutable blob storage** area, select **Add policy**, change the type from **Legal hold** to **Time-based retention**.
+1. Na área **Immutable blob storage**, selecione **Add policy**, altere o tipo de **Legal hold** para **Time-based retention**.
 
     | Setting | Value |
     | --- | --- |
     | Policy type | **Time-based retention**  |
     | Set retention period for | `180` days |
 
-1. Select **Save**.
+1. Selecione **Save**.
 
-### Manage blob uploads
+### Gerenciar uploads de blob
 
-1. In the storage account's left menu, under **Settings**, select **Configuration** and set **Allow storage account key access** to **Enabled**, then click **Save**. 
+1. No menu à esquerda da storage account, em **Settings**, selecione **Configuration** e configure **Allow storage account key access** para **Enabled**, em seguida clique **Save**.
 
-1. Next, navigate to **Access Control (IAM)**, click **Add role assignment**, select the **Storage Blob Data Contributor** role, and assign it to your user account, then click **Review + assign**.
+1. Em seguida, navegue até **Access Control (IAM)**, clique **Add role assignment**, selecione a role **Storage Blob Data Contributor**, e atribua-a à sua conta de usuário, então clique **Review + assign**.
 
-1. Next, do the same steps as in the previous step to assign the **Storage File Data Privileged Contributor** role.
+1. Em seguida, faça os mesmos passos do passo anterior para atribuir a role **Storage File Data Privileged Contributor**.
 
-1. Once access is configured,  select your **data** container and then click **Upload**.
+1. Depois que o acesso estiver configurado, selecione seu container **data** e então clique **Upload**.
 
-1. On the **Upload blob** blade, expand the **Advanced** section.
+1. Na lâmina **Upload blob**, expanda a seção **Advanced**.
 
-    >**Note**: Locate a file to upload. This can be any type of file, but a small file is best. A sample file can be downloaded from the AllFiles directory. 
+    >**Note**: Localize um arquivo para fazer upload. Pode ser qualquer tipo de arquivo, mas um arquivo pequeno é melhor. Um arquivo de exemplo pode ser baixado do diretório AllFiles.
 
     | Setting | Value |
     | --- | --- |
@@ -152,25 +153,25 @@ In this task, you will create a blob container and upload an image. Blob contain
     | Upload to folder | `securitytest` |
     | Encryption scope | Use existing default container scope |
 
-1. Click **Upload**.
+1. Clique **Upload**.
 
-1. Confirm you have a new folder, and your file was uploaded. 
+1. Confirme que você tem uma nova pasta, e que seu arquivo foi enviado.
 
-1. Select your upload file and review the ellipsis (...) options including **Download**, **Delete**, **Change tier**, and **Acquire lease**.
+1. Selecione o arquivo enviado e revise as opções nas reticências (...) incluindo **Download**, **Delete**, **Change tier**, e **Acquire lease**.
 
-1. Select the uploaded file to open its Overview panel, then copy the URL using the **Copy to clipboard** button in the Properties table. Paste the URL into a new **InPrivate** browser window.
+1. Selecione o arquivo enviado para abrir seu painel Overview, então copie a URL usando o botão **Copy to clipboard** na tabela Properties. Cole a URL em uma nova janela do navegador **InPrivate**.
 
-1. You should be presented with an XML-formatted message stating **ResourceNotFound** or **PublicAccessNotPermitted**.
+1. Você deverá ver uma mensagem em formato XML informando **ResourceNotFound** ou **PublicAccessNotPermitted**.
 
-    > **Note**: This is expected, since the container you created has the public access level set to **Private (no anonymous access)**.
+    > **Note**: Isso é esperado, já que o container que você criou tem o nível de acesso público definido como **Private (no anonymous access)**.
 
-### Configure limited access to the blob storage
+### Configurar acesso limitado ao blob storage
 
-1. Browse back to the file that you uploaded and select the ellipsis (…) to the far right, then select **Generate SAS**.
+1. Navegue de volta ao arquivo que você enviou e selecione as reticências (…) à extrema direita, então selecione **Generate SAS**.
 
-1. Note the warning banner stating that authorization with Shared Key is disabled for this account — this means the Account key signing option will be unavailable.
-  
-1. Specify the following settings (leave others with their default values):Browse back to the file that you uploaded and select the ellipsis (…) to the far right, then select **Generate SAS** and specify the following settings (leave others with their default values):
+1. Observe o banner de aviso indicando que a autorização com Shared Key está desabilitada para esta conta — isso significa que a opção Account key signing estará indisponível.
+
+1. Especifique as seguintes configurações (deixe as demais com seus valores padrão): Navegue de volta ao arquivo que você enviou e selecione as reticências (…) à extrema direita, então selecione **Generate SAS** e especifique as seguintes configurações (deixe as demais com seus valores padrão):
 
     | Setting | Value |
     | --- | --- |
@@ -182,115 +183,115 @@ In this task, you will create a blob container and upload an image. Blob contain
     | Expiry time | current time |
     | Allowed IP addresses | leave blank |
 
-1. Click **Generate SAS token and URL**.
+1. Clique **Generate SAS token and URL**.
 
-1. Copy the **Blob SAS URL** entry to the clipboard.
+1. Copie a entrada **Blob SAS URL** para a área de transferência.
 
-1. Open another InPrivate browser window and navigate to the Blob SAS URL you copied in the previous step.
+1. Abra outra janela do navegador InPrivate e navegue até a Blob SAS URL que você copiou no passo anterior.
 
-    >**Note**: You should be able to view the content of the file. 
+    >**Note**: Você deverá conseguir visualizar o conteúdo do arquivo.
 
 ## Task 3: Create and configure an Azure File storage
 
-In this task, you will create and configure Azure File shares. You will use Storage Browser to manage the file share. 
+Nesta tarefa, você criará e configurará Azure File shares. Você usará o Storage Browser para gerenciar o file share.
 
-### Create the file share and upload a file
+### Criar o file share e enviar um arquivo
 
-1. In the Azure portal, navigate back to your storage account, in the **Data storage** blade, click **Classic file shares**.
+1. No Azure portal, navegue de volta para sua storage account, na lâmina **Data storage**, clique **Classic file shares**.
 
-1. Click **+ Classic file share** and on the **Basics** tab give the file share a name, `share1`. 
+1. Clique **+ Classic file share** e na guia **Basics** dê ao file share um nome, `share1`.
 
-1. Notice the **Access tier** options. Keep the default **Transaction optimized**.
-   
-1. Move to the **Backup** tab and ensure **Enable backup** is **not** checked. We are disabling backup to simplify the lab configuration.
+1. Observe as opções de **Access tier**. Mantenha o padrão **Transaction optimized**.
 
-1. Click **Review + create**, and then **Create**. Wait for the file share to deploy.
+1. Vá para a guia **Backup** e assegure-se de que **Enable backup** **não** esteja marcado. Estamos desabilitando o backup para simplificar a configuração do laboratório.
 
-1. After the file share is created, an informational banner will appear prompting you to enable backup — you can disregard this message and continue.
+1. Clique **Review + create**, e então **Create**. Aguarde o file share ser implantado.
+
+1. Depois que o file share for criado, um banner informativo aparecerá solicitando que você habilite o backup — você pode ignorar esta mensagem e continuar.
 
     ![Screenshot of the create file share page.](../media/az104-lab07-create-share.png)
 
-### Explore Storage Browser and upload a file
+### Explore o Storage Browser e envie um arquivo
 
-1. Return to your storage account and select **Storage browser**. The Azure Storage Browser is a portal tool that lets you quickly view all the storage services under your account.
+1. Retorne à sua storage account e selecione **Storage browser**. O Azure Storage Browser é uma ferramenta do portal que permite visualizar rapidamente todos os serviços de armazenamento sob sua conta.
 
-1. Select **Clasic file shares** and verify your **share1** directory is present.
+1. Selecione **Clasic file shares** e verifique se seu diretório **share1** está presente.
 
-1. Select your **share1** directory and notice you can **+ Add directory**. This lets you create a folder structure.
+1. Selecione seu diretório **share1** e observe que você pode **+ Add directory**. Isso permite criar uma estrutura de pastas.
 
-1. If you see an authorization error, select **Switch Azure AD Account** (or change the authentication method to **Microsoft Entra user account**) in the Storage browser toolbar.
+1. Se você vir um erro de autorização, selecione **Switch Azure AD Account** (ou altere o método de autenticação para **Microsoft Entra user account**) na barra de ferramentas do Storage browser.
 
-1. Select **Upload**. Browse to a file of your choice, and then click **Upload**.
+1. Selecione **Upload**. Navegue até um arquivo de sua escolha e então clique **Upload**.
 
-    >**Note**: You can view file shares and manage those shares in the Storage Browser. There are currently no restrictions.
+    >**Note**: Você pode visualizar file shares e gerenciá-los no Storage Browser. Atualmente não há restrições.
 
-### Restrict network access to the storage account
+### Restringir o acesso de rede à storage account
 
-1. In the portal, search for and select **Network foundation**.
+1. No portal, pesquise e selecione **Network foundation**.
 
-1. Under `Virtual networks` click **Create**. On the Basics tab, set **Resource group** as `az104-rg7` and give the virtual network a **name**, `vnet1`.
+1. Em `Virtual networks` clique **Create**. Na guia Basics, defina **Resource group** como `az104-rg7` e dê à virtual network um **name**, `vnet1`.
 
-1. Take the defaults for other parameters, select **Review + create**, and then **Create**.
+1. Aceite os padrões para os demais parâmetros, selecione **Review + create**, e então **Create**.
 
-1. Wait for the virtual network to deploy, and then select **Go to resource**.
+1. Aguarde a virtual network ser implantada, e então selecione **Go to resource**.
 
-1. In the **Settings** section, select the **Service endpoints** blade.
-    + Select **Add**. 
-    + In the **Service** drop-down select **Microsoft.Storage**.
-    + Leave the **Service endpoint policies** dropdown at its default of **0 selected**.
-    + In the **Subnets** drop-down check the **Default** subnet.
-    + Click **Add** to save your changes.  
+1. Na seção **Settings**, selecione a lâmina **Service endpoints**.
+    + Selecione **Add**.
+    + No drop-down **Service** selecione **Microsoft.Storage**.
+    + Deixe o drop-down **Service endpoint policies** em seu padrão de **0 selected**.
+    + No drop-down **Subnets** marque a subnet **Default**.
+    + Clique **Add** para salvar suas alterações.
 
-1. Return to your storage account.
+1. Retorne para sua storage account.
 
-1. In the **Security + networking** blade, select **Networking**.
+1. Na lâmina **Security + networking**, selecione **Networking**.
 
-1. Under **Public network access** select **Manage**. 
+1. Em **Public network access** selecione **Manage**.
 
-1. Select **Add a virtual network** and then **Add existing network**.
+1. Selecione **Add a virtual network** e então **Add existing network**.
 
-1. Select **vnet1** and **default** subnet, select **Add**.
+1. Selecione **vnet1** e a subnet **default**, selecione **Add**.
 
-1. In the **IPv4 Addresses** section, **Delete** your machine IP address. Allowed traffic should only come from the virtual network. 
+1. Na seção **IPv4 Addresses**, **Delete** o endereço IP da sua máquina. O tráfego permitido deve vir apenas da virtual network.
 
-1. Be sure to **Save** your changes.
+1. Certifique-se de **Save** suas alterações.
 
-    >**Note:** The storage account should now only be accessed from the virtual network you just created. 
+    >**Note:** A storage account agora deve ser acessada apenas a partir da virtual network que você acabou de criar.
 
-1. Select the **Storage browser** and **Refresh** the page. Navigate to your file share or blob content.  
+1. Selecione o **Storage browser** e **Refresh** a página. Navegue até seu file share ou conteúdo de blob.
 
-    >**Note:** You should receive a message *not authorized to perform this operation*. You are not connecting from the virtual network. It may take a couple of minutes for this to take effect. You may still be able to view the file share, but not the files or blobs in the storage account. 
+    >**Note:** Você deverá receber uma mensagem *not authorized to perform this operation*. Você não está se conectando a partir da virtual network. Pode levar alguns minutos para que isso entre em vigor. Você ainda pode conseguir visualizar o file share, mas não os arquivos ou blobs na storage account.
 
 
 ![Screenshot unauthorized access.](../media/az104-lab07-notauthorized.png)
 
-## Cleanup your resources
+## Limpeza dos recursos
 
-If you are working with **your own subscription** take a minute to delete the lab resources. This will ensure resources are freed up and cost is minimized. The easiest way to delete the lab resources is to delete the lab resource group. 
+Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e que o custo seja minimizado. A maneira mais fácil de excluir os recursos do laboratório é excluir o resource group do laboratório.
 
-+ In the Azure portal, select the resource group, select **Delete the resource group**, **Enter resource group name**, and then click **Delete**. When the second confirmation dialog appears stating that deleting the resource group and its dependent resources is a permanent action, click **Delete** again to complete the deletion.
++ No Azure portal, selecione o resource group, selecione **Delete the resource group**, **Enter resource group name**, e então clique **Delete**. Quando o segundo diálogo de confirmação aparecer afirmando que excluir o resource group e seus recursos dependentes é uma ação permanente, clique **Delete** novamente para completar a exclusão.
 + Using Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
 + Using the CLI, `az group delete --name resourceGroupName`.
 
-## Extend your learning with Copilot
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
+## Amplie seu aprendizado com o Copilot
+Copilot pode ajudá-lo a aprender como usar as ferramentas de script do Azure. Copilot também pode auxiliar em áreas não cobertas no laboratório ou onde você precisar de mais informações. Abra um navegador Edge e escolha Copilot (canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
 
-+ Provide an Azure PowerShell script to create a storage account with a blob container. 
++ Provide an Azure PowerShell script to create a storage account with a blob container.
 + Provide a checklist I can use to ensure my Azure storage account is secure.
 + Create a table to compare Azure storage redundancy models.
 
-## Learn more with self-paced training
+## Aprenda mais com treinamento auto-guiado
 
-+ [Guided Project - Azure Files and Azure Blobs](https://learn.microsoft.com/training/modules/guided-project-azure-files-azure-blobs/). Practice storing business data securely by using Azure Blob Storage and Azure Files.
-+ [Create an Azure Storage account](https://learn.microsoft.com/training/modules/create-azure-storage-account/). Create an Azure Storage account with the correct options for your business needs.
-+ [Manage the Azure Blob storage lifecycle](https://learn.microsoft.com/training/modules/manage-azure-blob-storage-lifecycle). Learn how to manage data availability throughout the Azure Blob storage lifecycle.
++ [Guided Project - Azure Files and Azure Blobs](https://learn.microsoft.com/training/modules/guided-project-azure-files-azure-blobs/). Pratique armazenar dados de negócios com segurança usando Azure Blob Storage e Azure Files.
++ [Create an Azure Storage account](https://learn.microsoft.com/training/modules/create-azure-storage-account/). Crie uma Azure Storage account com as opções corretas para as necessidades do seu negócio.
++ [Manage the Azure Blob storage lifecycle](https://learn.microsoft.com/training/modules/manage-azure-blob-storage-lifecycle). Aprenda a gerenciar a disponibilidade de dados ao longo do ciclo de vida do Azure Blob storage.
 
-## Key takeaways
+## Principais aprendizados
 
-Congratulations on completing the lab. Here are the main takeaways for this lab. 
+Parabéns por completar o laboratório. Aqui estão os principais aprendizados deste laboratório.
 
-+ An Azure storage account contains all your Azure Storage data objects: blobs, files, queues, and tables. The storage account provides a unique namespace for your Azure Storage data that is accessible from anywhere in the world over HTTP or HTTPS.
-+ Azure storage provides several redundancy models including Locally redundant storage (LRS), Zone-redundant storage (ZRS), and Geo-redundant storage (GRS). 
-+ Azure blob storage allows you to store large amounts of unstructured data on Microsoft's data storage platform. Blob stands for Binary Large Object, which includes objects such as images and multimedia files.
-+ Azure file Storage provides shared storage for structured data. The data can be organized in folders.
-+ Immutable storage provides the capability to store data in a write once, read many (WORM) state. Immutable storage policies can be time-based or legal-hold.
++ Uma Azure storage account contém todos os seus objetos de Azure Storage: blobs, files, queues e tables. A storage account fornece um namespace único para seus dados do Azure Storage que é acessível de qualquer lugar do mundo via HTTP ou HTTPS.
++ Azure storage fornece vários modelos de redundância incluindo Locally redundant storage (LRS), Zone-redundant storage (ZRS), e Geo-redundant storage (GRS).
++ Azure blob storage permite que você armazene grandes quantidades de dados não estruturados na plataforma de armazenamento da Microsoft. Blob significa Binary Large Object, o que inclui objetos como imagens e arquivos multimídia.
++ Azure file Storage fornece armazenamento compartilhado para dados estruturados. Os dados podem ser organizados em pastas.
++ Immutable storage fornece a capacidade de armazenar dados em um estado write once, read many (WORM). As políticas de immutable storage podem ser baseadas em tempo ou legal-hold.

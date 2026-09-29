@@ -1,55 +1,52 @@
 ---
 demo:
-    title: 'Demonstration 11: Administer Monitoring'
-    module: 'Administer Monitoring'
+    title: 'Demonstração 11: Administrar Monitoramento'
+    module: 'Administrar Monitoramento'
+layout: default
 ---
 
-# 11 - Administer Monitoring
+# 11 - Administrar Monitoramento
 
 ## Configure Azure Alerts
 
-In this demonstration, we will create an alert rule.
+Nesta demonstração, vamos criar uma regra de alerta.
 
-**Reference**: [Create, view, and manage Metric Alerts Using Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/alerts/alerts-metric)
+**Referência**: [Create, view, and manage Metric Alerts Using Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/alerts/alerts-metric)
 
-**Create an alert rule**
+**Criar uma regra de alerta**
 
-1. Use the Azure portal.
+1. Use o portal do Azure.
 
-1. Search for and select **Monitor** and then **Alerts**.
+1. Pesquise por e selecione **Monitor** e então **Alerts**.
 
-1. Select a scope for the alert rule. Discuss how you can filter by subscription, resource type, or resource location.
+1. Selecione um escopo para a regra de alerta. Discuta como você pode filtrar por assinatura, tipo de recurso ou local do recurso.
 
-1. Set the conditions for the alert rule. Discuss how signals define what you want to measure. 
+1. Defina as condições para a regra de alerta. Discuta como os sinais definem o que você quer medir.
 
-1. Set the actions for the alert rule. Review action groups and the type of notifications that are available. 
+1. Defina as ações para a regra de alerta. Revise action groups e o tipo de notificações que estão disponíveis.
 
-1. Set the details for the alert rule. Review common details like severity. 
+1. Defina os detalhes para a regra de alerta. Revise detalhes comuns como severity.
 
-1. Finish configuring your alert and review any alerts which have fired. 
+1. Termine de configurar seu alerta e revise quaisquer alertas que tenham sido acionados.
 
 ## Configure Log Analytics
 
-**Reference:** [Tutorial: Use Log Analytics](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
+**Referência:** [Tutorial: Use Log Analytics](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
 
-In this demonstration, you will work with the Log Analytics query language.
+Nesta demonstração, você trabalhará com a linguagem de consulta do Log Analytics.
 
-1. Use the Azure portal.
+1. Use o portal do Azure.
 
-1. Search for and select **Monitor** and then **Logs**.
+1. Pesquise por e selecione **Monitor** e então **Logs**.
 
-1. If shown, close the splash screen.
+1. Se exibido, feche a tela de introdução.
 
-1. Select a scope and **apply** your changes. 
+1. Selecione um escopo e **apply** suas alterações.
 
-1. Review how log information is organized in tables. Browse several of the tables.
+1. Revise como as informações de log são organizadas em tabelas. Navegue por várias das tabelas.
 
-1. Move to the **queries** tab. Select a query and **load to editor**. Discuss how many common queries have already been created.
+1. Vá para a guia **queries**. Selecione uma consulta e **load to editor**. Discuta como muitas consultas comuns já foram criadas.
 
-1. Briefly review the KQL syntax. 
+1. Revise brevemente a sintaxe do KQL.
 
-1. As you have time, experiment with **Favorites** and **Saved Queries**.
-
-
-
-
+1. Conforme tiver tempo, experimente **Favorites** e **Saved Queries**.

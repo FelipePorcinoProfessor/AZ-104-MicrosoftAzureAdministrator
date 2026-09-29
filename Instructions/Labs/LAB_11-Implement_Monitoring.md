@@ -1,116 +1,117 @@
 ---
 lab:
-   title: 'Lab 11: Implement Monitoring'
-   module: Administer Monitoring
-   description: Configure Azure Monitor alerts and queries.
+   title: 'Laboratório 11: Implementar monitoramento'
+   module: Administrar Monitoramento
+   description: Configure alertas e consultas do Azure Monitor.
    duration: 45 minutes
    level: 300
    islab: true
    primarytopics:
    - Azure
    - Azure Monitor
+layout: default
 ---
 
-# Lab 11: Implement monitoring
+# Laboratório 11: Implementar monitoramento
 
-## Lab introduction
+## Introdução do laboratório
 
-In this lab, you deploy a virtual machine with logs-based monitoring, verify that monitoring data is being collected, create an Activity Log alert and action group, suppress notifications during a maintenance period, and trigger the alert by deleting the virtual machine.
+Neste laboratório, você implanta uma máquina virtual com monitoramento baseado em logs, verifica se os dados de monitoramento estão sendo coletados, cria um alerta do Activity Log e um action group, suprime notificações durante um período de manutenção e aciona o alerta excluindo a máquina virtual.
 
-This lab requires an Azure subscription. Your subscription type can affect feature availability. The steps use **East US**, but you can select another region if necessary.
+Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode afetar a disponibilidade de recursos. Os passos usam **East US**, mas você pode selecionar outra região, se necessário.
 
-## Estimated time
+## Tempo estimado
 
-45 minutes
+45 minutos
 
-## Lab scenario
+## Cenário do laboratório
 
-Your organization has migrated infrastructure to Azure. Administrators must be notified of significant infrastructure changes. You plan to use Azure Monitor, Log Analytics, alerts, action groups, and alert processing rules to monitor a virtual machine.
+Sua organização migrou a infraestrutura para o Azure. Os administradores devem ser notificados sobre alterações significativas na infraestrutura. Você planeja usar Azure Monitor, Log Analytics, alertas, action groups e alert processing rules para monitorar uma máquina virtual.
 
-## Lab tasks
+## Tarefas do laboratório
 
-- Task 1: Deploy the lab infrastructure.
-- Task 2: Verify monitoring data with Azure Monitor Logs.
-- Task 3: Create an action group.
-- Task 4: Create an Activity Log alert.
-- Task 5: Configure an alert processing rule.
-- Task 6: Trigger and verify the alert.
+- Tarefa 1: Implantar a infraestrutura do laboratório.
+- Tarefa 2: Verificar os dados de monitoramento com Azure Monitor Logs.
+- Tarefa 3: Criar um action group.
+- Tarefa 4: Criar um alerta do Activity Log.
+- Tarefa 5: Configurar uma alert processing rule.
+- Tarefa 6: Acionar e verificar o alerta.
 
-## Task 1: Deploy the lab infrastructure
+## Tarefa 1: Implantar a infraestrutura do laboratório
 
-In this task, you deploy a virtual machine and the resources required to collect guest performance data in a Log Analytics workspace.
+Nesta tarefa, você implanta uma máquina virtual e os recursos necessários para coletar dados de desempenho do guest em um Log Analytics workspace.
 
-1. Download the **\Allfiles\Labs\11\az104-11-vm-template.json** lab file to your computer.
+1. Baixe o arquivo do laboratório **\Allfiles\Labs\11\az104-11-vm-template.json** para o seu computador.
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Faça login no [Azure portal](https://portal.azure.com).
 
-1. Search for and select **Deploy a custom template**.
+1. Pesquise por e selecione **Deploy a custom template**.
 
-1. On the custom deployment page, select **Build your own template in the editor**.
+1. Na página de implantação personalizada, selecione **Build your own template in the editor**.
 
-1. Select **Load file**.
+1. Selecione **Load file**.
 
-1. Locate and select **az104-11-vm-template.json**, and then select **Open**.
+1. Localize e selecione **az104-11-vm-template.json**, e então selecione **Open**.
 
-1. Select **Save**.
+1. Selecione **Save**.
 
-1. Enter the following values, leaving all other settings at their default values.
+1. Insira os valores a seguir, deixando todas as outras configurações nos valores padrão.
 
-   | Setting | Value |
+   | Configuração | Valor |
    | --- | --- |
-   | Subscription | Your Azure subscription |
-   | Resource group | **az104-rg11**; create it if necessary |
+   | Subscription | Sua assinatura do Azure |
+   | Resource group | **az104-rg11**; crie-o se necessário |
    | Region | **East US** |
-   | VM size | Select an available size. Use **Standard_D2s_v5** if available. |
+   | VM size | Selecione um tamanho disponível. Use **Standard_D2s_v5** se disponível. |
    | Username | `localadmin` |
-   | Password | A complex password |
+   | Password | Uma senha complexa |
 
-1. Select **Review + create**, and then select **Create**.
+1. Selecione **Review + create**, e então selecione **Create**.
 
    > [!NOTE]
-   > The template provides three current VM sizes. Start with **Standard_D2s_v5**. If the deployment fails because the size is unavailable or Azure lacks capacity, select **Standard_D2s_v6** and redeploy to the same resource group. If necessary, retry with **Standard_D2s_v7**. If a retry fails because an existing or partially deployed resource causes a conflict, delete **az104-rg11**. Restart Task 1 from **Search for and select Deploy a custom template**, reload the template, select **Create new** to recreate **az104-rg11**, and deploy again with the selected VM size.
+   > O template fornece três tamanhos atuais de VM. Comece com **Standard_D2s_v5**. Se a implantação falhar porque o tamanho não está disponível ou o Azure não tem capacidade, selecione **Standard_D2s_v6** e reimplante no mesmo grupo de recursos. Se necessário, tente novamente com **Standard_D2s_v7**. Se uma nova tentativa falhar porque um recurso existente ou parcialmente implantado causa um conflito, exclua **az104-rg11**. Reinicie a Tarefa 1 a partir de **Search for and select Deploy a custom template**, recarregue o template, selecione **Create new** para recriar **az104-rg11**, e implante novamente com o tamanho de VM selecionado.
 
-1. Wait for the deployment to finish, and then select **Go to resource group**.
+1. Aguarde a conclusão da implantação e então selecione **Go to resource group**.
 
-### Verify the deployment
+### Verificar a implantação
 
-1. On the **az104-rg11** resource group page, confirm that the following resources exist:
+1. Na página do resource group **az104-rg11**, confirme que os seguintes recursos existem:
 
    - Virtual machine **az104-vm0**
-   - Log Analytics workspace with a name that begins with **az104-law11-**
+   - Log Analytics workspace com um nome que comece com **az104-law11-**
    - Data collection rule **az104-dcr11**
-   - The virtual network, network interface, public IP address, network security group, and storage account
+   - A virtual network, network interface, public IP address, network security group e storage account
 
-1. Open **az104-vm0**.
+1. Abra **az104-vm0**.
 
-1. If the virtual machine status is **Stopped**, select **Start** and wait for its status to change to **Running**.
+1. Se o status da máquina virtual estiver **Stopped**, selecione **Start** e aguarde até que o status mude para **Running**.
 
-1. Under **Settings**, select **Extensions + applications**.
+1. Em **Settings**, selecione **Extensions + applications**.
 
-1. Confirm that **AzureMonitorWindowsAgent** has a status of **Provisioning succeeded**.
+1. Confirme que **AzureMonitorWindowsAgent** tem status **Provisioning succeeded**.
 
-1. Return to **az104-rg11**, and then open **az104-dcr11**.
+1. Retorne para **az104-rg11**, e então abra **az104-dcr11**.
 
-1. Under **Configuration**, select **Resources**, and then confirm that **az104-vm0** is associated with the data collection rule.
+1. Em **Configuration**, selecione **Resources**, e confirme que **az104-vm0** está associada à data collection rule.
 
 > [!NOTE]
-> Data can take several minutes to appear after the Azure Monitor Agent and data collection rule are deployed. Do not delete the virtual machine until you complete Task 2.
+> Os dados podem demorar vários minutos para aparecer depois que o Azure Monitor Agent e a data collection rule são implantados. Não exclua a máquina virtual até concluir a Tarefa 2.
 
-## Task 2: Verify monitoring data with Azure Monitor Logs
+## Tarefa 2: Verificar dados de monitoramento com Azure Monitor Logs
 
-In this task, you verify that the Azure Monitor Agent is sending heartbeat and VM performance data to the Log Analytics workspace. Complete this task before deleting the virtual machine.
+Nesta tarefa, você verifica se o Azure Monitor Agent está enviando heartbeat e dados de desempenho da VM para o Log Analytics workspace. Execute esta tarefa antes de excluir a máquina virtual.
 
-1. In **az104-rg11**, open the Log Analytics workspace whose name begins with **az104-law11-**.
+1. Em **az104-rg11**, abra o Log Analytics workspace cujo nome começa com **az104-law11-**.
 
-1. Under **General**, select **Logs**.
+1. Em **General**, selecione **Logs**.
 
-1. Close the welcome window or **Queries hub** if either appears.
+1. Feche a janela de boas-vindas ou o **Queries hub**, se aparecerem.
 
-1. If necessary, select **KQL mode** from the query editor mode menu.
+1. Se necessário, selecione **KQL mode** no menu de modo do editor de consultas.
 
    ![Screenshot of the queries tab.](../media/az104-lab11-queries.png)
 
-1. Replace any text in the query editor with the following query, and then select **Run**.
+1. Substitua qualquer texto no editor de consultas pela seguinte consulta, e então selecione **Run**.
 
    ```kusto
    Heartbeat
@@ -120,12 +121,12 @@ In this task, you verify that the Azure Monitor Agent is sending heartbeat and V
        by Computer, Category
    ```
 
-1. Confirm that the results contain **az104-vm0**.
+1. Confirme que os resultados contêm **az104-vm0**.
 
    > [!NOTE]
-   > If the query returns no records, wait five minutes and run it again. If it still returns no records, verify that the Azure Monitor Agent extension succeeded and that the data collection rule is associated with the virtual machine.
+   > Se a consulta não retornar registros, espere cinco minutos e execute-a novamente. Se ainda não retornar registros, verifique se a extensão Azure Monitor Agent foi provisionada com sucesso e se a data collection rule está associada à máquina virtual.
 
-1. Replace the query with the following query, and then select **Run**.
+1. Substitua a consulta pela seguinte consulta, e então selecione **Run**.
 
    ```kusto
    InsightsMetrics
@@ -137,100 +138,100 @@ In this task, you verify that the Azure Monitor Agent is sending heartbeat and V
    | render timechart
    ```
 
-1. Confirm that the query returns VM performance data.
+1. Confirme que a consulta retorna dados de desempenho da VM.
 
 > [!IMPORTANT]
-> Continue only after both queries return data. Previously ingested records remain in the workspace after the virtual machine is deleted, but the virtual machine can't send data that wasn't collected before deletion.
+> Continue somente após ambas as consultas retornarem dados. Registros previamente ingeridos permanecem no workspace depois que a máquina virtual é excluída, mas a máquina virtual não pode enviar dados que não foram coletados antes da exclusão.
 
-## Task 3: Create an action group
+## Tarefa 3: Criar um action group
 
-In this task, you create an action group that sends an email notification when the alert is triggered.
+Nesta tarefa, você cria um action group que envia uma notificação por e-mail quando o alerta é acionado.
 
-1. In the Azure portal, search for and select **Monitor**.
+1. No portal do Azure, pesquise por e selecione **Monitor**.
 
-1. Select **Alerts**, and then select **Action groups**.
+1. Selecione **Alerts**, e então selecione **Action groups**.
 
-1. Select **Create**.
+1. Selecione **Create**.
 
-1. On the **Basics** tab, enter the following values.
+1. Na guia **Basics**, insira os seguintes valores.
 
-   | Setting | Value |
+   | Configuração | Valor |
    | --- | --- |
-   | Subscription | Your Azure subscription |
+   | Subscription | Sua assinatura do Azure |
    | Resource group | **az104-rg11** |
    | Region | **Global** |
    | Action group name | `Alert the operations team` |
    | Display name | `AlertOpsTeam` |
 
-1. Select **Next: Notifications**.
+1. Selecione **Next: Notifications**.
 
-1. Enter the following notification settings.
+1. Insira as seguintes configurações de notificação.
 
-   | Setting | Value |
+   | Configuração | Valor |
    | --- | --- |
    | Notification type | **Email/SMS message/Push/Voice** |
    | Name | `VM was deleted` |
 
-1. Select **Email**, enter your email address, and then select **OK**.
+1. Selecione **Email**, insira seu endereço de e-mail e então selecione **OK**.
 
-1. Select **Review + create**, and then select **Create**.
+1. Selecione **Review + create**, e então selecione **Create**.
 
-1. Confirm that you receive an email stating that you were added to the action group. Delivery can take several minutes.
+1. Confirme que você recebeu um e-mail informando que foi adicionado ao action group. A entrega pode levar vários minutos.
 
-## Task 4: Create an Activity Log alert
+## Tarefa 4: Criar um alerta do Activity Log
 
-In this task, you create an alert for the Activity Log operation that deletes a virtual machine.
+Nesta tarefa, você cria um alerta para a operação do Activity Log que exclui uma máquina virtual.
 
 > [!NOTE]
-> Virtual machine deletion is an Activity Log administrative operation. It is not a VM metric. The operation name is `Microsoft.Compute/virtualMachines/delete`.
+> A exclusão de máquina virtual é uma operação administrativa do Activity Log. Não é uma métrica de VM. O nome da operação é `Microsoft.Compute/virtualMachines/delete`.
 
-1. In **Azure Monitor**, select **Alerts**.
+1. Em **Azure Monitor**, selecione **Alerts**.
 
-1. Select **Create**, and then select **Alert rule**.
+1. Selecione **Create**, e então selecione **Alert rule**.
 
-1. On the **Scope** tab, select your subscription, and then select **Apply**.
+1. Na guia **Scope**, selecione sua subscription, e então selecione **Apply**.
 
-1. Select the **Condition** tab.
+1. Selecione a guia **Condition**.
 
-1. Under **Select a signal**, select **Activity log**.
+1. Em **Select a signal**, selecione **Activity log**.
 
-1. Select **Delete Virtual Machine (Virtual Machines)**, and then select **Apply**.
+1. Selecione **Delete Virtual Machine (Virtual Machines)**, e então selecione **Apply**.
 
-1. Under **Alert logic**, leave **Event level** and **Status** set to **All selected**.
+1. Em **Alert logic**, deixe **Event level** e **Status** definidos como **All selected**.
 
    > [!TIP]
-   > If **See all signals** reports **Couldn't load metric query signals**, try to select **Delete Virtual Machine (Virtual Machines)**, and then select **Apply**. If the condition is applied, continue with the portal steps. The message affects metric-query signals and doesn't prevent the Activity Log signal from working. If you can't select or apply **Delete Virtual Machine (Virtual Machines)**, use the **Cloud Shell fallback for a signal-loading error** below.
+   > Se **See all signals** relatar **Couldn't load metric query signals**, tente selecionar **Delete Virtual Machine (Virtual Machines)**, e então selecione **Apply**. Se a condição for aplicada, continue com os passos do portal. A mensagem afeta sinais de consulta de métrica e não impede o sinal do Activity Log de funcionar. Se você não conseguir selecionar ou aplicar **Delete Virtual Machine (Virtual Machines)**, use o **Cloud Shell fallback for a signal-loading error** abaixo.
 
-1. Select the **Actions** tab.
+1. Selecione a guia **Actions**.
 
-1. Under **Select actions**, select **Use action groups**.
+1. Em **Select actions**, selecione **Use action groups**.
 
-1. Select **Alert the operations team**, and then select **Select**.
+1. Selecione **Alert the operations team**, e então selecione **Select**.
 
-1. Select the **Details** tab, and then enter the following values.
+1. Selecione a guia **Details**, e então insira os seguintes valores.
 
-   | Setting | Value |
+   | Configuração | Valor |
    | --- | --- |
-   | Subscription | Your Azure subscription |
+   | Subscription | Sua assinatura do Azure |
    | Resource group | **az104-rg11** |
    | Alert rule name | `VM was deleted` |
    | Alert rule description | `A VM in the subscription was deleted` |
    | Region | **Global** |
-   | Enable alert rule upon creation | Selected |
+   | Enable alert rule upon creation | Selecionado |
 
-1. Select **Review + create**, and then select **Create**.
+1. Selecione **Review + create**, e então selecione **Create**.
 
-1. In **Azure Monitor**, select **Alerts** > **Alert rules**.
+1. Em **Azure Monitor**, selecione **Alerts** > **Alert rules**.
 
-1. Confirm that **VM was deleted** is enabled before continuing.
+1. Confirme que **VM was deleted** está habilitado antes de continuar.
 
 ### Cloud Shell fallback for a signal-loading error
 
-If the portal can't display the **Delete Virtual Machine** signal, use Azure Cloud Shell to create the same alert rule without the signal picker.
+Se o portal não conseguir exibir o sinal **Delete Virtual Machine**, use o Azure Cloud Shell para criar a mesma alert rule sem o seletor de sinais.
 
-1. Open **Cloud Shell** and select **Bash**.
+1. Abra o **Cloud Shell** e selecione **Bash**.
 
-1. Run the following commands.
+1. Execute os seguintes comandos.
 
    ```azurecli
    subscriptionId=$(az account show --query id --output tsv)
@@ -249,118 +250,118 @@ If the portal can't display the **Delete Virtual Machine** signal, use Azure Clo
      --description "A VM in the subscription was deleted"
    ```
 
-1. When the command succeeds, return to **Azure Monitor** > **Alerts** > **Alert rules**.
+1. Quando o comando for bem-sucedido, retorne para **Azure Monitor** > **Alerts** > **Alert rules**.
 
-1. Confirm that **VM was deleted** is enabled, and then continue to Task 5.
+1. Confirme que **VM was deleted** está habilitado, e então continue para a Tarefa 5.
 
-## Task 5: Configure an alert processing rule
+## Tarefa 5: Configurar uma alert processing rule
 
-In this task, you configure a rule that suppresses notifications during a planned maintenance period.
+Nesta tarefa, você configura uma regra que suprime notificações durante um período de manutenção planejada.
 
-1. In **Azure Monitor**, select **Alerts** > **Alert processing rules**.
+1. Em **Azure Monitor**, selecione **Alerts** > **Alert processing rules**.
 
-1. Select **Create**.
+1. Selecione **Create**.
 
-1. On the **Scope** tab, select your subscription, and then select **Apply**.
+1. Na guia **Scope**, selecione sua subscription, e então selecione **Apply**.
 
-1. Select **Next: Rule settings**.
+1. Selecione **Next: Rule settings**.
 
-1. Select **Suppress notifications**.
+1. Selecione **Suppress notifications**.
 
-1. Select **Next: Scheduling**.
+1. Selecione **Next: Scheduling**.
 
-1. Configure the following schedule.
+1. Configure a seguinte programação.
 
-   | Setting | Value |
+   | Configuração | Valor |
    | --- | --- |
    | Apply the rule | **At a specific time** |
-   | Start | Today's date at 10:00 PM |
-   | End | Tomorrow's date at 7:00 AM |
-   | Time zone | Your local time zone |
+   | Start | Data de hoje às 22:00 |
+   | End | Data de amanhã às 07:00 |
+   | Time zone | Seu fuso horário local |
 
    ![Screenshot of the scheduling section of an alert processing rule.](../media/az104-lab11-alert-processing-rule-schedule.png)
 
-1. Select **Next: Details**.
+1. Selecione **Next: Details**.
 
-1. Enter the following values.
+1. Insira os seguintes valores.
 
-   | Setting | Value |
+   | Configuração | Valor |
    | --- | --- |
-   | Subscription | Your Azure subscription |
+   | Subscription | Sua assinatura do Azure |
    | Resource group | **az104-rg11** |
    | Rule name | `Planned Maintenance` |
    | Description | `Suppress notifications during planned maintenance.` |
 
-1. Select **Review + create**, and then select **Create**.
+1. Selecione **Review + create**, e então selecione **Create**.
 
 > [!NOTE]
-> The schedule is outside the normal time used to complete this lab, so it shouldn't suppress the deletion notification. If your current time falls within the configured window, adjust the schedule before triggering the alert.
+> A programação está fora do horário normal usado para concluir este laboratório, portanto não deverá suprimir a notificação de exclusão. Se seu horário atual cair dentro da janela configurada, ajuste a programação antes de acionar o alerta.
 
-## Task 6: Trigger and verify the alert
+## Tarefa 6: Acionar e verificar o alerta
 
-In this task, you delete the virtual machine and confirm that the Activity Log alert is triggered.
+Nesta tarefa, você exclui a máquina virtual e confirma que o alerta do Activity Log foi acionado.
 
 > [!IMPORTANT]
-> Confirm that the **VM was deleted** alert rule is enabled before deleting the virtual machine.
+> Confirme que a regra de alerta **VM was deleted** está habilitada antes de excluir a máquina virtual.
 
-1. In the Azure portal, search for and select **Virtual machines**.
+1. No portal do Azure, pesquise por e selecione **Virtual machines**.
 
-1. Select the checkbox for **az104-vm0**.
+1. Selecione a caixa de seleção para **az104-vm0**.
 
-1. Select **Delete**.
+1. Selecione **Delete**.
 
-1. In the **Delete resources** pane, review the selected resources.
+1. No painel **Delete resources**, reveja os recursos selecionados.
 
-1. Enter `delete` in the confirmation field, and then select **Delete**.
+1. Insira `delete` no campo de confirmação, e então selecione **Delete**.
 
-1. If a second confirmation dialog appears, select **Delete** again.
+1. Se um segundo diálogo de confirmação aparecer, selecione **Delete** novamente.
 
-1. Select the **Notifications** icon and wait until the virtual machine is successfully deleted.
+1. Selecione o ícone **Notifications** e aguarde até que a máquina virtual seja excluída com sucesso.
 
-1. Wait for an email with a subject indicating that the **VM was deleted** Azure Monitor alert was activated.
+1. Aguarde um e-mail com um assunto indicando que o alerta do Azure Monitor **VM was deleted** foi ativado.
 
    ![Screenshot of alert email.](../media/az104-lab11-alert-email.png)
 
    > [!NOTE]
-   > Activity Log entries and alert notifications can take several minutes to appear.
+   > Entradas do Activity Log e notificações de alerta podem levar vários minutos para aparecer.
 
-1. In **Azure Monitor**, select **Alerts**.
+1. Em **Azure Monitor**, selecione **Alerts**.
 
-1. Confirm that an alert named **VM was deleted** appears.
+1. Confirme que um alerta chamado **VM was deleted** aparece.
 
-1. Open the alert and review its scope, condition, operation name, status, and history.
+1. Abra o alerta e revise seu escopo, condição, operation name, status e histórico.
 
-1. Optionally, return to the Log Analytics workspace and rerun the Task 2 queries. The records collected before deletion remain available according to the workspace retention period.
+1. Opcionalmente, retorne ao Log Analytics workspace e execute novamente as consultas da Tarefa 2. Os registros coletados antes da exclusão permanecem disponíveis conforme o período de retenção do workspace.
 
-## Clean up resources
+## Limpar recursos
 
-If you're using your own subscription, delete the lab resource group to avoid unnecessary charges.
+Se você estiver usando sua própria assinatura, exclua o grupo de recursos do laboratório para evitar cobranças desnecessárias.
 
-1. In the Azure portal, open **az104-rg11**.
+1. No portal do Azure, abra **az104-rg11**.
 
-1. Select **Delete resource group**.
+1. Selecione **Delete resource group**.
 
-1. Enter `az104-rg11` to confirm the deletion.
+1. Insira `az104-rg11` para confirmar a exclusão.
 
-1. Select **Delete**, and then confirm the deletion if prompted.
+1. Selecione **Delete**, e então confirme a exclusão se solicitado.
 
-You can also use Azure PowerShell:
+Você também pode usar o Azure PowerShell:
 
 ```azurepowershell
 Remove-AzResourceGroup -Name az104-rg11
 ```
 
-Or Azure CLI:
+Ou Azure CLI:
 
 ```azurecli
 az group delete --name az104-rg11
 ```
 
-## Key takeaways
+## Principais conclusões
 
-- Host and recommended VM metrics don't prove that logs-based VM monitoring is configured.
-- Azure Monitor Logs requires a Log Analytics workspace and an appropriate data collection path.
-- Azure Monitor Agent uses a data collection rule and association to send guest monitoring data to a workspace.
-- Monitoring ingestion should be verified before deleting the resource that generates the data.
-- Virtual machine deletion is an Activity Log administrative operation rather than a VM metric.
-- Action groups define notification recipients, while alert processing rules control when notifications are delivered.
+- Host and recommended VM metrics não provam que o monitoramento de VM baseado em logs esteja configurado.
+- Azure Monitor Logs requer um Log Analytics workspace e um caminho de coleta de dados apropriado.
+- Azure Monitor Agent usa uma data collection rule e uma associação para enviar dados de monitoramento do guest para um workspace.
+- A ingestão de monitoramento deve ser verificada antes de excluir o recurso que gera os dados.
+- A exclusão de máquina virtual é uma operação administrativa do Activity Log, e não uma métrica de VM.
+- Action groups definem os destinatários de notificação, enquanto alert processing rules controlam quando as notificações são entregues.

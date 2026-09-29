@@ -1,40 +1,41 @@
 ---
 lab:
-  title: 'Lab 02a: Manage Subscriptions and RBAC'
-  module: Administer Governance and Compliance
-  description: Review and assign Azure roles. 
+  title: 'Laboratório 02a: Gerenciar Assinaturas e RBAC'
+  module: Administrar Governança e Conformidade
+  description: Revisar e atribuir funções do Azure.
   duration: 20 minutes
   level: 300
   islab: true
   primarytopics:
     - Azure
     - Azure Roles
+layout: default
 ---
 
 # Lab 02a - Manage Subscriptions and RBAC
 
 ## Lab introduction
 
-In this lab, you learn about role-based access control. You learn how to use permissions and scopes to control what actions identities can and cannot perform. You also learn how to make subscription management easier using management groups. 
+Neste laboratório, você aprenderá sobre role-based access control. Você aprende como usar permissões e escopos para controlar quais ações identidades podem e não podem executar. Você também aprenderá como facilitar o gerenciamento de assinaturas usando management groups.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the region, but the steps are written using **East US**. 
+Este laboratório requer uma assinatura do Azure. O tipo de assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas as etapas estão escritas usando **East US**.
 
 ## Estimated timing: 20 minutes
 
 ## Lab scenario
 
-To simplify management of Azure resources in your organization, you have been tasked with implementing the following functionality:
+Para simplificar o gerenciamento de recursos do Azure em sua organização, você foi encarregado de implementar a seguinte funcionalidade:
 
-- Creating a management group that includes all your Azure subscriptions.
+- Criar um management group que inclua todas as suas assinaturas do Azure.
 
-- Granting permissions to submit support requests for all subscriptions in the management group. The permissions should be limited only to: 
+- Conceder permissões para enviar solicitações de suporte para todas as assinaturas no management group. As permissões devem ser limitadas apenas a:
 
-    - Create and manage virtual machines
-    - Create support request tickets (do not include adding Azure providers)
+    - Criar e gerenciar máquinas virtuais
+    - Criar tickets de solicitação de suporte (não incluir registro de providers do Azure)
 
 ## Architecture diagram
 
-![Diagram of lab tasks.](../media/az104-lab02a-architecture.png)
+![Diagrama das tarefas do laboratório.](../media/az104-lab02a-architecture.png)
 
 ## Job skills
 
@@ -45,7 +46,7 @@ To simplify management of Azure resources in your organization, you have been ta
 
 ## Task 1: Implement Management Groups
 
-In this task, you will create and configure management groups. Management groups are used to logically organize and segment subscriptions. They allow for RBAC and Azure Policy to be assigned and inherited to other management groups and subscriptions. For example, if your organization has a dedicated support team for Europe, you can organize European subscriptions into a management group to provide the support staff access to those subscriptions (without providing individual access to all subscriptions). In our scenario everyone at the Help Desk will need to create a support request across all subscriptions. 
+Nesta tarefa, você criará e configurará management groups. Management groups são usados para organizar e segmentar assinaturas logicamente. Eles permitem que RBAC e Azure Policy sejam atribuídos e herdados por outros management groups e assinaturas. Por exemplo, se sua organização tiver uma equipe de suporte dedicada para a Europa, você pode organizar as assinaturas europeias em um management group para fornecer à equipe de suporte acesso a essas assinaturas (sem fornecer acesso individual a todas as assinaturas). No nosso cenário, todos do Help Desk precisarão criar uma solicitação de suporte em todas as assinaturas.
 
 1. Sign in to the **Azure portal** - `https://portal.azure.com`.
 
@@ -59,38 +60,40 @@ In this task, you will create and configure management groups. Management groups
 
 1. On the **Management groups** blade, click **+ Create**.
 
-1. Create a management group with the following settings. Select **Submit** when you are done. 
+1. Create a management group with the following settings. Select **Submit** when you are done.
 
     | Setting | Value |
     | --- | --- |
     | Management group ID | `az104-mg1` (must be unique in the directory) |
     | Management group display name | `az104-mg1` |
 
-1. **Refresh** the management group page to ensure your new management group displays. This may take a minute. 
+1. **Refresh** the management group page to ensure your new management group displays. This may take a minute.
 
-   >**Note:** Did you notice the root management group? The root management group is built into the hierarchy to have all management groups and subscriptions fold up to it. This root management group allows for global policies and Azure role assignments to be applied at the directory level. After creating a management group, you would add any subscriptions that should be included in the group. 
+   >**Nota:** Você percebeu o management group root? O root management group é integrado à hierarquia para agrupar todos os management groups e assinaturas. Esse management group root permite que políticas globais e atribuições de funções do Azure sejam aplicadas no nível do diretório. Após criar um management group, você adicionaria quaisquer assinaturas que devam ser incluídas no grupo.
 
-1. If you receive permission errors in Task 2 after creating the management group, sign out of the Azure portal and sign back in to the **Azure portal** - `https://portal.azure.com`.
+1. If you receive permission errors in Task 2 after creating the management group, sign out of the Azure portal and sign back in to the **Azure portal** - `https://portal.azure.com`.
 
-    >**Note:** This refreshes your credentials and can resolve "AuthorizationFailed" errors on the management group IAM blades.
+
+    >**Nota:** Isso atualiza suas credenciais e pode resolver erros "AuthorizationFailed" nas lâminas de IAM do management group.
+
 
 ## Task 2: Review and assign a built-in Azure role
 
-In this task, you will review the built-in roles and assign the VM Contributor role to a member of the Help Desk. Azure provides a large number of [built-in roles](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles). 
+Nesta tarefa, você revisará as funções integradas e atribuirá a função VM Contributor a um membro do Help Desk. Azure fornece um grande número de [built-in roles](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles).
 
->**Note:** In the following steps, you will assign the role to the **helpdesk** group. If you do not have a Help Desk group, take a minute to create it.
+>**Nota:** Nas etapas a seguir, você atribuirá a função ao grupo **helpdesk**. Se você não tiver um grupo Help Desk, leve um minuto para criá-lo.
 
 1. Select the **az104-mg1** management group.
 
 1. Select the **Access control (IAM)** blade, and then the **Roles** tab.
 
-1. Scroll through the built-in role definitions that are available. **View** a role to get detailed information about the **Permissions**, **JSON**, and **Assignments**. You will often use *owner*, *contributor*, and *reader*. 
+1. Scroll through the built-in role definitions that are available. **View** a role to get detailed information about the **Permissions**, **JSON**, and **Assignments**. You will often use *owner*, *contributor*, and *reader*.
 
-1. Select **+ Add**, from the drop-down menu, select **Add role assignment**. 
+1. Select **+ Add**, from the drop-down menu, select **Add role assignment**.
 
 1. On the **Add role assignment** blade, search for and select the **Virtual Machine Contributor**. The Virtual machine contributor role lets you manage virtual machines, but not access their operating system or manage the virtual network and storage account they are connected to. This is a good role for the Help Desk. Select **Next**.
 
-    >**Did you know?** Azure originally provided only the **Classic** deployment model. This has been replaced by the **Azure Resource Manager** deployment model. As a best practice, do not use classic resources.
+    >**Você sabia?** Azure originally provided only the **Classic** deployment model. This has been replaced by the **Azure Resource Manager** deployment model. As a best practice, do not use classic resources.
 
 1. On the **Members** tab, **Select Members**.
 
@@ -102,15 +105,15 @@ In this task, you will review the built-in roles and assign the VM Contributor r
 
 1. Click **Review + assign** to create the role assignment.
 
-1. Continue on the **Access control (IAM)** blade. On the **Role assignments** tab, confirm the **helpdesk** group has the **Virtual Machine Contributor** role. 
+1. Continue on the **Access control (IAM)** blade. On the **Role assignments** tab, confirm the **helpdesk** group has the **Virtual Machine Contributor** role.
 
-    >**Note:** As a best practice always assign roles to groups not individuals. 
+    >**Nota:** Como boa prática, sempre atribua funções a grupos e não a indivíduos.
 
-    >**Did you know?** This assignment might not actually grant you any additional privileges. If you already have the Owner role, that role includes all permissions associated with the VM Contributor role.
-    
+    >**Você sabia?** Esta atribuição pode não realmente conceder a você privilégios adicionais. Se você já tem a função Owner, essa função inclui todas as permissões associadas à função VM Contributor.
+
 ## Task 3: Create a custom RBAC role
 
-In this task, you will create a custom RBAC role. Custom roles are a core part of implementing the principle of least privilege for an environment. Built-in roles might have too many permissions for your scenario. We will also create a new role and remove permissions that are not necessary. Do you have a plan for managing overlapping permissions?
+Nesta tarefa, você criará uma função RBAC personalizada. Funções personalizadas são uma parte central da implementação do princípio de menor privilégio para um ambiente. Built-in roles podem ter permissões demais para seu cenário. Também criaremos uma nova função e removeremos permissões que não são necessárias. Você tem um plano para gerenciar permissões sobrepostas?
 
 1. Continue working on your management group. Navigate to the **Access control (IAM)** blade.
 
@@ -125,7 +128,7 @@ In this task, you will create a custom RBAC role. Custom roles are a core part o
 
 1. For **Baseline permissions**, select **Clone a role**. In the **Role to clone** drop-down menu, select **Support Request Contributor**.
 
-    ![Screenshot clone a role.](../media/az104-lab02a-clone-role.png)
+    ![Captura de tela clonando uma função.](../media/az104-lab02a-clone-role.png)
 
 1. Select **Next** to move to the **Permissions** tab, and then select **+ Exclude permissions**.
 
@@ -133,38 +136,38 @@ In this task, you will create a custom RBAC role. Custom roles are a core part o
 
 1. In the list of permissions, place a checkbox next to **Other: Registers Support Resource Provider** and then select **Add**. The role should be updated to include this permission as a *NotAction*.
 
-    >**Note:** An Azure resource provider is a set of REST operations that enable functionality for a specific Azure service. We do not want the Help Desk to be able to have this capability, so it is being removed from the cloned role. 
+    >**Nota:** Um resource provider do Azure é um conjunto de operações REST que habilitam funcionalidade para um serviço específico do Azure. Não queremos que o Help Desk tenha essa capacidade, então ela está sendo removida da função clonada.
 
 1. On the **Assignable scopes** tab, ensure your management group is listed, then click **Next**.
 
-1. Review the JSON for the *Actions*, *NotActions*, and *AssignableScopes* that are customized in the role. 
+1. Review the JSON for the *Actions*, *NotActions*, and *AssignableScopes* that are customized in the role.
 
 1. Select **Review + Create**, and then select **Create**.
 
-    >**Note:** At this point, you have created a custom role and assigned it to the management group.  
+    >**Nota:** Neste ponto, você criou uma função personalizada e a atribuiu ao management group.
 
 ## Task 4: Monitor role assignments with the Activity Log
 
-In this task, you view the activity log to determine if anyone has created a new role. 
+Nesta tarefa, você visualizará o activity log para determinar se alguém criou uma nova função.
 
-1. In the portal locate the **az104-mg1** resource and select **Activity log**. The activity log provides insight into subscription-level events. 
+1. In the portal locate the **az104-mg1** resource and select **Activity log**. The activity log provides insight into subscription-level events.
 
-1. Review the activities for role assignments. The activity log can be filtered for specific operations. 
+1. Review the activities for role assignments. The activity log can be filtered for specific operations.
 
-    ![Screenshot of the Activity log page with configured filter.](../media/az104-lab02a-searchactivitylog.png)
+    ![Captura de tela da página Activity log com filtro configurado.](../media/az104-lab02a-searchactivitylog.png)
 
 ## Cleanup your resources
 
-If you are working with **your own subscription** take a minute to delete the lab resources. This will ensure resources are freed up and cost is minimized. The easiest way to delete the lab resources is to delete the lab resource group. 
+Se você estiver trabalhando com **sua própria assinatura**, leve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e que os custos sejam minimizados. A maneira mais fácil de excluir os recursos do laboratório é excluir o resource group do laboratório.
 
 + In the Azure portal, select the management group, select **Delete** and click on **Yes** to confirm the deletion.
 + Using Azure PowerShell, `Remove-AzManagementGroup -GroupName az104-mg1`.
 + Using the CLI, `az account management-group delete --name az104-mg1`.
-  
+
 ## Extend your learning with Copilot
 
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
-+ Create two tables highlighting important PowerShell and CLI commands to get information about organization subscriptions on Azure and explain each command in the column “Explanation”. 
+Copilot pode ajudá-lo a aprender como usar as ferramentas de script do Azure. Copilot também pode ajudar em áreas não cobertas no laboratório ou onde você precise de mais informações. Abra um navegador Edge e escolha Copilot (no canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
++ Create two tables highlighting important PowerShell and CLI commands to get information about organization subscriptions on Azure and explain each command in the column “Explanation”.
 + What is the format of the Azure RBAC JSON file?
 + What are the basic steps for creating a custom Azure RBAC role?
 + What is the difference between Azure RBAC roles and Microsoft Entra ID roles?
@@ -175,24 +178,11 @@ Copilot can assist you in learning how to use the Azure scripting tools. Copilot
 
 ## Key takeaways
 
-Congratulations on completing the lab. Here are the main takeaways for this lab. 
+Parabéns por concluir o laboratório. Aqui estão os principais pontos deste laboratório.
 
-+ Management groups are used to logically organize subscriptions.
-+ The built-in root management group includes all the management groups and subscriptions.
-+ Azure has many built-in roles. You can assign these roles to control access to resources.
-+ You can create new roles or customize existing roles.
-+ Roles are defined in a JSON formatted file and include *Actions*, *NotActions*, and *AssignableScopes*.
-+ You can use the Activity Log to monitor role assignments.
-
-
-
-
-
-
-
-
-
-
-
-
-
++ Management groups são usados para organizar assinaturas.
++ O management group root integrado inclui todos os management groups e assinaturas.
++ Azure possui muitas funções integradas. Você pode atribuir essas funções para controlar o acesso aos recursos.
++ Você pode criar novas funções ou customizar funções existentes.
++ Funções são definidas em um arquivo formatado em JSON e incluem *Actions*, *NotActions*, e *AssignableScopes*.
++ Você pode usar o Activity Log para monitorar atribuições de funções.

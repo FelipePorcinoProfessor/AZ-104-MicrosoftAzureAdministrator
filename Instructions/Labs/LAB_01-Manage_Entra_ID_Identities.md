@@ -1,66 +1,66 @@
 ---
 lab:
-  title: 'Lab 01: Manage Microsoft Entra ID Identities'
-  module: Administer Identity
-  description: Create and configure user and group accounts. 
-  duration: 30 minutes
+  title: 'Laboratório 01: Gerenciar identidades do Microsoft Entra ID'
+  module: Administrar identidade
+  description: Criar e configurar contas de usuário e de grupo.
+  duration: 30 minutos
   level: 300
   islab: true
   primarytopics:
     - Azure
     - Microsoft Entra ID
-    - User accounts
+    - Contas de usuário
+layout: default
 ---
 
-# Lab 01 - Manage Microsoft Entra ID Identities
+# Laboratório 01 - Gerenciar identidades do Microsoft Entra ID
 
-## Lab introduction
+## Introdução ao laboratório
 
-This is the first in a series of labs for Azure Administrators. In this lab, you learn about users and groups. Users and groups are the basic building blocks for an identity solution. 
+Este é o primeiro de uma série de laboratórios para Administradores do Azure. Neste laboratório, você aprenderá sobre usuários e grupos. Usuários e grupos são os blocos de construção básicos para uma solução de identidade.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the region, but the steps are written using **East US**. 
+Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas os passos estão descritos usando **East US**.
 
+## Tempo estimado: 30 minutos
 
-## Estimated timing: 30 minutes
+## Cenário do laboratório
 
-## Lab scenario
+Sua organização está construindo um novo ambiente de laboratório para testes pré-produção de aplicativos e serviços. Alguns engenheiros estão sendo contratados para gerenciar o ambiente do laboratório, incluindo as máquinas virtuais. Para permitir que os engenheiros se autentiquem usando Microsoft Entra ID, você recebeu a tarefa de provisionar usuários e grupos. Para minimizar a sobrecarga administrativa, a associação aos grupos deve ser atualizada automaticamente com base em títulos de trabalho.
 
-Your organization is building a new lab environment for pre-production testing of apps and services.  A few engineers are being hired to manage the lab environment, including the virtual machines. To allow the engineers to authenticate by using Microsoft Entra ID, you have been tasked with provisioning users and groups. To minimize administrative overhead, membership of the groups should be updated automatically based on job titles. 
+## Diagrama de arquitetura
 
-## Architecture diagram
+![Diagrama da arquitetura do laboratório 01.](../media/az104-lab01-architecture.png)
 
-![Diagram of the lab 01 architecture.](../media/az104-lab01-architecture.png)
+## Habilidades abordadas
 
-## Job skills
++ Tarefa 1: Criar e configurar contas de usuário.
++ Tarefa 2: Criar grupos e adicionar membros.
 
-+ Task 1: Create and configure user accounts.
-+ Task 2: Create groups and add members.
+## Tarefa 1: Criar e configurar contas de usuário
 
-## Task 1: Create and configure user accounts
+Nesta tarefa, você criará e configurará contas de usuário. As contas de usuário armazenam dados do usuário, como nome, departamento, localização e informações de contato.
 
-In this task, you will create and configure user accounts. User accounts will store user data such as name, department, location, and contact information.
+1. Faça logon no **Azure portal** - `https://portal.azure.com`.
 
-1. Sign in to the **Azure portal** - `https://portal.azure.com`.
+1. Para prosseguir ao portal, selecione **Cancel** na tela de boas-vindas **Welcome to Azure**.
 
-1. To proceed to the portal, select **Cancel** on the **Welcome to Azure** splash screen. 
+    >**Observação:** O Azure portal é usado em todos os laboratórios. Se você é novo no Azure, pesquise e selecione `Quickstart Center`. Reserve alguns minutos para assistir ao vídeo **Getting started in the Azure portal**. Mesmo que você já tenha usado o portal antes, encontrará algumas dicas sobre navegação e personalização da interface.
 
-    >**Note:** The Azure portal is used in all the labs. If you are new to the Azure, search for and select `Quickstart Center`. Take a few minutes to watch the **Getting started in the Azure portal** video. Even if you have used the portal before, you will find a few tips and tricks on navigating and customizing the interface.
-    
-1. Search for and select `Microsoft Entra ID`. Microsoft Entra ID is Azure's cloud-based identity and access management solution. Take a few minutes to familiarize yourself with some of the features listed in the left pane. 
+1. Pesquise e selecione `Microsoft Entra ID`. Microsoft Entra ID é a solução de gerenciamento de identidade e acesso baseada em nuvem da Azure. Reserve alguns minutos para se familiarizar com alguns dos recursos listados no painel esquerdo.
 
-1. Select the **Overview** blade and then the **Manage tenants** tab. 
+1. Selecione a blade **Overview** e depois a guia **Manage tenants**.
 
-    >**Did you know?** A tenant is a specific instance of Microsoft Entra ID containing accounts and groups. Depending on your situation, you can create more tenants and **Switch** between them. 
+    >**Você sabia?** Um tenant é uma instância específica do Microsoft Entra ID contendo contas e grupos. Dependendo da sua situação, você pode criar mais tenants e usar a opção **Switch** para alternar entre eles.
 
-1. Return to the **Entra ID** page by pressing back in the browser or selecting the option in the breadcrumb menu.
+1. Retorne à página **Entra ID** pressionando voltar no navegador ou selecionando a opção no menu de breadcrumb.
 
-1. As you have time, explore other options such as **Licenses** and **Password reset**.
-   
-### Create a new user
+1. Se tiver tempo, explore outras opções, como **Licenses** e **Password reset**.
 
-1. In the **Manage** blade, select **Users**; then in the **New user** drop-down select **Create new user**. 
+### Criar um novo usuário
 
-1. Create a new user with the following settings (leave others with their defaults). On the **Properties** tab notice all the different types of information that can be included in the user account. 
+1. No blade **Manage**, selecione **Users**; em seguida, no menu suspenso **New user**, selecione **Create new user**.
+
+1. Crie um novo usuário com as seguintes configurações (deixe as demais com os padrões). Na guia **Properties**, observe todos os diferentes tipos de informações que podem ser incluídas na conta de usuário.
 
     | Setting | Value |
     | --- | --- |
@@ -70,49 +70,49 @@ In this task, you will create and configure user accounts. User accounts will st
     | Account enabled | **checked** |
     | Job title (Properties tab) | `IT Lab Administrator` |
     | Department (Properties tab) | `IT` |
-    | Usage location (Properties tab) | **United States** |
+    | Usage location (Properties tab) | **Estados Unidos** |
 
-1. Once you have finished reviewing, select **Review + create** and then **Create**.
+1. Depois de revisar, selecione **Review + create** e então **Create**.
 
-1. Refresh the page and confirm your new user was created. 
+1. Atualize a página e confirme que o novo usuário foi criado.
 
-### Invite an external user
+### Convidar um usuário externo
 
-1. In the **New user** drop-down select **Invite an external user**. 
+1. No menu suspenso **New user**, selecione **Invite an external user**.
 
     | Setting | Value |
     | --- | --- |
-    | Email | your email address |
-    | Display name | your name |
-    | Send invite message | **check the box** |
+    | Email | seu endereço de e-mail |
+    | Display name | seu nome |
+    | Send invite message | **marcar a caixa** |
     | Message | `Welcome to Azure and our group project` |
 
-1. Move to the **Properties** tab. Complete the basic information, including these fields. 
+1. Vá para a guia **Properties**. Complete as informações básicas, incluindo estes campos.
 
     | Setting | Value |
     | --- | --- |
     | Job title  | `IT Lab Administrator` |
     | Department  | `IT` |
-    | Usage location (Properties tab) | **United States** |
+    | Usage location (Properties tab) | **Estados Unidos** |
 
-1. Select **Review + invite**, and then **Invite**.
+1. Selecione **Review + invite**, e então **Invite**.
 
-1. **Refresh** the page and confirm the invited user was created. You should receive the invitation email shortly. 
+1. **Atualize** a página e confirme que o usuário convidado foi criado. Você deverá receber o e-mail de convite em breve.
 
-    >**Note:** It is unlikely you will be creating user accounts individually. Do you know how your organization plans to create and manage user accounts?
-    
-## Task 2: Create groups and add members
+    >**Observação:** É improvável que você esteja criando contas de usuário individualmente. Você sabe como sua organização planeja criar e gerenciar contas de usuário?
 
-In this task, you create a group account. Group accounts can include user accounts or devices. These are two basic ways members are assigned to groups: Statically and Dynamically. Static groups require administrators to add and remove members manually.  Dynamic groups update automatically based on the properties of a user account or device. For example, job title. 
+## Tarefa 2: Criar grupos e adicionar membros
 
-1. In the Azure portal, search for and select `Microsoft Entra ID`. In the **Manage** blade, select **Groups**. 
+Nesta tarefa, você criará uma conta de grupo. Contas de grupo podem incluir contas de usuário ou dispositivos. Existem duas maneiras básicas de atribuir membros a grupos: Estática e Dinâmica. Grupos estáticos exigem que administradores adicionem e removam membros manualmente. Grupos dinâmicos são atualizados automaticamente com base nas propriedades de uma conta de usuário ou dispositivo. Por exemplo, job title.
 
-1. Take a minute to familiarize yourself with the group settings in the left pane.
+1. No Azure portal, pesquise e selecione `Microsoft Entra ID`. No blade **Manage**, selecione **Groups**.
 
-   + **Expiration** lets you configure a group lifetime in days. After that time the group must be renewed by the owner.
-   + **Naming policy** lets you configure blocked words and add a prefix or suffix to group names.
+1. Reserve um minuto para se familiarizar com as configurações de grupo no painel esquerdo.
 
-1. In the **All groups** blade, select **+ New group** and create a new group.     
+   + **Expiration** permite que você configure uma duração de vida do grupo em dias. Após esse período, o grupo deve ser renovado pelo proprietário.
+   + **Naming policy** permite que você configure palavras bloqueadas e adicione um prefixo ou sufixo aos nomes de grupo.
+
+1. No blade **All groups**, selecione **+ New group** e crie um novo grupo.
 
     | Setting | Value |
     | --- | --- |
@@ -121,49 +121,47 @@ In this task, you create a group account. Group accounts can include user accoun
     | Group description | `Administrators that manage the IT lab` |
     | Membership type | **Assigned** |
 
-    >**Note**: An Entra ID Premium P1 or P2 license is required for dynamic membership. If other **Membership types** are available, the options will show up in the drop-down. 
-    
+    >**Observação**: Uma licença Entra ID Premium P1 ou P2 é necessária para associação dinâmica. Se outros **Membership types** estiverem disponíveis, as opções aparecerão no menu suspenso.
+
     ![Screenshot of create assigned group.](../media/az104-lab01-create-assigned-group.png)
 
-1. Select **No owners selected**.
+1. Selecione **No owners selected**.
 
-1. In the **Add owners** page, search for and **select** yourself (shown in the top right corner) as the owner. Notice you can have more than one owner. 
+1. Na página **Add owners**, pesquise e **selecione** a si mesmo (mostrado no canto superior direito) como o owner. Observe que você pode ter mais de um owner.
 
-1. Select **No members selected**.
+1. Selecione **No members selected**.
 
-1. In the **Add members** pane, search for and **select** the **az104-user1** and the **guest user** you invited. Add both of the users to the group. 
+1. No painel **Add members**, pesquise e **selecione** o **az104-user1** e o **guest user** que você convidou. Adicione ambos os usuários ao grupo.
 
-1. Select **Create** to deploy the group.
+1. Selecione **Create** para implantar o grupo.
 
-1. **Refresh** the page and ensure your group was created.
+1. **Atualize** a página e verifique se seu grupo foi criado.
 
-1. Select the new group and review the **Members** and **Owners** information.
+1. Selecione o novo grupo e revise as informações de **Members** e **Owners**.
 
->**Note:** You may be managing a large number of groups. Does your organization have a plan for creating groups and adding members?
-   
-## Extend your learning with Copilot
+>**Observação:** Você pode estar gerenciando um grande número de grupos. Sua organização tem um plano para criar grupos e adicionar membros?
 
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
-+ What are the Azure PowerShell and CLI commands to create a security group called IT Admins? Provide the official command reference page.  
+## Amplie seu aprendizado com o Copilot
+
+Copilot pode ajudá-lo a aprender como usar as ferramentas de script do Azure. Copilot também pode auxiliar em áreas não cobertas no laboratório ou onde você precise de mais informações. Abra um navegador Edge e escolha Copilot (no canto superior direito) ou acesse *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
++ What are the Azure PowerShell and CLI commands to create a security group called IT Admins? Provide the official command reference page.
 + Provide a step-by-step strategy for managing users and groups in Microsoft Entra ID.
 + What are the steps in the Azure portal to bulk create users and groups?
-+ Provide a comparison table of internal and external Microsoft Entra ID user accounts. 
++ Provide a comparison table of internal and external Microsoft Entra ID user accounts.
 
 
-## Learn more with self-paced training
+## Aprenda mais com treinamentos self-paced
 
-+ [Understand Microsoft Entra ID](https://learn.microsoft.com/training/modules/understand-azure-active-directory/). Compare Microsoft Entra ID to Active Directory DS, learn about Microsoft Entra ID P1 and P2, and explore Microsoft Entra Domain Services for managing domain-joined devices and apps in the cloud.
-+ [Create Azure users and groups in Microsoft Entra ID](https://learn.microsoft.com//training/modules/create-users-and-groups-in-azure-active-directory/). Create users in Microsoft Entra ID. Understand different types of groups. Create a group and add members. Manage business-to-business guest accounts.
-+ [Allow users to reset their password with Microsoft Entra self-service password reset](https://learn.microsoft.com/training/modules/allow-users-reset-their-password/). Evaluate self-service password reset to allow users in your organization to reset their passwords or unlock their accounts. Set up, configure, and test self-service password reset.
-
-
-## Key takeaways
-
-Congratulations on completing the lab. Here are some main takeaways for this lab:
-
-+ A tenant represents your organization and helps you to manage a specific instance of Microsoft cloud services for your internal and external users.
-+ Microsoft Entra ID has user and guest accounts. Each account has a level of access specific to the scope of work expected to be done.
-+ Groups combine together related users or devices. There are two types of groups including Security and Microsoft 365.
-+ Group membership can be statically or dynamically assigned.
++ [Entenda o Microsoft Entra ID](https://learn.microsoft.com/training/modules/understand-azure-active-directory/). Compare Microsoft Entra ID com Active Directory DS, aprenda sobre Microsoft Entra ID P1 e P2 e explore Microsoft Entra Domain Services para gerenciar dispositivos e aplicativos com associação a domínio na nuvem.
++ [Criar usuários e grupos do Azure no Microsoft Entra ID](https://learn.microsoft.com//training/modules/create-users-and-groups-in-azure-active-directory/). Crie usuários no Microsoft Entra ID. Entenda os diferentes tipos de grupos. Crie um grupo e adicione membros. Gerencie contas business-to-business de guest.
++ [Permitir que usuários redefinam suas senhas com self-service password reset do Microsoft Entra](https://learn.microsoft.com/training/modules/allow-users-reset-their-password/). Avalie o self-service password reset para permitir que usuários na sua organização redefinam suas senhas ou desbloqueiem suas contas. Configure, teste e valide o self-service password reset.
 
 
+## Principais conclusões
+
+Parabéns por concluir o laboratório. Aqui estão os principais pontos deste laboratório:
+
++ Um tenant representa sua organização e ajuda a gerenciar uma instância específica dos serviços Microsoft na nuvem para seus usuários internos e externos.
++ Microsoft Entra ID possui contas de usuário e guest. Cada conta tem um nível de acesso específico ao escopo do trabalho esperado.
++ Grupos reúnem usuários ou dispositivos relacionados. Existem dois tipos de grupos, incluindo Security e Microsoft 365.
++ A associação a grupos pode ser atribuída de forma estática ou dinâmica.

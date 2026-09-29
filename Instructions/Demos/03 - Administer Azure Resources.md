@@ -1,105 +1,105 @@
 ---
 demo:
-    title: 'Demonstration 03: Administer Azure Resources'
-    module: 'Administer Azure Resources'
+    title: 'Demonstração 03: Administrar Recursos do Azure'
+    module: 'Administrar Recursos do Azure'
+layout: default
 ---
-# 03 - Administer Azure Resources
+# 03 - Administrar Recursos do Azure
 
-## Demonstration -- Microsoft Copilot for Azure
+## Demonstração -- Microsoft Copilot for Azure
 
-In this demonstration, we explore Copilot for Azure.
+Nesta demonstração, exploramos o Copilot for Azure.
 
-**Reference**: [Analyze, estimate and optimize cloud costs using Azure Copilot](https://learn.microsoft.com/azure/copilot/analyze-cost-management)
+**Referência**: [Analisar, estimar e otimizar custos em nuvem usando Azure Copilot](https://learn.microsoft.com/azure/copilot/analyze-cost-management)
 
-**Reference**: [Generate PowerShell scripts using Azure Copilot](https://learn.microsoft.com/azure/copilot/generate-powershell-scripts)
+**Referência**: [Gerar scripts PowerShell usando Azure Copilot](https://learn.microsoft.com/azure/copilot/generate-powershell-scripts)
 
-Or, you can use any other scenario suggested on this page: [Perform tasks](https://learn.microsoft.com/azure/copilot/capabilities#perform-tasks)
+Ou, você pode usar qualquer outro cenário sugerido nesta página: [Executar tarefas](https://learn.microsoft.com/azure/copilot/capabilities#perform-tasks)
 
-1. Access the portal and Copilot window.
+1. Acesse o portal e a janela do Copilot.
 
-1. Use one of the suggested prompts or choose one of your own.
+1. Use um dos prompts sugeridos ou escolha um de sua autoria.
 
-## Demonstration -- Azure Portal
+## Demonstração -- Azure Portal
 
-In this demonstration, we explore the Azure portal.
+Nesta demonstração, exploramos o Azure Portal.
 
-**Reference**: [Manage Azure portal settings and preferences](https://docs.microsoft.com/azure/azure-portal/set-preferences)
+**Referência**: [Gerenciar configurações e preferências do Azure portal](https://docs.microsoft.com/azure/azure-portal/set-preferences)
 
-**Reference**: [Create a dashboard in the Azure portal](https://docs.microsoft.com/azure/azure-portal/azure-portal-dashboards)
+**Referência**: [Criar um painel no Azure portal](https://docs.microsoft.com/azure/azure-portal/azure-portal-dashboards)
 
-**Reference**: [How to create an Azure support request](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request)
+**Referência**: [Como criar uma solicitação de suporte do Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request)
 
-1. Access the Azure Portal.
+1. Acesse o Azure Portal.
 
-1. Select  the **Support & Troubleshooting** icon on the top banner. Review the **Support resources** links. 
+1. Selecione o ícone **Support & Troubleshooting** na barra superior. Revise os links **Support resources**.
 
-1. Select the **Settings** icon on the top banner. Review **Appearance + startup views** settings. 
+1. Selecione o ícone **Settings** na barra superior. Revise as configurações **Appearance + startup views**.
 
-1. Use the left-side menu and select **Dashboard**. **Edit** the dashboard using the **Tile Gallery**. Discuss customization options.
+1. Use o menu lateral e selecione **Dashboard**. **Edit** o dashboard usando a **Tile Gallery**. Discuta as opções de personalização.
 
-1. Show how to search for and locate resources.
+1. Mostre como pesquisar e localizar recursos.
 
-1. Use the upper left menu to locate **All services**. 
+1. Use o menu superior esquerdo para localizar **All services**.
 
-1. As you have time review other features.
-   
-1. Ask if the students have any questions.
+1. Se houver tempo, reveja outros recursos.
 
-## Demonstration -- Cloud Shell
+1. Pergunte se os alunos têm alguma pergunta.
 
-In this demonstration, we experiment with Cloud Shell.
+## Demonstração -- Cloud Shell
 
-**Reference**: [Quickstart for Azure Cloud Shell](https://learn.microsoft.com/en-us/azure/cloud-shell/quickstart?tabs=azurecli)
+Nesta demonstração, experimentamos o Cloud Shell.
 
-**Configure the Cloud Shell**
+**Referência**: [Introdução rápida ao Azure Cloud Shell](https://learn.microsoft.com/en-us/azure/cloud-shell/quickstart?tabs=azurecli)
 
-1.  Access the **Azure Portal**.
+**Configurar o Cloud Shell**
 
-1.  Click the **Cloud Shell** icon on the top banner.
+1.  Acesse o **Azure Portal**.
 
-1.  On the Welcome to the Shell page, notice your selections for Bash or PowerShell. Select **PowerShell**.
+1.  Clique no ícone **Cloud Shell** na barra superior.
 
-1.  Discuss how the Azure Cloud Shell requires an Azure file share to persist files. If necessary, configure the storage share. 
+1.  Na página Welcome to the Shell, observe suas seleções para Bash ou PowerShell. Selecione **PowerShell**.
 
-**Experiment with Azure PowerShell and Bash**
+1.  Explique como o Azure Cloud Shell requer um Azure file share para persistir arquivos. Se necessário, configure o storage share.
 
-1. Ensure the **PowerShell** shell is selected and try a few commands. For example, **Get-AzSubscription** and **Get-AzResourceGroup**.
+**Experimente com o Azure PowerShell e o Bash**
 
-1. Show how auto-complete works. Show how to clear the screen, **cls**. 
+1. Certifique-se de que o shell **PowerShell** esteja selecionado e execute alguns comandos. Por exemplo, **Get-AzSubscription** e **Get-AzResourceGroup**.
 
-1. Ensure the **Bash** shell is selected and try a few commands. For example, **az account list** and **az resource list**.
+1. Mostre como o auto-complete funciona. Mostre como limpar a tela, **cls**.
 
-1. Ask if students have any questions on using the PowerShell or Bash commands. 
+1. Certifique-se de que o shell **Bash** esteja selecionado e execute alguns comandos. Por exemplo, **az account list** e **az resource list**.
 
-**Experiment with the Cloud shell editor (optional)**
+1. Pergunte se os alunos têm alguma dúvida sobre o uso dos comandos do PowerShell ou do Bash.
 
-1. To use the Cloud Editor, select the **curly braces** icon.
+**Experimente o editor do Cloud Shell (opcional)**
 
-1. Select a file from the left navigation pane. For example, **.profile**.
+1. Para usar o Cloud Editor, selecione o ícone de **chaves**.
 
-1. Notice on the editor top banner, selections for Settings (Text Size and Font) and Upload/Download files.
+1. Selecione um arquivo no painel de navegação à esquerda. Por exemplo, **.profile**.
 
-1. Notice on the ellipsis (**\...**) on the far right for **Save**, **Close Editor**, and **Open File**.
+1. Observe na barra superior do editor as opções para Settings (Text Size and Font) e Upload/Download files.
 
-1. Experiment as you have time, then **close** the Cloud Editor.
+1. Observe os três pontos (**\...**) no canto direito para **Save**, **Close Editor**, e **Open File**.
 
-1. Close the Cloud Shell.
+1. Experimente conforme houver tempo, então **close** o Cloud Editor.
 
-## Demonstration -- QuickStart Templates
+1. Feche o Cloud Shell.
 
-In this demonstration, we explore QuickStart templates.
+## Demonstração -- QuickStart Templates
 
-**Reference**: [Tutorial - Create & deploy template - Azure Resource Manager](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-tutorial-create-first-template?tabs=azure-powershell)
+Nesta demonstração, exploramos os QuickStart Templates.
 
-1. Start by browsing to the [Azure Quickstart Templates gallery](https://learn.microsoft.com/en-us/samples/browse/?expanded=azure&products=azure-resource-manager). Notice there are JSON and Bicep examples. 
+**Referência**: [Tutorial - Criar e implantar template - Azure Resource Manager](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-tutorial-create-first-template?tabs=azure-powershell)
 
-1. Ask students if there are any specific templates that are of interest. If not, select a template. For example, the [Deploy a simple Windows VM with tags](https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/vm-simple-windows/) template.
+1. Comece navegando até a galeria [Azure Quickstart Templates](https://learn.microsoft.com/en-us/samples/browse/?expanded=azure&products=azure-resource-manager). Observe que há exemplos em JSON e Bicep.
 
-1. Discuss how the **Deploy to Azure** button enables you to deploy the template directly through the Azure portal.
+1. Pergunte aos alunos se há templates específicos de interesse. Caso não, selecione um template. Por exemplo, o template [Implantar uma VM Windows simples com tags](https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/vm-simple-windows/).
 
-1. **Deploy** the JSON template and discuss how you can edit the template and parameters file. Review the purpose of the files. As you have time, review the syntax. 
+1. Explique como o botão **Deploy to Azure** permite implantar o template diretamente pelo Azure Portal.
 
-1. Return to the code samples gallery, and locate a Bicep template. For example, [Create a Standard Storage Account](https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/storage-account-create/). 
+1. **Deploy** o template JSON e discuta como você pode editar o template e o arquivo de parâmetros. Revise a finalidade dos arquivos. Se houver tempo, revise a sintaxe.
 
-1. **Deploy** the Bicep template and discuss how you can edit the template and parameters file. As you have time, review the syntax. 
+1. Retorne à galeria de exemplos de código e localize um template em Bicep. Por exemplo, [Criar uma Standard Storage Account](https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/storage-account-create/).
 
+1. **Deploy** o template Bicep e discuta como você pode editar o template e o arquivo de parâmetros. Se houver tempo, revise a sintaxe.

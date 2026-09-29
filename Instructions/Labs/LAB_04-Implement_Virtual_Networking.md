@@ -1,8 +1,8 @@
 ---
 lab:
-  title: 'Lab 04: Implement Virtual Networking'
+  title: 'Laboratório 04: Implementar Redes Virtuais'
   module: Implement Virtual Networking
-  description: Configure virtual networks, network security groups, and DNS zones. 
+  description: Configure virtual networks, network security groups, and DNS zones.
   duration: 50 minutes
   level: 400
   islab: true
@@ -11,70 +11,71 @@ lab:
   - Virtual networks
   - Network security groups
   - Azure DNS
+layout: default
 ---
 
 # Lab 04 - Implement Virtual Networking
 
-## Lab introduction
+## Introdução do laboratório
 
-This lab is the first of three labs that focuses on virtual networking. In this lab, you learn the basics of virtual networking and subnetting. You learn how to protect your network with network security groups and application security groups. You also learn about DNS zones and records. 
+Este laboratório é o primeiro de três laboratórios que foca em virtual networking. Neste laboratório, você aprenderá o básico de virtual networking e subnetting. Você aprenderá como proteger sua rede com network security groups e application security groups. Você também aprenderá sobre DNS zones e records.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the region, but the steps are written using **East US**.
+Este laboratório requer uma assinatura do Azure. Seu tipo de assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas os passos foram escritos usando **East US**.
 
-## Estimated time: 50 minutes
+## Tempo estimado: 50 minutos
 
-## Lab scenario 
+## Cenário do laboratório
 
-Your global organization plans to implement virtual networks. The immediate goal is to accommodate all the existing resources. However, the organization is in a growth phase and wants to ensure there is additional capacity for the growth.
+Sua organização global planeja implementar virtual networks. O objetivo imediato é acomodar todos os recursos existentes. No entanto, a organização está em fase de crescimento e quer garantir capacidade adicional para esse crescimento.
 
-The **CoreServicesVnet** virtual network has the largest number of resources. A large amount of growth is anticipated, so a large address space is necessary for this virtual network.
+A virtual network **CoreServicesVnet** tem o maior número de recursos. Uma grande quantidade de crescimento é prevista, então um espaço de endereço grande é necessário para esta virtual network.
 
-The **ManufacturingVnet** virtual network contains systems for the operations of the manufacturing facilities. The organization is anticipating a large number of internal connected devices for their systems to retrieve data from. 
+A virtual network **ManufacturingVnet** contém sistemas para as operações das instalações de fabricação. A organização prevê um grande número de dispositivos internos conectados para que seus sistemas obtenham dados.
 
-## Architecture diagram
+## Diagrama de arquitetura
 
 ![Network layout](../media/az104-lab04-architecture.png)
 
-These virtual networks and subnets are structured in a way that accommodates existing resources yet allows for the projected growth. Let's create these virtual networks and subnets to lay the foundation for our networking infrastructure.
+Essas virtual networks e subnets são estruturadas de forma a acomodar os recursos existentes e permitir o crescimento projetado. Vamos criar essas virtual networks e subnets para estabelecer a base da nossa infraestrutura de rede.
 
->**Did you know?**: It is a good practice to avoid overlapping IP address ranges to reduce issues and simplify troubleshooting. Overlapping is a concern across the entire network, whether in the cloud or on-premises. Many organizations design an enterprise-wide IP addressing scheme to avoid overlapping and plan for future growth.
+>**Você sabia?**: É uma boa prática evitar sobreposição de intervalos de endereços IP para reduzir problemas e simplificar a solução de problemas. A sobreposição é uma preocupação em toda a rede, seja na cloud ou on-premises. Muitas organizações projetam um esquema de endereçamento IP em nível empresarial para evitar sobreposição e planejar crescimento futuro.
 
-## Job skills
+## Competências desenvolvidas
 
-+ Task 1: Create a virtual network with subnets using the portal.
-+ Task 2: Create a virtual network and subnets using a template.
-+ Task 3: Create and configure communication between an Application Security Group and a Network Security Group.
-+ Task 4: Configure public and private Azure DNS zones.
-  
-## Task 1: Create a virtual network with subnets using the portal
++ Tarefa 1: Criar uma virtual network com subnets usando o portal.
++ Tarefa 2: Criar uma virtual network e subnets usando um template.
++ Tarefa 3: Criar e configurar comunicação entre um Application Security Group e um Network Security Group.
++ Tarefa 4: Configurar public e private Azure DNS zones.
 
-The organization plans a large amount of growth for core services. In this task, you create the virtual network and the associated subnets to accommodate the existing resources and planned growth. In this task, you will use the Azure portal. 
+## Tarefa 1: Criar uma virtual network com subnets usando o portal
 
-1. Sign in to the **Azure portal** - `https://portal.azure.com`.
-   
-1. Search for and select `Virtual Networks`.
+A organização planeja um grande crescimento para os serviços centrais. Nesta tarefa, você criará a virtual network e as subnets associadas para acomodar os recursos existentes e o crescimento planejado. Nesta tarefa, você usará o Azure portal.
 
-1. Select **Create** on the Virtual networks page.
+1. Faça login no **Azure portal** - `https://portal.azure.com`.
 
-1. Complete the **Basics** tab for the CoreServicesVnet.  
+1. Procure por e selecione `Virtual Networks`.
+
+1. Selecione **Create** na página Virtual networks.
+
+1. Complete a guia **Basics** para o CoreServicesVnet.
 
 	|  **Option**         | **Value**            |
 	| ------------------ | -------------------- |
-	| Resource Group     | `az104-rg4` (if necessary, create new) |
+	| Resource Group     | `az104-rg4` (se necessário, criar novo) |
 	| Name               | `CoreServicesVnet`     |
 	| Region             | (US) **East US**         |
 
-    >**Note:** If deployment fails due to capacity or quota limits, adjust the configuration or choose a different region.
+    >**Observação:** Se a implantação falhar devido a limites de capacidade ou cota, ajuste a configuração ou escolha uma região diferente.
 
-1. Move to the **Address space** tab.
+1. Vá para a guia **Address space**.
 
 	|  **Option**         | **Value**            |
 	| ------------------ | -------------------- |
-	| IPv4 address space | Replace the prepopulated IPv4 address space with `10.20.0.0/16` (separate the entries)  |
+	| IPv4 address space | Substitua o IPv4 address space pré-populado por `10.20.0.0/16` (separe as entradas)  |
 
-1. Select **+ Add a subnet**. Complete the name and address information for each subnet. Be sure to select **Add** for each new subnet. 
+1. Selecione **+ Add a subnet**. Complete o nome e as informações de endereço para cada subnet. Certifique-se de selecionar **Add** para cada nova subnet.
 
-	>**Note:** Be sure to delete the default subnet - either before or after creating the other subnets.
+	>**Observação:** Certifique-se de excluir o subnet padrão - seja antes ou depois de criar os outros subnets.
 
 	| **Subnet**             | **Option**           | **Value**              |
 	| ---------------------- | -------------------- | ---------------------- |
@@ -85,142 +86,142 @@ The organization plans a large amount of growth for core services. In this task,
 	|                        | Starting address		| `10.20.20.0`        |
 	|						 | Size					| `/24`	|
 
-	>**Note:** Every virtual network must have at least one subnet. Reminder that five IP addresses will always be reserved, so consider that in your planning. 
+	>**Observação:** Toda virtual network deve ter pelo menos um subnet. Lembre-se que cinco endereços IP serão sempre reservados, então considere isso no seu planejamento.
 
-1. To finish creating the CoreServicesVnet and its associated subnets, select **Review + create**.
+1. Para finalizar a criação do CoreServicesVnet e seus subnets associados, selecione **Review + create**.
 
-1. Verify your configuration passed validation, and then select **Create**.
+1. Verifique se sua configuração passou na validação e, em seguida, selecione **Create**.
 
-1. Wait for the virtual network to deploy and then select **Go to resource**.
+1. Aguarde a implantação da virtual network e então selecione **Go to resource**.
 
-1. Take a minute to verify the **Address space** and the **Subnets**. Notice your other choices in the **Settings** blade. 
+1. Reserve um minuto para verificar o **Address space** e os **Subnets**. Observe suas outras escolhas na lâmina **Settings**.
 
-1. In the **Automation** section, select **Export template**, and then wait for the template to be generated.
+1. Na seção **Automation**, selecione **Export template**, e então aguarde o template ser gerado.
 
-1. Select the **Template** tab and **Download** the template. Then, switch to the **Parameters** tab, and repeat the **Download** operation.
+1. Selecione a guia **Template** e **Download** o template. Em seguida, alterne para a guia **Parameters** e repita a operação **Download**.
 
-1. Navigate on the local machine to the **Downloads** folder. 
+1. Navegue na máquina local até a pasta **Downloads**.
 
-1. Before proceeding, ensure you have the **template.json** file. You will use this template to create the ManufacturingVnet in the next task. 
- 
-## Task 2: Create a virtual network and subnets using a template
+1. Antes de prosseguir, certifique-se de que você tem o arquivo **template.json**. Você usará este template para criar o ManufacturingVnet na próxima tarefa.
 
-In this task, you create the ManufacturingVnet virtual network and associated subnets. The organization anticipates growth for the manufacturing offices so the subnets are sized for the expected growth. For this task, you use a template to create the resources. 
+## Tarefa 2: Criar uma virtual network e subnets usando um template
 
-1. Locate the **template.json** file exported in the previous task. It should be in your **Downloads** folder.
+Nesta tarefa, você criará a virtual network ManufacturingVnet e os subnets associados. A organização prevê crescimento para os escritórios de manufatura, portanto os subnets são dimensionados para o crescimento esperado. Para esta tarefa, você usará um template para criar os recursos.
 
-1. Edit the file using the editor of your choice. Many editors have a *change all occurrences* feature. If you are using Visual Studio Code be sure you are working in a **trusted window** and not in the **restricted mode**. Consult the architecture diagram to verify the details. 
+1. Localize o arquivo **template.json** exportado na tarefa anterior. Deve estar na sua pasta **Downloads**.
 
-### Make changes for the ManufacturingVnet virtual network
+1. Edite o arquivo usando o editor de sua escolha. Muitos editores têm um recurso de *change all occurrences*. Se você estiver usando Visual Studio Code, certifique-se de que está trabalhando em uma **trusted window** e não em **restricted mode**. Consulte o diagrama de arquitetura para verificar os detalhes.
 
-1. Replace all occurrences of **CoreServicesVnet** with `ManufacturingVnet`. 
+### Faça alterações para a virtual network ManufacturingVnet
 
-1. Replace all occurrences of **10.20.0.0** with `10.30.0.0`. 
+1. Substitua todas as ocorrências de **CoreServicesVnet** por `ManufacturingVnet`.
 
-### Make changes for the ManufacturingVnet subnets
+1. Substitua todas as ocorrências de **10.20.0.0** por `10.30.0.0`.
 
-1. Change all occurrences of **SharedServicesSubnet** to `SensorSubnet1`.
+### Faça alterações para os subnets do ManufacturingVnet
 
-1. Change all occurrences of **10.20.10.0/24** to `10.30.20.0/24`.
+1. Altere todas as ocorrências de **SharedServicesSubnet** para `SensorSubnet1`.
 
-1. Change all occurrences of **DatabaseSubnet** to `SensorSubnet2`.
+1. Altere todas as ocorrências de **10.20.10.0/24** para `10.30.20.0/24`.
 
-1. Change all occurrences of **10.20.20.0/24** to `10.30.21.0/24`.
+1. Altere todas as ocorrências de **DatabaseSubnet** para `SensorSubnet2`.
 
-1. Read back through the file and ensure everything looks correct. Use the architecture diagram for resource names and IP addresses. 
+1. Altere todas as ocorrências de **10.20.20.0/24** para `10.30.21.0/24`.
 
-1. Be sure to **Save** your changes.
+1. Leia o arquivo novamente e certifique-se de que tudo esteja correto. Use o diagrama de arquitetura para nomes de recursos e endereços IP.
 
->**Note:** There are completed template files in the lab files directory. 
+1. Certifique-se de **Salvar** suas alterações.
 
-### Make changes to the parameters file
+>**Observação:** Existem arquivos de template prontos no diretório de arquivos do laboratório.
 
-1. Locate the **parameters.json** file exported in the previous task. It should be in your **Downloads** folder.
+### Faça alterações no arquivo de parâmetros
 
-1. Edit the file using the editor of your choice.
+1. Localize o arquivo **parameters.json** exportado na tarefa anterior. Deve estar na sua pasta **Downloads**.
 
-1. Replace the one occurrence of **CoreServicesVnet** with `ManufacturingVnet`.
+1. Edite o arquivo usando o editor de sua escolha.
 
-1. **Save** your changes.
-   
-### Deploy the custom template
+1. Substitua a única ocorrência de **CoreServicesVnet** por `ManufacturingVnet`.
 
-1. In the portal, search for and select `Deploy a custom template`.
+1. **Salve** suas alterações.
 
-1. Select **Build your own template in the editor** and then **Load file**.
+### Implantar o template personalizado
 
-1. Select the **template.json** file with your Manufacturing changes, then select **Save**.
+1. No portal, pesquise por e selecione `Deploy a custom template`.
 
-1. Select **Edit parameters**, and then **Load file**.
+1. Selecione **Build your own template in the editor** e então **Load file**.
 
-1. Select the **parameters.json** file with your Manufacturing changes, then select **Save**.
+1. Selecione o arquivo **template.json** com suas alterações para Manufacturing e, em seguida, selecione **Save**.
 
-1. Ensure your resource group, **az104-rg4** is selected. 
+1. Selecione **Edit parameters**, e então **Load file**.
 
-1. Select **Review + create** and then **Create**.
+1. Selecione o arquivo **parameters.json** com suas alterações para Manufacturing e, em seguida, selecione **Save**.
 
-1. Wait for the template to deploy, then confirm (in the portal) the Manufacturing virtual network and subnets were created.
+1. Certifique-se de que seu resource group, **az104-rg4**, esteja selecionado.
 
->**Note:** If you have to deploy more than one time you may find some resources were successfully completed and the deployment is failing. You can manually remove those resources and try again. 
-   
-## Task 3: Create and configure communication between an Application Security Group and a Network Security Group
+1. Selecione **Review + create** e então **Create**.
 
-In this task, we create an Application Security Group and a Network Security Group. The NSG will have an inbound security rule that allows traffic from the ASG. The NSG will also have an outbound rule that denies access to the internet. 
+1. Aguarde o template ser implantado, então confirme (no portal) que a virtual network e os subnets Manufacturing foram criados.
 
-### Create the Application Security Group (ASG)
+>**Observação:** Se for necessário implantar mais de uma vez, você poderá descobrir que alguns recursos foram concluídos com sucesso e a implantação está falhando. Você pode remover manualmente esses recursos e tentar novamente.
 
-1. In the Azure portal, search for and select `Application security groups`.
+## Tarefa 3: Criar e configurar comunicação entre um Application Security Group e um Network Security Group
 
-1. Click **Create** and provide the basic information.
+Nesta tarefa, criaremos um Application Security Group e um Network Security Group. O NSG terá uma regra de segurança de entrada que permite tráfego do ASG. O NSG também terá uma regra de saída que nega acesso à Internet.
+
+### Criar o Application Security Group (ASG)
+
+1. No Azure portal, pesquise por e selecione `Application security groups`.
+
+1. Clique em **Create** e forneça as informações básicas.
 
     | Setting | Value |
     | -- | -- |
-    | Subscription | *your subscription* |
+    | Subscription | *sua assinatura* |
     | Resource group | **az104-rg4** |
     | Name | `asg-web` |
     | Region | **East US**  |
 
-1. Click **Review + create** and then after the validation click **Create**.
+1. Clique em **Review + create** e então, após a validação, clique em **Create**.
 
->**Note:** At this point, you would associate the ASG with virtual machine(s). These machines will be affected by the inbound NSG rule you create in the next task.  
+>**Observação:** Neste ponto, você associaria o ASG com máquina(s) virtual(is). Essas máquinas serão afetadas pela regra de entrada do NSG que você criará na próxima tarefa.
 
-### Create the Network Security Group and associate it with CoreServicesVnet
+### Criar o Network Security Group e associá-lo ao CoreServicesVnet
 
-1. In the Azure portal, search for and select `Network security groups`.
+1. No Azure portal, pesquise por e selecione `Network security groups`.
 
->**Note:** You can also locate this resource using the Azure portal menu (icon top left). Select **Create a resource** and then in the **Networking** blade, select **Network security group**. 
+>**Observação:** Você também pode localizar este recurso usando o menu do Azure portal (ícone no canto superior esquerdo). Selecione **Create a resource** e então no blade **Networking**, selecione **Network security group**.
 
-1. Select **+ Create** and provide information on the **Basics** tab. 
+1. Selecione **+ Create** e forneça informações na guia **Basics**.
 
     | Setting | Value |
     | -- | -- |
-    | Subscription | *your subscription* |
+    | Subscription | *sua assinatura* |
     | Resource group | **az104-rg4** |
     | Name | `myNSGSecure` |
     | Region | **East US**  |
 
-1. Click **Review + create** and then after the validation click **Create**.
+1. Clique em **Review + create** e então, após a validação, clique em **Create**.
 
-1. After the NSG is deployed, click **Go to resource**.
+1. Após a implantação do NSG, clique em **Go to resource**.
 
-1. Under **Settings** click **Subnets** and then **Associate**.
+1. Em **Settings** clique em **Subnets** e então **Associate**.
 
     | Setting | Value |
     | -- | -- |
     | Virtual network | **CoreServicesVnet (az104-rg4)** |
     | Subnet | **SharedServicesSubnet** |
 
-1. Click **OK** to save the association.
+1. Clique em **OK** para salvar a associação.
 
-### Configure an inbound security rule to allow ASG traffic
+### Configurar uma regra de segurança de entrada para permitir tráfego do ASG
 
-1. Continue working with your NSG. In the **Settings** area, select **Inbound security rules**.
+1. Continue trabalhando com seu NSG. Na área **Settings**, selecione **Inbound security rules**.
 
-1. Review the default inbound rules. Notice that only other virtual networks and load balancers are allowed access.
+1. Revise as regras de entrada padrão. Observe que apenas outras virtual networks e load balancers têm acesso permitido.
 
-1. Select **+ Add**.
+1. Selecione **+ Add**.
 
-1. On the **Add inbound security rule** blade, use the following information to add an inbound port rule. This rule allows ASG traffic. When you are finished, select **Add**.
+1. No blade **Add inbound security rule**, use as seguintes informações para adicionar uma regra de porta de entrada. Esta regra permite tráfego do ASG. Quando terminar, selecione **Add**.
 
     | Setting | Value |
     | -- | -- |
@@ -228,20 +229,20 @@ In this task, we create an Application Security Group and a Network Security Gro
     | Source application security groups | **asg-web** |
     | Source port ranges |  * |
     | Destination | **Any** |
-    | Service | **Custom** (notice your other choices) |
+    | Service | **Custom** (observe suas outras escolhas) |
     | Destination port ranges | **80,443** |
     | Protocol | **TCP** |
     | Action | **Allow** |
     | Priority | **100** |
     | Name | `AllowASG` |
 
-### Configure an outbound NSG rule that denies Internet access
+### Configurar uma regra de saída do NSG que nega acesso à Internet
 
-1. After creating your inbound NSG rule, select **Outbound security rules**. 
+1. Depois de criar sua regra de entrada do NSG, selecione **Outbound security rules**.
 
-1. Notice the **AllowInternetOutBound** rule. Also notice the rule cannot be deleted and the priority is 65001.
+1. Observe a regra **AllowInternetOutBound**. Também observe que a regra não pode ser excluída e a prioridade é 65001.
 
-1. Select **+ Add** and then configure an outbound rule that denies access to the internet. When you are finished, select **Add**.
+1. Selecione **+ Add** e então configure uma regra de saída que negue acesso à Internet. Quando terminar, selecione **Add**.
 
     | Setting | Value |
     | -- | -- |
@@ -257,34 +258,34 @@ In this task, we create an Application Security Group and a Network Security Gro
     | Name | `DenyInternetOutbound` |
 
 
-## Task 4: Configure public and private Azure DNS zones
+## Tarefa 4: Configurar public e private Azure DNS zones
 
-In this task, you will create and configure public and private DNS zones. 
+Nesta tarefa, você criará e configurará public e private DNS zones.
 
-### Configure a public DNS zone
+### Configurar uma DNS zone pública
 
-You can configure Azure DNS to resolve host names in your public domain. For example, if you purchased the contoso.xyz domain name from a domain name registrar, you can configure Azure DNS to host the `contoso.com` domain and resolve www.contoso.xyz to the IP address of your web server or web app.
+Você pode configurar Azure DNS para resolver nomes de host no seu domínio público. Por exemplo, se você comprou o domínio contoso.xyz de um registrador de domínios, você pode configurar Azure DNS para hospedar o domínio `contoso.com` e resolver www.contoso.xyz para o endereço IP do seu web server ou web app.
 
-1. In the portal, search for and select `DNS zones`.
+1. No portal, pesquise por e selecione `DNS zones`.
 
-1. Select **+ Create**.
+1. Selecione **+ Create**.
 
-1. Configure the **Basics** tab.
+1. Configure a guia **Basics**.
 
     | Property | Value    |
     |:---------|:---------|
-    | Subscription | **Select your subscription** |
+    | Subscription | **Selecione sua assinatura** |
     | Resource group | **az104-rg4** |
-    | Name | `contoso.com` (this name must be unique, contoso.com is reserved so change to something else.) |
-    | Region |**East US** (review the informational icon) |
+    | Name | `contoso.com` (este nome deve ser único, contoso.com está reservado então altere para outro.) |
+    | Region |**East US** (revise o ícone informativo) |
 
-1. Select **Review + create** and then **Create**.
-   
-1. Wait for the DNS zone to deploy and then select **Go to resource**.
+1. Selecione **Review + create** e então **Create**.
 
-1. On the **Overview** blade notice the names of the four Azure DNS name servers assigned to the zone. **Copy** one of the name server addresses. You will need it in a future step for the nslookup command below.. 
-  
-1. Expand the **DNS Management** blade and select **Recordsets**. Click **+Add**. 
+1. Aguarde a DNS zone ser implantada e então selecione **Go to resource**.
+
+1. Na lâmina **Overview** observe os nomes dos quatro name servers do Azure DNS atribuídos à zone. **Copie** um dos endereços do name server. Você precisará dele em um passo futuro para o comando nslookup abaixo..
+
+1. Expanda o blade **DNS Management** e selecione **Recordsets**. Clique em **+Add**.
 
     | Property | Value    |
     |:---------|:---------|
@@ -294,50 +295,50 @@ You can configure Azure DNS to resolve host names in your public domain. For exa
     | TTL | **1** |
     | IP address | **10.1.1.4** |
 
->**Note:**  In a real-world scenario, you'd enter the public IP address of your web server.
+>**Observação:** Em um cenário real, você inseriria o endereço IP público do seu web server.
 
-1. Select **Add** and verify your domain has an A record set named **www**.
+1. Selecione **Add** e verifique se seu domínio tem um A record chamado **www**.
 
-1. Open a command prompt, and run the following command. If you have changed the domain name, make an adjustment. 
+1. Abra um prompt de comando e execute o seguinte comando. Se você tiver alterado o nome de domínio, faça o ajuste.
 
    ```sh
    nslookup www.contosoxyz104.com <name server name you copied in step 6 above>
    ```
-1. Verify the host name www.contosoxyz104.com resolves to the IP address you provided. This confirms name resolution is working correctly.
+1. Verifique se o host www.contosoxyz104.com resolve para o endereço IP que você forneceu. Isso confirma que a resolução de nomes está funcionando corretamente.
 
-### Configure a private DNS zone
+### Configurar uma DNS zone privada
 
-A private DNS zone provides name resolution services within virtual networks. A private DNS zone is only accessible from the virtual networks that it is linked to and can't be accessed from the internet. 
+Uma private DNS zone fornece serviços de resolução de nomes dentro de virtual networks. Uma private DNS zone só é acessível a partir das virtual networks às quais ela está vinculada e não pode ser acessada pela internet.
 
-1. In the portal, search for and select `Private dns zones`.
+1. No portal, pesquise por e selecione `Private dns zones`.
 
-1. Select **+ Create**.
+1. Selecione **+ Create**.
 
-1. On the **Basics** tab of Create private DNS zone, enter the information as listed in the table below:
+1. Na guia **Basics** de Create private DNS zone, insira as informações conforme listado na tabela abaixo:
 
     | Property | Value    |
     |:---------|:---------|
-    | Subscription | **Select your subscription** |
+    | Subscription | **Selecione sua assinatura** |
     | Resource group | **az104-rg4** |
-    | Name | `private.contoso.com` (adjust if you had to rename) |
+    | Name | `private.contoso.com` (ajuste se você teve que renomear) |
     | Region |**East US** |
 
-1. Select **Review + create** and then **Create**.
-   
-1. Wait for the DNS zone to deploy and then select **Go to resource**.
+1. Selecione **Review + create** e então **Create**.
 
-1. Notice on the **Overview** blade there are no name server records. 
+1. Aguarde a DNS zone ser implantada e então selecione **Go to resource**.
 
-1. Expand the **DNS Management** blade and then select **Virtual network links**. Configure the link. 
+1. Observe na lâmina **Overview** que não há name server records.
+
+1. Expanda o blade **DNS Management** e então selecione **Virtual network links**. Configure o link.
 
     | Property | Value    |
     |:---------|:---------|
     | Link name | `manufacturing-link` |
     | Virtual network | `ManufacturingVnet` |
 
-1. Select **Create** and wait for the link to create. 
+1. Selecione **Create** e aguarde a criação do link.
 
-1. From the **DNS Management** blade select **+ Recordsets**. You would now add a record for each virtual machine that needs private name-resolution support.
+1. No blade **DNS Management** selecione **+ Recordsets**. Agora você adicionaria um record para cada virtual machine que precisa de suporte a resolução de nome privada.
 
     | Property | Value    |
     |:---------|:---------|
@@ -346,47 +347,38 @@ A private DNS zone provides name resolution services within virtual networks. A 
     | TTL | **1** |
     | IP address | **10.1.1.4** |
 
- >**Note:**  In a real-world scenario, you'd enter the IP address for a specific manufacturing virtual machine.
+ >**Observação:** Em um cenário real, você inseriria o endereço IP para uma VM específica de manufatura.
 
-## Cleanup your resources
+## Limpar seus recursos
 
-If you are working with **your own subscription** take a minute to delete the lab resources. This will ensure resources are freed up and cost is minimized. The easiest way to delete the lab resources is to delete the lab resource group. 
+Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e que o custo seja minimizado. A forma mais fácil de excluir os recursos do laboratório é excluir o resource group do laboratório.
 
-+ In the Azure portal, select the resource group, select **Delete the resource group**, **Enter resource group name**, and then click **Delete**.
-+ Using Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
-+ Using the CLI, `az group delete --name resourceGroupName`.
++ No Azure portal, selecione o resource group, selecione **Delete the resource group**, **Enter resource group name**, e então clique **Delete**.
++ Usando Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
++ Usando o CLI, `az group delete --name resourceGroupName`.
 
-## Extend your learning with Copilot
+## Expanda seu aprendizado com o Copilot
 
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
-+ Share the top 10 best practices when deploying and configuring a virtual network in Azure.
-+ How do I use Azure PowerShell and Azure CLI commands to create a virtual network with a public IP address and one subnet. 
-+ Explain Azure Network Security Group inbound and outbound rules and how they are used.
-+ What is the difference between Azure Network Security Groups and Azure Application Security Groups? Share examples of when to use each of these groups. 
-+ Give a step-by-step guide on how to troubleshoot any network issues we face when deploying a network on Azure. Also share the thought process used for every step of the troubleshooting.
+Copilot pode ajudá-lo a aprender como usar as ferramentas de script do Azure. O Copilot também pode auxiliar em áreas não cobertas no laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (no canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para testar estes prompts.
++ Compartilhe as 10 melhores práticas ao implantar e configurar uma virtual network no Azure.
++ Como usar Azure PowerShell e Azure CLI para criar uma virtual network com um public IP address e um subnet.
++ Explique as regras inbound e outbound do Azure Network Security Group e como elas são usadas.
++ Qual é a diferença entre Azure Network Security Groups e Azure Application Security Groups? Compartilhe exemplos de quando usar cada um desses grupos.
++ Forneça um guia passo a passo sobre como diagnosticar quaisquer problemas de rede enfrentados ao implantar uma rede no Azure. Também compartilhe o raciocínio usado em cada etapa do troubleshooting.
 
-## Learn more with self-paced training
+## Aprenda mais com treinamento autodirigido
 
 + [Introduction to Azure Virtual Networks](https://learn.microsoft.com/training/modules/introduction-to-azure-virtual-networks/). Design and implement core Azure Networking infrastructure such as virtual networks, public and private IPs, DNS, virtual network peering, routing, and Azure Virtual NAT.
 + [Secure and isolate access to Azure resources by using network security groups and service endpoints](https://learn.microsoft.com/training/modules/secure-and-isolate-with-nsg-and-service-endpoints/). Network security groups and service endpoints help you secure your virtual machines and Azure services from unauthorized network access.
 + [Host your domain on Azure DNS](https://learn.microsoft.com/training/modules/host-domain-azure-dns/). Create a DNS zone for your domain name. Create DNS records to map the domain to an IP address. Test that the domain name resolves to your web server.
-  
-## Key takeaways
 
-Congratulations on completing the lab. Here are the main takeaways for this lab. 
+## Principais conclusões
 
-+ A virtual network is a representation of your own network in the cloud. 
-+ When designing virtual networks it is a good practice to avoid overlapping IP address ranges. This will reduce issues and simplify troubleshooting.
-+ A subnet is a range of IP addresses in the virtual network. You can divide a virtual network into multiple subnets for organization and security.
-+ A network security group contains security rules that allow or deny network traffic. There are default incoming and outgoing rules which you can customize to your needs.
-+ Application security groups are used to protect groups of servers with a common function, such as web servers or database servers.
-+ Azure DNS is a hosting service for DNS domains that provides name resolution. You can configure Azure DNS to resolve host names in your public domain.  You can also use private DNS zones to assign DNS names to virtual machines (VMs) in your Azure virtual networks.
+Parabéns por concluir o laboratório. Aqui estão os principais aprendizados deste laboratório.
 
-
-
-
-
-
-
-
-
++ Uma virtual network é uma representação da sua própria rede na cloud.
++ Ao projetar virtual networks é uma boa prática evitar sobreposição de intervalos de endereços IP. Isso reduzirá problemas e simplificará a solução de problemas.
++ Um subnet é um intervalo de endereços IP na virtual network. Você pode dividir uma virtual network em vários subnets para organização e segurança.
++ Um network security group contém regras de segurança que permitem ou negam o tráfego de rede. Existem regras de entrada e saída padrão que você pode personalizar conforme suas necessidades.
++ Application security groups são usados para proteger grupos de servidores com uma função comum, como web servers ou database servers.
++ Azure DNS é um serviço de hospedagem para domínios DNS que fornece resolução de nomes. Você pode configurar Azure DNS para resolver nomes de host no seu domínio público. Você também pode usar private DNS zones para atribuir nomes DNS às virtual machines (VMs) em suas virtual networks do Azure.

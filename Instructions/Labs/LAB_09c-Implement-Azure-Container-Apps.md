@@ -1,106 +1,105 @@
 ---
 lab:
-  title: 'Lab 09c: Implement Azure Container Apps'
-  module: Administer PaaS Compute Options
-  description: Implement and deploy Azure Container Apps.
+  title: 'Lab 09c: Implementar Azure Container Apps'
+  module: Administrar opções de computação PaaS
+  description: Implementar e implantar Azure Container Apps.
   duration: 15 minutes
   level: 300
   islab: true
   primarytopics:
     - Azure
     - Azure Container Apps
+layout: default
 ---
 
-# Lab 09c - Implement Azure Container Apps
+# Lab 09c - Implementar Azure Container Apps
 
-## Lab introduction
+## Introdução do laboratório
 
-In this lab, you learn how to implement and deploy Azure Container Apps.
+Neste laboratório, você aprenderá como implementar e implantar Azure Container Apps.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the region, but the steps are written using **East US**.
+Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas os passos estão escritos usando **East US**.
 
-## Estimated timing: 15 minutes
+## Tempo estimado: 15 minutos
 
-## Lab scenario
+## Cenário do laboratório
 
-Your organization has a web application that runs on a virtual machine in your on-premises data center. The organization wants to move all applications to the cloud but doesn't want to have a large number of servers to manage. You decide to evaluate Azure Container Apps.
+Sua organização tem um aplicativo web que é executado em uma máquina virtual no seu data center on-premises. A organização deseja mover todos os aplicativos para a nuvem, mas não quer ter um grande número de servidores para gerenciar. Você decide avaliar Azure Container Apps.
 
-## Architecture diagram
+## Diagrama de arquitetura
 
 ![Diagram of the tasks.](../media/az104-lab09b-aca-architecture.png)
 
-## Job skills
+## Habilidades do trabalho
 
-- Task 1: Create and configure an Azure Container App and environment.
-- Task 2: Test and verify deployment of the Azure Container App.
+- Tarefa 1: Criar e configurar um Azure Container App e ambiente.
+- Tarefa 2: Testar e verificar a implantação do Azure Container App.
 
-## Task 1: Create and configure an Azure Container App and environment
+## Tarefa 1: Criar e configurar um Azure Container App e ambiente
 
-Azure Container Apps take the concept of a managed Kubernetes cluster a step further and manages the cluster environment as well as provides other managed services on top of the cluster. Unlike an Azure Kubernetes cluster, where you must still manage the cluster, an Azure Container Apps instance removes some of the complexity to setting up a Kubernetes cluster.
+Azure Container Apps leva o conceito de um cluster Kubernetes gerenciado um passo adiante e gerencia o ambiente do cluster, além de fornecer outros serviços gerenciados sobre o cluster. Ao contrário de um cluster Azure Kubernetes, onde você ainda precisa gerenciar o cluster, uma instância de Azure Container Apps remove parte da complexidade de configurar um cluster Kubernetes.
 
-1. From the Azure portal, search for and select `Container Apps`.
+1. No portal do Azure, pesquise por e selecione `Container Apps`.
 
-1. Select **+ Create**, from drop-down menu, **Container App**. Notice the other choices. 
+1. Selecione **+ Create**, no menu suspenso, **Container App**. Observe as outras opções.
 
-1. Use the following information to fill out the details on the **Basics** tab.
+1. Use as seguintes informações para preencher os detalhes na guia **Basics**.
 
     | Setting | Action |
     |---|---|
-    | Subscription | Select your Azure subscription |
+    | Subscription | Selecione sua assinatura do Azure |
     | Resource group | `az104-rg9` |
     | Container app name |  `my-app` |
     | Region    | **East US** |
-    | Container Apps Environment | Select **Create new environment** > Set Environment name to `my-environment` > **Create** |
+    | Container Apps Environment | Selecione **Create new environment** > Defina o nome do ambiente como `my-environment` > **Create** |
 
-1. Click **Next: Container** tab and ensure that **Use quickstart image** is checked. You may need to scroll up to view this setting. 
+1. Clique na guia **Next: Container** e certifique-se de que **Use quickstart image** esteja marcado. Pode ser necessário rolar para cima para visualizar essa configuração.
 
-1. Ensure **Quickstart image** is set to **Simple hello world container**.
+1. Certifique-se de que **Quickstart image** esteja definida como **Simple hello world container**.
 
-1. Under **Application ingress settings**, configure the ingress options as needed, then click **Next: Tags**.
+1. Em **Application ingress settings**, configure as opções de ingress conforme necessário e, em seguida, clique em **Next: Tags**.
 
-1. Select the **Review and create** and then **Create**.
+1. Selecione **Review and create** e depois **Create**.
 
-    >**Note:** Wait for the container app to deploy. This will take a couple of minutes. 
- 
-## Task 2: Test and verify deployment of the Azure Container App
+    >**Observação:** Aguarde a implantação do container app. Isso levará alguns minutos.
 
-By default, the Azure container app that you create will accept traffic on port 80 using the sample Hello World application. Azure Container Apps will provide a DNS name for the application. Copy and navigate to this URL to ensure that the application is up and running.
+## Tarefa 2: Testar e verificar a implantação do Azure Container App
 
-1. Select **Go to resource** to view your new container app.
+Por padrão, o container app do Azure que você criar aceitará tráfego na porta 80 usando o aplicativo de exemplo Hello World. Azure Container Apps fornecerá um nome DNS para o aplicativo. Copie e navegue até essa URL para garantir que o aplicativo esteja em execução.
 
-1. Select the link next to *Application URL* to view your application.
+1. Selecione **Go to resource** para visualizar seu novo container app.
+
+1. Selecione o link ao lado de *Application URL* para visualizar seu aplicativo.
 
     ![Screenshot of the ACA overview page in the portal.](../media/az104-lab09b-aca-overview.png)
 
-1. Verify you receive the **Your container app is running with a Hello World image** message.
-   
-## Cleanup your resources
+1. Verifique se você recebe a mensagem **Your container app is running with a Hello World image**.
 
-If you are working with **your own subscription** take a minute to delete the lab resources. This will ensure resources are freed up and cost is minimized. The easiest way to delete the lab resources is to delete the lab resource group. 
+## Limpeza dos seus recursos
 
-+ In the Azure portal, select the resource group, select **Delete the resource group**, **Enter resource group name**, and then click **Delete**.
-+ Using Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
-+ Using the CLI, `az group delete --name resourceGroupName`.
+Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e que o custo seja minimizado. A maneira mais fácil de excluir os recursos do laboratório é excluir o grupo de recursos do laboratório.
 
-## Extend your learning with Copilot
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
++ No portal do Azure, selecione o grupo de recursos, selecione **Delete the resource group**, **Enter resource group name**, e então clique em **Delete**.
++ Usando Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
++ Usando o CLI, `az group delete --name resourceGroupName`.
 
-+ Summarize the steps to create and configure an Azure Container App.
-+ Compare and contrast Azure Container Apps to Azure Kubernetes Service.
+## Amplie seu aprendizado com o Copilot
+O Copilot pode ajudá-lo a aprender como usar as ferramentas de script do Azure. O Copilot também pode ajudar em áreas não cobertas no laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
 
-## Learn more with self-paced training
++ Resuma os passos para criar e configurar um Azure Container App.
++ Compare e contraste Azure Container Apps com Azure Kubernetes Service.
 
-
-+ [Configure a container app in Azure Container Apps](https://learn.microsoft.com/training/modules/configure-container-app-azure-container-apps/). Examines the features and capabilities of Azure Container Apps, and then focuses on how to create, configure, scale, and manage container apps using Azure Container Apps.
-+ [Implement Azure Container Apps](https://learn.microsoft.com/training/modules/implement-azure-container-apps/). Learn how Azure Container Apps can help you deploy and manage microservices and containerized apps on a serverless platform.
+## Aprenda mais com treinamentos autoguiados
 
 
-## Key takeaways
++ [Configurar um container app no Azure Container Apps](https://learn.microsoft.com/training/modules/configure-container-app-azure-container-apps/). Examina os recursos e capacidades do Azure Container Apps e, em seguida, foca em como criar, configurar, escalar e gerenciar container apps usando Azure Container Apps.
++ [Implementar Azure Container Apps](https://learn.microsoft.com/training/modules/implement-azure-container-apps/). Aprenda como Azure Container Apps pode ajudá-lo a implantar e gerenciar microsserviços e aplicativos conteinerizados em uma plataforma serverless.
 
-Congratulations on completing the lab. Here are the main takeaways for this lab. 
 
-+ Azure Container Apps (ACA) is a serverless platform that allows you to maintain less infrastructure and save costs while running containerized applications.
-+ Container Apps provides server configuration, container orchestration, and deployment details. 
-+ Workloads on ACA are usually long-running processes like a Web App.
+## Principais conclusões
 
-     
+Parabéns por completar o laboratório. Aqui estão os principais pontos deste laboratório.
+
++ Azure Container Apps (ACA) é uma plataforma serverless que permite manter menos infraestrutura e reduzir custos enquanto executa aplicativos conteinerizados.
++ Container Apps fornece configuração de servidor, orquestração de containers e detalhes de implantação.
++ Workloads no ACA geralmente são processos de longa execução, como um Web App.

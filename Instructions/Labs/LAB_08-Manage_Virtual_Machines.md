@@ -1,8 +1,8 @@
 ---
 lab:
-  title: 'Lab 08: Manage Virtual Machines'
-  module: Administer Virtual Machines
-  description: Create and scale virtual machines and virtual machine scale sets. 
+  title: 'Laboratório 08: Gerenciar Virtual Machines'
+  module: Administrar Virtual Machines
+  description: Criar e dimensionar Virtual Machines e Virtual Machine Scale Sets.
   duration: 50 minutes
   level: 400
   islab: true
@@ -10,21 +10,22 @@ lab:
   - Azure
   - Virtual machines
   - Virtual Machine Scale Sets
+layout: default
 ---
 
 # Lab 08 - Manage Virtual Machines
 
 ## Lab introduction
 
-In this lab, you create and compare virtual machines to virtual machine scale sets. You learn how to create, configure and resize a single virtual machine. You learn how to create a virtual machine scale set and configure autoscaling.
+Neste laboratório, você cria e compara virtual machines com virtual machine scale sets. Você aprende como criar, configurar e redimensionar uma única virtual machine. Você aprende como criar um Virtual Machine Scale Set e configurar o autoscaling.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the region, but the steps are written using **East US**.
+Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas os passos estão escritos usando **East US**.
 
 ## Estimated timing: 50 minutes
 
 ## Lab scenario
 
-Your organization wants to explore deploying and configuring Azure virtual machines. First, you implement an Azure virtual machine with manual scaling. Next, you implement a Virtual Machine Scale Set and explore autoscaling.
+Sua organização quer explorar a implementação e configuração de Virtual Machines do Azure. Primeiro, você implementa uma Virtual Machine do Azure com escalonamento manual. Em seguida, você implementa um Virtual Machine Scale Set e explora o autoscaling.
 
 ## Job skills
 
@@ -41,22 +42,22 @@ Your organization wants to explore deploying and configuring Azure virtual machi
 
 ## Task 1: Deploy zone-resilient Azure virtual machines by using the Azure portal
 
-In this task, you will deploy two Azure virtual machines into different availability zones by using the Azure portal. Availability zones offer the highest level of uptime SLA for virtual machines at 99.99%. To achieve this SLA, you must deploy at least two virtual machines across different availability zones.
+Nesta tarefa, você implantará duas Virtual Machines do Azure em diferentes availability zones usando o Azure portal. Availability zones oferecem o nível mais alto de SLA de tempo de atividade para virtual machines em 99,99%. Para atingir esse SLA, você deve implantar pelo menos duas virtual machines em diferentes availability zones.
 
-1. Sign in to the Azure portal - `https://portal.azure.com`.
+1. Faça login no Azure portal - `https://portal.azure.com`.
 
-1. Search for and select `Virtual machines`, on the **Virtual machines** blade, click **+ Create**, and then select in the drop-down **virtual machine**. Notice your other choices.
+1. Pesquise por e selecione `Virtual machines`, no painel **Virtual machines**, clique em **+ Create**, e então selecione no menu suspenso **virtual machine**. Observe suas outras escolhas.
 
-1. On the **Basics** tab, in the **Availability zone** drop down menu, place a checkmark next to **Zone 2**. This should select both **Zone 1** and **Zone 2**.
+1. Na aba **Basics**, no menu suspenso **Availability zone**, marque a caixa ao lado de **Zone 2**. Isso deve selecionar tanto **Zone 1** quanto **Zone 2**.
 
-    >**Note**: This will deploy two virtual machines in the selected region, one in each zone. You achieve the 99.99% uptime SLA because you have at least two VMs distributed across at least two zones. In the scenario where you might only need one VM, it is a best practice to still deploy the VM to another zone.
+    >**Observação**: Isso irá implantar duas virtual machines na região selecionada, uma em cada zone. Você atinge o SLA de 99,99% de uptime porque tem pelo menos duas VMs distribuídas por pelo menos duas zones. No cenário em que você possa precisar de apenas uma VM, é uma boa prática ainda implantar a VM em outra zone.
 
-1. On the Basics tab, continue completing the configuration:
+1. Na aba Basics, continue completando a configuração:
 
     | Setting | Value |
     | --- | --- |
-    | Subscription | the name of your Azure subscription |
-    | Resource group |  **az104-rg8** (If necessary, click **Create new**) |
+    | Subscription | o nome da sua assinatura do Azure |
+    | Resource group |  **az104-rg8** (Se necessário, clique em **Create new**) |
     | Virtual machine names | `az104-vm1` and `az104-vm2` (After selecting both availability zones, select **Edit names** under the VM name field.) |
     | Region | **East US** |
     | Availability options | **Availability zone** |
@@ -71,13 +72,13 @@ In this task, you will deploy two Azure virtual machines into different availabi
     | Password | **Provide a secure password** |
     | Public inbound ports | **None** |
     | Would you like to use an existing Windows Server license? | **Unchecked** |
-    
+
     > [!NOTE]
     > Use **Standard_D2s_v5** first. If the size is unavailable or Azure lacks capacity, select **Standard_D2s_v6**. If that size is also unavailable, select **Standard_D2s_v7**.
 
     ![Screenshot of the create vm page.](../media/az104-lab08-create-vm.png)
 
-1. Click **Next : Disks >** , specify the following settings (leave others with their default values):
+1. Clique **Next : Disks >** , especifique as seguintes configurações (deixe as outras com seus valores padrão):
 
     | Setting | Value |
     | --- | --- |
@@ -85,53 +86,53 @@ In this task, you will deploy two Azure virtual machines into different availabi
     | Delete with VM | **checked** (default) |
     | Enable Ultra Disk compatibility | **Unchecked** |
 
-1. In the **VM disk encryption** section, leave **Encryption at host** at its default (disabled).
+1. Na seção **VM disk encryption**, deixe **Encryption at host** em seu padrão (disabled).
 
-1. Click **Next : Networking >** take the defaults but do not provide a load balancer，change **Load balancing options** from **Azure load balancer** to **None**.
+1. Clique **Next : Networking >** aceite os padrões mas não forneça um load balancer，mude **Load balancing options** de **Azure load balancer** para **None**.
 
     | Setting | Value |
     | --- | --- |
     | Delete public IP and NIC when VM is deleted | **Checked** |
     | Load balancing options | **None** |
 
-1. Click **Next : Management >** and review the settings. Do not make any changes, leave **Metadata Security Protocol** checkboxes and **Microsoft Entra ID** settings at their defaults.
+1. Clique **Next : Management >** e revise as configurações. Não faça alterações, deixe as checkboxes de **Metadata Security Protocol** e as configurações de **Microsoft Entra ID** em seus valores padrão.
 
-1. Click **Next : Monitoring >** and specify the following settings (leave others with their default values):
+1. Clique **Next : Monitoring >** e especifique as seguintes configurações (deixe as outras com seus valores padrão):
 
     | Setting | Value |
     | --- | --- |
     | Boot diagnostics | **Disable** |
 
-1. Click **Next : Advanced >**, take the defaults, then click **Review + Create**.
+1. Clique **Next : Advanced >**, mantenha os padrões, então clique **Review + Create**.
 
-1. After the validation, click **Create**.
+1. Após a validação, clique **Create**.
 
-1. Once deployment finishes, dismiss any informational coachmarks or suggestions that appear on the deployment page, such as the **Scale out your VM** tooltip or **Cost management** alerts. Continue to the next step.
+1. Depois que a implantação terminar, dispense quaisquer coachmarks informativos ou sugestões que apareçam na página de implantação, como a dica de ferramenta **Scale out your VM** ou alertas de **Cost management**. Continue para o próximo passo.
 
-    >**Note:** Notice as the virtual machine deploys the NIC, disk, and public IP address (if configured) are independently created and managed resources.
+    >**Observação:** Note que à medida que a virtual machine é implantada, a NIC, o disco e o endereço IP público (se configurado) são recursos criados e gerenciados de forma independente.
 
-1. Wait for the deployment to complete, then select **Go to resource**.
+1. Aguarde a conclusão da implantação, então selecione **Go to resource**.
 
-   >**Note:** Monitor the **Notification** messages.
+   >**Observação:** Monitore as mensagens de **Notification**.
 
 ## Task 2: Manage compute and storage scaling for virtual machines
 
-In this task, you will scale a virtual machine by adjusting its size to a different SKU. Azure provides flexibility in VM size selection so that you can adjust a VM for periods of time if it needs more (or less) compute and memory allocated. This concept is extended to disks, where you can modify the performance of the disk, or increase the allocated capacity.
+Nesta tarefa, você irá dimensionar uma virtual machine ajustando seu tamanho para um SKU diferente. O Azure fornece flexibilidade na seleção do tamanho da VM para que você possa ajustar uma VM por períodos de tempo se ela precisar de mais (ou menos) CPU e memória alocadas. Esse conceito se estende aos discos, onde você pode modificar o desempenho do disco ou aumentar a capacidade alocada.
 
-1. On the **az104-vm1** virtual machine, go to **Overview** and click **Stop** to deallocate the VM, then confirm.
+1. Na virtual machine **az104-vm1**, vá para **Overview** e clique **Stop** para desalocar a VM, então confirme.
 
-1. Once the VM shows as **Stopped (deallocated)**, in the **Availability + scale** blade, select **Size**.
+1. Depois que a VM mostrar **Stopped (deallocated)**, no painel **Availability + scale**, selecione **Size**.
 
-1. Set the virtual machine size to **Standard_D4s_v5** and click **Resize**. When prompted, confirm the change.
+1. Defina o tamanho da virtual machine para **Standard_D4s_v5** e clique **Resize**. Quando solicitado, confirme a alteração.
 
     > [!NOTE]
-    > The virtual machine was created with **Standard_D2s_v5**. Resizing to **Standard_D4s_v5** increases it from 2 vCPUs and 8 GiB of memory to 4 vCPUs and 16 GiB of memory. If that size is unavailable, select **Standard_D4s_v6**. If that size is also unavailable, select **Standard_D4s_v7**.
+    > A virtual machine foi criada com **Standard_D2s_v5**. Redimensionar para **Standard_D4s_v5** aumenta de 2 vCPUs e 8 GiB de memória para 4 vCPUs e 16 GiB de memória. Se esse tamanho estiver indisponível, selecione **Standard_D4s_v6**. Se esse tamanho também estiver indisponível, selecione **Standard_D4s_v7**.
 
     ![Screenshot of the resize the virtual machine.](../media/az104-lab08-resize-vm.png)
 
-1. In the **Settings** area, select **Disks**.
+1. Na área **Settings**, selecione **Disks**.
 
-1. Under **Data disks** select **+ Create and attach a new disk**. Configure the settings (leave other settings at their default values).
+1. Em **Data disks** selecione **+ Create and attach a new disk**. Configure as definições (deixe as demais com seus valores padrão).
 
     | Setting | Value |
     | --- | --- |
@@ -139,33 +140,33 @@ In this task, you will scale a virtual machine by adjusting its size to a differ
     | Storage type | **Standard HDD** |
     | Size (GiB) | `32` |
 
-1. Click **Apply**.
+1. Clique **Apply**.
 
-1. After the disk has been created, click **Detach** (if necessary, scroll to the right to view the detach icon), and then click **Apply**.
+1. Depois que o disco for criado, clique **Detach** (se necessário, role para a direita para ver o ícone de detach), e então clique **Apply**.
 
-    >**Note**: Detaching removes the disk from the VM but keeps it in storage for later use.
+    >**Observação**: Desanexar remove o disco da VM mas o mantém em storage para uso posterior.
 
-1. Using **Global Search**, search for and select `Disks`. 
+1. Usando o **Global Search**, pesquise por e selecione `Disks`.
 
-1. In the **Storage Center | Azure Disks** blade, select the **Resources** tab, and then select the **vm1-disk1** object.
+1. No painel **Storage Center | Azure Disks**, selecione a aba **Resources**, e então selecione o objeto **vm1-disk1**.
 
-    >**Note:** The **Overview** blade also provides performance and usage information for the disk.
+    >**Observação:** O painel **Overview** também fornece informações de desempenho e uso para o disco.
 
-1. In the **Settings** blade, select **Size + performance**.
+1. No painel **Settings**, selecione **Size + performance**.
 
-1. Set the storage type to **Standard SSD**, and then click **Save**.
+1. Defina o tipo de armazenamento para **Standard SSD**, e então clique **Save**.
 
-1. Navigate back to the **az104-vm1** virtual machine and select **Disks**.
+1. Navegue de volta para a virtual machine **az104-vm1** e selecione **Disks**.
 
-1. In the **Data disk** section, select **Attach existing disks**.
+1. Na seção **Data disk**, selecione **Attach existing disks**.
 
-1. In the **Disk name** drop-down, select **VM1-DISK1**. 
+1. No menu suspenso **Disk name**, selecione **VM1-DISK1**.
 
-1. Verify the disk is now **Standard SSD**.
+1. Verifique se o disco agora é **Standard SSD**.
 
-1. Select **Apply** to save your changes. 
+1. Selecione **Apply** para salvar suas alterações.
 
-    >**Note:** You have now created a virtual machine, scaled the SKU and the data disk size. In the next task we use Virtual Machine Scale Sets to automate the scaling process.
+    >**Observação:** Você agora criou uma virtual machine, redimensionou o SKU e o tamanho do data disk. Na próxima tarefa, usamos Virtual Machine Scale Sets para automatizar o processo de escalonamento.
 
 ## Azure Virtual Machine Scale Sets Architecture Diagram
 
@@ -173,15 +174,15 @@ In this task, you will scale a virtual machine by adjusting its size to a differ
 
 ## Task 3: Create and configure Azure Virtual Machine Scale Sets
 
-In this task, you will deploy an Azure virtual machine scale set across availability zones. VM Scale Sets reduce the administrative overhead of automation by enabling you to configure metrics or conditions that allow the scale set to horizontally scale, scale in or scale out.
+Nesta tarefa, você implantará um Virtual Machine Scale Set do Azure em availability zones. VM Scale Sets reduzem a sobrecarga administrativa de automação ao permitir que você configure métricas ou condições que permitam que o scale set seja escalado horizontalmente, scale in ou scale out.
 
-1. In the Azure portal, search for and select `Virtual machine scale sets` and, on the **Virtual machine scale sets** blade, click **+ Create**.
+1. No Azure portal, pesquise por e selecione `Virtual machine scale sets` e, no painel **Virtual machine scale sets**, clique **+ Create**.
 
-1. On the **Basics** tab of the **Create a virtual machine scale set** blade, specify the following settings (leave others with their default values) and click **Next : Spot >**:
+1. Na aba **Basics** do painel **Create a virtual machine scale set**, especifique as seguintes configurações (deixe as outras com seus valores padrão) e clique **Next : Spot >**:
 
     | Setting | Value |
     | --- | --- |
-    | Subscription | the name of your Azure subscription  |
+    | Subscription | o nome da sua assinatura do Azure  |
     | Resource group | **az104-rg8**  |
     | Virtual machine scale set name | `vmss1` |
     | Region | **(US)East US** |
@@ -199,15 +200,15 @@ In this task, you will deploy an Azure virtual machine scale set across availabi
     > [!NOTE]
     > Use **Standard_D2s_v5** first. If the size is unavailable or Azure lacks capacity, select **Standard_D2s_v6**. If that size is also unavailable, select **Standard_D2s_v7**.
 
-    >**Note**: For the list of Azure regions which support deployment of Windows virtual machines to availability zones, refer to [What are Availability Zones in Azure?](https://docs.microsoft.com/en-us/azure/availability-zones/az-overview)
+    >**Observação**: Para a lista de regiões do Azure que suportam a implantação de máquinas virtuais Windows em availability zones, consulte [What are Availability Zones in Azure?](https://docs.microsoft.com/en-us/azure/availability-zones/az-overview)
 
     ![Screenshot of the create vmss page. ](../media/az104-lab08-create-vmss.png)
 
-1. On the **Spot** tab, accept the defaults and select **Next : Disks >**.
+1. Na aba **Spot**, aceite os padrões e selecione **Next : Disks >**.
 
-1. On the **Disks** tab, accept the default values and click **Next : Networking >**.
+1. Na aba **Disks**, aceite os valores padrão e clique **Next : Networking >**.
 
-1. On the **Networking** page, select **Edit virtual network** link. Make a few changes. When finished, select **OK**.
+1. Na página **Networking**, selecione o link **Edit virtual network**. Faça algumas alterações. Quando terminar, selecione **OK**.
 
     | Setting | Value |
     | --- | --- |
@@ -216,17 +217,17 @@ In this task, you will deploy an Azure virtual machine scale set across availabi
     | Subnet name | `subnet0` |
     | Subnet range | `10.82.0.0/24` |
 
-1. In the **Networking** tab, click the **Edit network interface** icon to the right of the network interface entry.
+1. Na aba **Networking**, clique no ícone **Edit network interface** à direita da entrada da interface de rede.
 
-1. For **NIC network security group** section, select **Advanced** and then click **Create new** under the **Configure network security group** drop-down list.
+1. Para a seção **NIC network security group**, selecione **Advanced** e então clique em **Create new** embaixo do menu suspenso **Configure network security group**.
 
-1. On the **Create network security group** blade, specify the following settings (leave others with their default values):
+1. No painel **Create network security group**, especifique as seguintes configurações (deixe as outras com seus valores padrão):
 
     | Setting | Value |
     | --- | --- |
     | Name | **vmss1-nsg** |
 
-1. Click **Add an inbound rule** and add an inbound security rule with the following settings (leave others with their default values):
+1. Clique **Add an inbound rule** e adicione uma regra de segurança de entrada com as seguintes configurações (deixe as outras com seus valores padrão):
 
     | Setting | Value |
     | --- | --- |
@@ -238,56 +239,56 @@ In this task, you will deploy an Azure virtual machine scale set across availabi
     | Priority | **1010** |
     | Name | `allow-http` |
 
-1. Click **Add** and, back on the **Create network security group** blade, click **OK**.
+1. Clique **Add** e, de volta no painel **Create network security group**, clique **OK**.
 
-1. In the **Edit network interface** blade, in the **Public IP address** section, click **Enabled** and click **OK**.
+1. No painel **Edit network interface**, na seção **Public IP address**, clique **Enabled** e clique **OK**.
 
-1. In the **Networking** tab, under the **Load balancing** section, confirm that Load balancing options is set to Azure load balancer (selected by default), Specify the following (leave others with their default values).
+1. Na aba **Networking**, embaixo da seção **Load balancing**, confirme que Load balancing options está definido como Azure load balancer (selecionado por padrão). Especifique o seguinte (deixe as outras com seus valores padrão).
 
     | Setting | Value |
     | --- | --- |
     | Load balancing options | **Azure load balancer** |
     | Select a load balancer | **Create a load balancer** |
 
-1. On the **Create a load balancer** page, in the side pane that opens, set the Load balancer name to `vmss-lb`. Leave Type, Protocol, and all Rules settings (including Load balancer rule and Inbound NAT rule) at their defaults. Click **Create** when you are done then **Next : Management >**.
-   
+1. Na página **Create a load balancer**, no painel lateral que se abre, defina o Load balancer name para `vmss-lb`. Deixe Type, Protocol, e todas as configurações de Rules (incluindo Load balancer rule e Inbound NAT rule) em seus valores padrão. Clique **Create** quando terminar e então **Next : Management >**.
+
     | Setting | Value |
     | --- | --- |
     | Load balancer name | `vmss-lb` |
 
-    >**Note:** Pause for a minute and review what you done. At this point, you have configured the virtual machine scale set with disks and networking. In the network configuration you have created a network security group and allowed HTTP. You have also created a load balancer with a public IP address.
+    >**Observação:** Pause por um minuto e revise o que você fez. Neste ponto, você configurou o virtual machine scale set com discos e networking. Na configuração de rede você criou um network security group e permitiu HTTP. Você também criou um load balancer com um endereço IP público.
 
-1. On the **Management** tab, specify the following settings (leave others with their default values):
+1. Na aba **Management**, especifique as seguintes configurações (deixe as outras com seus valores padrão):
 
     | Setting | Value |
     | --- | --- |
     | Boot diagnostics | **Disable** |
 
-1. Click **Next : Health >**.
+1. Clique **Next : Health >**.
 
-1. On the **Health** tab, review the default settings without making any changes and click **Next : Advanced >**.
+1. Na aba **Health**, revise as configurações padrão sem fazer alterações e clique **Next : Advanced >**.
 
-1. On the **Advanced** tab, click **Review + create**.
+1. Na aba **Advanced**, clique **Review + create**.
 
-1. On the **Review + create** tab, ensure that the validation passed and click **Create**.
+1. Na aba **Review + create**, garanta que a validação passou e clique **Create**.
 
-    >**Note**: Wait for the virtual machine scale set deployment to complete. This should take approximately 5 minutes. While you wait review the [documentation](https://learn.microsoft.com/azure/virtual-machine-scale-sets/overview).
+    >**Observação**: Aguarde a conclusão da implantação do virtual machine scale set. Isso deve levar aproximadamente 5 minutos. Enquanto espera, revise a [documentation](https://learn.microsoft.com/azure/virtual-machine-scale-sets/overview).
 
 ## Task 4: Scale Azure Virtual Machine Scale Sets
 
-In this task, you scale the virtual machine scale set using a custom scale rule.
+Nesta tarefa, você dimensiona o virtual machine scale set usando uma regra de escala customizada.
 
-1. Select **Go to resource** or search for and select the **vmss1** scale set.
-  
-1. Expand the **Availability + scale** section then select **Scaling**. 
+1. Selecione **Go to resource** ou pesquise por e selecione o scale set **vmss1**.
 
-1. Select **Custom autoscale**. Then change the **Scale mode** to **Scale based on metric**. A warning message will appear indicating no scale rules are defined — click the **Add a rule** link within that message.
+1. Expanda a seção **Availability + scale** e então selecione **Scaling**.
 
-    >**Did you know?** You can **Manual scale** or **Custom autoscale**. In scale sets with a small number of VM instances, increasing or decreasing the instance count (Manual scale) may be best. In scale sets with a large number of VM instances, scaling based on metrics (Custom autoscale) may be more appropriate.
+1. Selecione **Custom autoscale**. Então altere o **Scale mode** para **Scale based on metric**. Uma mensagem de aviso aparecerá indicando que nenhuma regra de escala está definida — clique no link **Add a rule** dentro dessa mensagem.
+
+    >**Você sabia?** Você pode usar **Manual scale** ou **Custom autoscale**. Em scale sets com um pequeno número de instâncias de VM, aumentar ou diminuir a contagem de instâncias (Manual scale) pode ser o melhor. Em scale sets com um grande número de instâncias de VM, escalar com base em métricas (Custom autoscale) pode ser mais apropriado.
 
 **Scale out rule**
 
-1. Let's create a rule that automatically increases the number of VM instances. This rule scales out when the average CPU load is greater than 70% over a 10-minute period. When the rule triggers, the number of VM instances is increased by 50%.
+1. Vamos criar uma regra que aumenta automaticamente o número de instâncias de VM. Essa regra faz scale out quando a carga média da CPU é maior que 70% durante um período de 10 minutos. Quando a regra dispara, o número de instâncias de VM é aumentado em 50%.
 
     | Setting | Value |
     | --- | --- |
@@ -302,19 +303,19 @@ In this task, you scale the virtual machine scale set using a custom scale rule.
     | Cool down (minutes) | **5** |
     | Percentage | **50** |
 
-    >**Note**: The default of Operation is "Increase count by",you need to change it to "Increase percent by"
+    >**Observação**: O padrão de Operation é "Increase count by", você precisa alterá-lo para "Increase percent by"
 
     ![Screenshot of the scaling add rule page.](../media/az104-lab08-scale-rule.png)
 
-1. Be sure to **Save** your changes.
+1. Certifique-se de **Save** suas alterações.
 
 **Scale in rule**
 
-1. During evenings or weekends, demand may decrease so it is important to create a scale in rule.
+1. Durante noites ou finais de semana, a demanda pode diminuir, então é importante criar uma regra de scale in.
 
-1. Let's create a rule that decreases the number of VM instances in a scale set. The number of instances should decrease when the average CPU load drops below 30% over a 10-minute period. When the rule triggers, the number of VM instances is decreased by 20%.
+1. Vamos criar uma regra que diminui o número de instâncias de VM em um scale set. O número de instâncias deve diminuir quando a carga média de CPU cair abaixo de 30% durante um período de 10 minutos. Quando a regra dispara, o número de instâncias de VM é diminuído em 20%.
 
-1. Select **Add a rule**, adjust the settings, then select **Add**.
+1. Selecione **Add a rule**, ajuste as configurações, então selecione **Add**.
 
     | Setting | Value |
     | --- | --- |
@@ -323,13 +324,13 @@ In this task, you scale the virtual machine scale set using a custom scale rule.
     | Operation | **decrease percentage by** (review your other choices) |
     | Percentage | **50** |
 
-1. Be sure to **Save** your changes.
+1. Certifique-se de **Save** suas alterações.
 
 **Set the instance limits**
 
-1. When your autoscale rules are applied, instance limits make sure that you do not scale out beyond the maximum number of instances or scale in beyond the minimum number of instances.
+1. Quando suas regras de autoscale são aplicadas, os limites de instâncias asseguram que você não faça scale out além do número máximo de instâncias ou scale in além do número mínimo de instâncias.
 
-1. **Instance limits** are shown on the **Scaling** page after the rules.
+1. **Instance limits** são mostrados na página **Scaling** após as regras.
 
     | Setting | Value |
     | --- | --- |
@@ -337,19 +338,19 @@ In this task, you scale the virtual machine scale set using a custom scale rule.
     | Maximum | **10** |
     | Default | **2** |
 
-1. Be sure to **Save** your changes
+1. Certifique-se de **Save** suas alterações
 
-1. On the **vmss1** page, select **Instances**. This is where you would monitor the number of virtual machine instances.
+1. Na página **vmss1**, selecione **Instances**. Aqui é onde você monitoraria o número de instâncias de virtual machine.
 
-    >**Note:** If you are interested in using Azure PowerShell for virtual machine creation, try Task 5. If you are interested in using the CLI to create virtual machines, try Task 6.
+    >**Observação:** Se você estiver interessado em usar Azure PowerShell para a criação de virtual machines, tente a Task 5. Se estiver interessado em usar o CLI para criar virtual machines, tente a Task 6.
 
 ## Task 5: Create a virtual machine using Azure PowerShell (option 1)
 
-1. Use the icon (top right) to launch a **Cloud Shell** session. Alternately, navigate directly to `https://shell.azure.com`.
+1. Use o ícone (canto superior direito) para iniciar uma sessão do **Cloud Shell**. Alternativamente, navegue diretamente para `https://shell.azure.com`.
 
-1. Be sure to select **PowerShell**. If necessary, configure the shell storage.
+1. Certifique-se de selecionar **PowerShell**. Se necessário, configure o armazenamento do shell.
 
-1. Run the following command to create a virtual machine. When prompted, provide a username and password to create the local administrator account on the VM. While you wait check out the [New-AzVM](https://learn.microsoft.com/powershell/module/az.compute/new-azvm?view=azps-11.1.0) command reference for all the parameters associated with creating a virtual machine.
+1. Execute o comando a seguir para criar uma virtual machine. Quando solicitado, forneça um nome de usuário e senha para criar a conta de administrador local na VM. Enquanto aguarda, confira o comando de referência [New-AzVM](https://learn.microsoft.com/powershell/module/az.compute/new-azvm?view=azps-11.1.0) para todos os parâmetros associados à criação de uma virtual machine.
 
     ```powershell
     New-AzVm `
@@ -365,7 +366,7 @@ In this task, you scale the virtual machine scale set using a custom scale rule.
     > [!NOTE]
     > Use **Standard_D2s_v5** first. If the command fails because the size is unavailable or Azure lacks capacity, rerun it with **Standard_D2s_v6**. If that command fails for the same reason, rerun it with **Standard_D2s_v7**.
 
-1. Once the command completes, use **Get-AzVM** to list the virtual machines in your resource group.
+1. Depois que o comando completar, use **Get-AzVM** para listar as virtual machines no seu resource group.
 
     ```powershell
     Get-AzVM `
@@ -373,9 +374,9 @@ In this task, you scale the virtual machine scale set using a custom scale rule.
     -Status
     ```
 
-1. Verify your new virtual machine is listed and the **Status** is **Running**.
+1. Verifique se sua nova virtual machine está listada e o **Status** é **Running**.
 
-1. Use **Stop-AzVM** to deallocate your virtual machine. Type **Yes** to confirm.
+1. Use **Stop-AzVM** para desalocar sua virtual machine. Digite **Yes** para confirmar.
 
     ```powershell
     Stop-AzVM `
@@ -383,52 +384,52 @@ In this task, you scale the virtual machine scale set using a custom scale rule.
     -Name 'myPSVM' 
     ```
 
-1. Use **Get-AzVM** with the **-Status** parameter to verify the machine is **deallocated**.
+1. Use **Get-AzVM** com o parâmetro **-Status** para verificar se a máquina está **deallocated**.
 
-    >**Did you know?** When you use Azure to stop your virtual machine, the status is *deallocated*. This means that any non-static public IPs are released, and you stop paying for the VM’s compute costs.
+    >**Você sabia?** Quando você usa o Azure para parar sua virtual machine, o status fica *deallocated*. Isso significa que quaisquer IPs públicos não estáticos são liberados, e você para de pagar pelos custos de compute da VM.
 
 ## Task 6: Create a virtual machine using the CLI (option 2)
 
-1. Use the icon (top right) to launch a **Cloud Shell** session. Alternately, navigate directly to `https://shell.azure.com`.
+1. Use o ícone (canto superior direito) para iniciar uma sessão do **Cloud Shell**. Alternativamente, navegue diretamente para `https://shell.azure.com`.
 
-1. Be sure to select **Bash**. If necessary, configure the shell storage.
+1. Certifique-se de selecionar **Bash**. Se necessário, configure o armazenamento do shell.
 
-1. Run the following command to create a virtual machine. While you wait check out the [az vm create](https://learn.microsoft.com/cli/azure/vm?view=azure-cli-latest#az-vm-create) command reference for all the parameters associated with creating a virtual machine.
+1. Execute o comando a seguir para criar uma virtual machine. Enquanto espera, confira o comando de referência [az vm create](https://learn.microsoft.com/cli/azure/vm?view=azure-cli-latest#az-vm-create) para todos os parâmetros associados à criação de uma virtual machine.
 
     ```sh
     az vm create --name myCLIVM --resource-group az104-rg8 --image Canonical:0001-com-ubuntu-server-jammy:22_04-lts:latest --admin-username localadmin --generate-ssh-keys
     ```
 
-1. Once the command completes, use **az vm show** to verify your machine was created.
+1. Depois que o comando completar, use **az vm show** para verificar se sua máquina foi criada.
 
     ```sh
     az vm show --name  myCLIVM --resource-group az104-rg8 --show-details --output table
     ```
 
-1. Verify the **powerState** is **VM Running**.
+1. Verifique se o **powerState** é **VM Running**.
 
-1. Use **az vm deallocate** to deallocate your virtual machine. Type **Yes** to confirm.
+1. Use **az vm deallocate** para desalocar sua virtual machine. Digite **Yes** para confirmar.
 
     ```sh
     az vm deallocate --resource-group az104-rg8 --name myCLIVM
     ```
 
-1. Use **az vm show** to ensure the **powerState** is **VM deallocated**.
+1. Use **az vm show** para garantir que o **powerState** é **VM deallocated**.
 
-    >**Did you know?** When you use Azure to stop your virtual machine, the status is *deallocated*. This means that any non-static public IPs are released, and you stop paying for the VM’s compute costs.
+    >**Você sabia?** Quando você usa o Azure para parar sua virtual machine, o status fica *deallocated*. Isso significa que quaisquer IPs públicos não estáticos são liberados, e você para de pagar pelos custos de compute da VM.
 
 ## Cleanup your resources
 
-If you are working with **your own subscription** take a minute to delete the lab resources. This will ensure resources are freed up and cost is minimized. The easiest way to delete the lab resources is to delete the lab resource group. 
+Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e que o custo seja minimizado. A maneira mais fácil de excluir os recursos do laboratório é excluir o resource group do laboratório.
 
-+ In the Azure portal, select the resource group, select **Delete the resource group**, **Enter resource group name**, and then click **Delete**.
-+ Using Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
-+ Using the CLI, `az group delete --name resourceGroupName`.
++ No Azure portal, selecione o resource group, selecione **Delete the resource group**, **Enter resource group name**, e então clique **Delete**.
++ Usando Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
++ Usando o CLI, `az group delete --name resourceGroupName`.
 
 ## Extend your learning with Copilot
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
+O Copilot pode ajudar você a aprender como usar as ferramentas de script do Azure. O Copilot também pode auxiliar em áreas não cobertas no laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (canto superior direito) ou navegue para *copilot.microsoft.com*. Reserve alguns minutos para testar estes prompts.
 
-+ Provide the steps and the Azure CLI commands to create a Linux virtual machine. 
++ Provide the steps and the Azure CLI commands to create a Linux virtual machine.
 + Review the ways you can scale virtual machines and improve performance.
 + Describe Azure storage lifecycle management policies and how they can optimize costs.
 
@@ -437,14 +438,14 @@ Copilot can assist you in learning how to use the Azure scripting tools. Copilot
 + [Introduction to Azure virtual machines](https://learn.microsoft.com/training/modules/intro-to-azure-virtual-machines/). Learn about the decisions you make before creating a virtual machine, the options to create and manage the VM, and the extensions and services you use to manage your VM.
 + [Create a Windows virtual machine in Azure](https://learn.microsoft.com/training/modules/create-windows-virtual-machine-in-azure/). Create a Windows virtual machine using the Azure portal. Connect to a running Windows virtual machine using Remote Desktop
 + [Guided Project: Deploy and administer Linux virtual machines on Azure](https://learn.microsoft.com/training/modules/guided-project-deploy-administer-linux-virtual-machines-azure/). Learn Linux virtual machine administrator tasks.
-  
+
 ## Key takeaways
 
-Congratulations on completing the lab. Here are the main takeaways for this lab.
+Parabéns por completar o laboratório. Aqui estão os principais aprendizados deste laboratório.
 
-+ Azure virtual machines are on-demand, scalable computing resources.
-+ Azure virtual machines provide both vertical and horizontal scaling options.
-+ Configuring Azure virtual machines includes choosing an operating system, size, storage and networking settings.
-+ Azure Virtual Machine Scale Sets let you create and manage a group of load balanced VMs.
-+ The virtual machines in a Virtual Machine Scale Set are created from the same image and configuration.
-+ In a Virtual Machine Scale Set the number of VM instances can automatically increase or decrease in response to demand or a defined schedule.
++ Azure virtual machines são recursos de computação sob demanda e escaláveis.
++ Azure virtual machines fornecem opções de escalonamento tanto vertical quanto horizontal.
++ Configurar Azure virtual machines inclui escolher um sistema operacional, tamanho, armazenamento e configurações de rede.
++ Azure Virtual Machine Scale Sets permitem criar e gerenciar um grupo de VMs balanceadas por carga.
++ As virtual machines em um Virtual Machine Scale Set são criadas a partir da mesma imagem e configuração.
++ Em um Virtual Machine Scale Set, o número de instâncias de VM pode aumentar ou diminuir automaticamente em resposta à demanda ou a uma programação definida.

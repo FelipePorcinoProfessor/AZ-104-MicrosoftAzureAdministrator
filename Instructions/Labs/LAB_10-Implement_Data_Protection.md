@@ -1,8 +1,8 @@
 ---
 lab:
-  title: 'Lab 10: Implement Data Protection'
-  module: Administer Data Protection
-  description: Configure Azure Backup for virtual machines. 
+  title: 'Laboratório 10: Implementar Proteção de Dados'
+  module: Administrar Proteção de Dados
+  description: Configure o Azure Backup para virtual machines.
   duration: 50 minutes
   level: 400
   islab: true
@@ -10,198 +10,201 @@ lab:
   - Azure
   - Virtual machines
   - Azure Backup
+layout: default
 ---
 
-# Lab 10 - Implement Data Protection
+# Laboratório 10 - Implementar Proteção de Dados
 
-## Lab introduction    
+## Introdução ao laboratório
 
-In this lab, you learn about backup and recovery of Azure virtual machines. You learn to create a Recovery Service vault and a backup policy for Azure virtual machines. You learn about disaster recovery with Azure Site Recovery. 
+Neste laboratório, você aprende sobre backup e recuperação de Azure virtual machines. Você aprenderá a criar um Recovery Services vault e uma política de backup para Azure virtual machines. Você também aprenderá sobre recuperação de desastres com Azure Site Recovery.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the regions, but the steps are written using **East US** and **West US**.
+Este laboratório requer uma assinatura do Azure. O tipo de assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar as regiões, mas os procedimentos foram escritos usando **East US** e **West US**.
 
-## Estimated timing: 50 minutes
+## Tempo estimado: 50 minutos
 
-## Lab scenario
+## Cenário do laboratório
 
-Your organization is evaluating how to backup and restore Azure virtual machines from accidental or malicious data loss. Additionally, the organization wants to explore using Azure Site Recovery for disaster recovery scenarios. 
+Sua organização está avaliando como fazer backup e restaurar Azure virtual machines de perda de dados acidental ou maliciosa. Além disso, a organização quer explorar o uso do Azure Site Recovery para cenários de recuperação de desastres.
 
-## Job skills
+## Habilidades do trabalho
 
-+ Task 1: Use a template to provision an infrastructure.
-+ Task 2: Create and configure a Recovery Services vault.
-+ Task 3: Configure Azure virtual machine-level backup.
-+ Task 4: Monitor Azure Backup.
-+ Task 5: Enable virtual machine replication. 
++ Tarefa 1: Use um template para provisionar uma infraestrutura.
++ Tarefa 2: Crie e configure um Recovery Services vault.
++ Tarefa 3: Configure backup a nível de Azure virtual machine.
++ Tarefa 4: Monitore o Azure Backup.
++ Tarefa 5: Habilite replicação de virtual machine.
 
-## Architecture diagram
+## Diagrama de arquitetura
 
 ![Diagram of the architecture tasks.](../media/az104-lab10-architecture.png)
 
-## Task 1: Use a template to provision an infrastructure
+## Tarefa 1: Use um template para provisionar uma infraestrutura
 
-In this task, you will use a template to deploy a virtual machine. The virtual machine will be used to test different backup scenarios.
+Nesta tarefa, você usará um template para implantar uma virtual machine. A máquina virtual será usada para testar diferentes cenários de backup.
 
-1. Download the **\\Allfiles\\Lab10\\** lab files.
+1. Faça o download dos arquivos do laboratório **\\Allfiles\\Lab10\\**.
 
-1. Sign in to the **Azure portal** - `https://portal.azure.com`.
+1. Faça logon no **Azure portal** - `https://portal.azure.com`.
 
-1. Search for and select `Deploy a custom template`.
+1. Pesquise por e selecione `Deploy a custom template`.
 
-1. On the custom deployment page, select **Build your own template in the editor**.
+1. Na página de implantação personalizada, selecione **Build your own template in the editor**.
 
-1. On the edit template page, select **Load file**.
+1. Na página de edição do template, selecione **Load file**.
 
-1. Locate and select the **\\Allfiles\\Lab10\\az104-10-vms-edge-template.json** file and select **Open**.
+1. Localize e selecione o arquivo **\\Allfiles\\Lab10\\az104-10-vms-edge-template.json** e selecione **Open**.
 
-   >**Note:** Take a moment to review the template. We are deploying a virtual network and virtual machine so we can demonstrate backup and recovery. 
+   > [!NOTE]
+   > Reserve um momento para revisar o template. Estamos implantando uma virtual network e uma virtual machine para que possamos demonstrar backup e recuperação.
 
-1. **Save** your changes.
+1. **Save** suas alterações.
 
-1. Select **Edit parameters** and then **Load file**.
+1. Selecione **Edit parameters** e depois **Load file**.
 
-1. Load and select the **\\Allfiles\\Lab10\\az104-10-vms-edge-parameters.json** file.
+1. Carregue e selecione o arquivo **\\Allfiles\\Lab10\\az104-10-vms-edge-parameters.json**.
 
-1. **Save** your changes.
+1. **Save** suas alterações.
 
-1. Use the following information to complete the custom deployment fields, leaving all other fields with their default values:
+1. Use as seguintes informações para preencher os campos da implantação personalizada, deixando todos os outros campos com seus valores padrão:
 
-    | Setting       | Value         | 
+    | Setting       | Value         |
     | ---           | ---           |
     | Subscription  | Your Azure subscription |
-    | Resource group| `az104-rg-region1` (If necessary, select **Create new**) |
+    | Resource group| `az104-rg-region1` (Se necessário, selecione **Create new**) |
     | Region        | **East US**   |
-    | VM size       | Select an available size. Use **Standard_D2s_v5** if available. |
+    | VM size       | Selecione um tamanho disponível. Use **Standard_D2s_v5** se disponível. |
     | Username      | **localadmin**   |
-    | Password      | Provide a complex password |
+    | Password      | Forneça uma senha complexa |
 
-1. Select **Review + Create**, then select **Create**.
+1. Selecione **Review + Create**, então selecione **Create**.
 
     > [!NOTE]
-    > The template provides three current VM sizes. Start with **Standard_D2s_v5**. If the deployment fails because the size is unavailable or Azure lacks capacity, select **Standard_D2s_v6** and redeploy to the same resource group. If necessary, retry with **Standard_D2s_v7**. If a retry fails because an existing or partially deployed resource causes a conflict, delete **az104-rg-region1**. Restart Task 1 from **Search for and select Deploy a custom template**, reload the template and parameter files, select **Create new** to recreate **az104-rg-region1**, and deploy again with the selected VM size.
+    > O template fornece três tamanhos de VM atuais. Comece com **Standard_D2s_v5**. Se a implantação falhar porque o tamanho não está disponível ou o Azure não tem capacidade, selecione **Standard_D2s_v6** e reimplante no mesmo resource group. Se necessário, tente novamente com **Standard_D2s_v7**. Se uma nova tentativa falhar porque um recurso existente ou parcialmente implantado causa um conflito, exclua **az104-rg-region1**. Reinicie a Tarefa 1 a partir de **Search for and select Deploy a custom template**, recarregue os arquivos de template e de parâmetros, selecione **Create new** para recriar **az104-rg-region1**, e implante novamente com o tamanho de VM selecionado.
 
-    >**Note:** Wait for the template to deploy, then select **Go to resource**. You should have one virtual machine in one virtual network. 
+    > [!NOTE]
+    > Aguarde a implantação do template e, em seguida, selecione **Go to resource**. Você deverá ter uma virtual machine em uma virtual network.
 
-## Task 2: Create and configure a Recovery Services vault
+## Tarefa 2: Crie e configure um Recovery Services vault
 
-In this task, you will create a Recovery Services vault. A Recovery Services vault provides storage for the virtual machine data. 
+Nesta tarefa, você criará um Recovery Services vault. Um Recovery Services vault fornece armazenamento para os dados das virtual machines.
 
-1. In the Azure portal, search for and select `Recovery Services vaults` and, on the **Recovery Services vaults** blade, click **+ Create**.
+1. No Azure portal, pesquise por e selecione `Recovery Services vaults` e, na lâmina **Recovery Services vaults**, clique em **+ Create**.
 
-1. On the **Create Recovery Services vault** blade, specify the following settings:
+1. Na lâmina **Create Recovery Services vault**, especifique as seguintes configurações:
 
     | Settings | Value |
     | --- | --- |
-    | Subscription | the name of your Azure subscription |
+    | Subscription | o nome da sua assinatura do Azure |
     | Resource group | `az104-rg-region1`  |
     | Vault Name | `az104-rsv-region1` |
     | Region | **East US** |
 
-    >**Note**: Make sure that you specify the same region into which you deployed virtual machines in the previous task.
+    >**Nota**: Certifique-se de que você especificou a mesma região para a qual implantou as virtual machines na tarefa anterior.
 
     ![Screenshot of the recovery services vault.](../media/az104-lab10-create-rsv.png)
 
-1. Click **Review + Create**, ensure that the validation passes and then click **Create**.
+1. Clique em **Review + Create**, verifique se a validação foi bem-sucedida e então clique em **Create**.
 
-    >**Note**: Wait for the deployment to complete. The deployment should take a couple of minutes. 
+    >**Nota**: Aguarde a conclusão da implantação. A implantação deve levar alguns minutos.
 
-1. When the deployment is completed, click **Go to Resource**.
+1. Quando a implantação for concluída, clique em **Go to Resource**.
 
-1. In the **Settings** section, click **Properties**.
+1. Na seção **Settings**, clique em **Properties**.
 
-1. Select the **Update** link under **Backup Configuration** label.
+1. Selecione o link **Update** sob o rótulo **Backup Configuration**.
 
-1. On the **Backup Configuration** blade, review the choices for **Storage replication type**. Leave the default setting of **Geo-redundant** in place and close the blade.
+1. Na lâmina **Backup Configuration**, revise as opções para **Storage replication type**. Mantenha a configuração padrão **Geo-redundant** e feche a lâmina.
 
-    >**Note**: This setting can be configured only if there are no existing backup items.
-    
-    >**Did you know?** The [Cross Region Restore](https://learn.microsoft.com/azure/backup/backup-create-recovery-services-vault#set-cross-region-restore) option allows you to restore data in a secondary, Azure paired region. 
+    >**Nota**: Esta configuração só pode ser alterada se não houver itens de backup existentes.
 
-1. Select the **Update** link under **Security Settings > Soft Delete Settings** label.
+    >**Você sabia?** A opção [Cross Region Restore](https://learn.microsoft.com/azure/backup/backup-create-recovery-services-vault#set-cross-region-restore) permite restaurar dados em uma região secundária pareada do Azure.
 
-1. On the **Soft delete Settings** blade, verify that the **Soft delete retention period** is **14** days and close the blade. 
+1. Selecione o link **Update** sob o rótulo **Security Settings > Soft Delete Settings**.
 
->**Did you know?** Azure has two types of vaults: Recovery Services vaults and Backup vaults. The main difference is the datasources that can be backed up. Learn more about [the differences](https://learn.microsoft.com/answers/questions/405915/what-is-difference-between-recovery-services-vault).
+1. Na lâmina **Soft delete Settings**, verifique que o **Soft delete retention period** é **14** dias e feche a lâmina.
 
-## Task 3: Configure Azure virtual machine-level backup
+>**Você sabia?** O Azure possui dois tipos de vaults: Recovery Services vaults e Backup vaults. A principal diferença está nas fontes de dados que podem ser protegidas. Aprenda mais sobre [as diferenças](https://learn.microsoft.com/answers/questions/405915/what-is-difference-between-recovery-services-vault).
 
-In this task, you will implement Azure virtual-machine level backup. As part of a VM backup, you will need to define the backup and retention policy that applies to the backup. Different VMs can have different backup and retention policies assigned to them.
+## Tarefa 3: Configure backup a nível de Azure virtual machine
 
-   >**Note**: Before you start this task, make sure that the deployment you initiated in the first task of this lab has successfully completed.
+Nesta tarefa, você implementará backup a nível de virtual machine do Azure. Como parte do backup da VM, você precisará definir a política de backup e de retenção que será aplicada ao backup. Diferentes VMs podem ter políticas de backup e retenção diferentes atribuídas a elas.
 
-1. On the Recovery Services vault blade, click **Overview**, then click **+ Backup**.
+   >**Nota**: Antes de iniciar esta tarefa, certifique-se de que a implantação iniciada na primeira tarefa deste laboratório foi concluída com sucesso.
 
-1. On the **Backup Goal** blade, specify the following settings:
+1. Na lâmina do Recovery Services vault, clique em **Overview**, em seguida clique em **+ Backup**.
+
+1. Na lâmina **Backup Goal**, especifique as seguintes configurações:
 
     | Settings | Value |
     | --- | --- |
-    | Where is your workload running? | **Azure** (notice your other options) |
-    | What do you want to backup? | **Virtual machine** (notice your other options)|
+    | Where is your workload running? | **Azure** (observe suas outras opções) |
+    | What do you want to backup? | **Virtual machine** (observe suas outras opções)|
 
-1. Select **Backup**.
+1. Selecione **Backup**.
 
-1. Notice there a two **Policy sub types**: **Enhanced** and **Standard**. Review the choices and select **Standard**. 
+1. Observe que existem dois **Policy sub types**: **Enhanced** e **Standard**. Revise as opções e selecione **Standard**.
 
-1. In **Backup policy**, select **Create a new policy**.
+1. Em **Backup policy**, selecione **Create a new policy**.
 
-1. Define a new backup policy with the following settings (leave others with their default values):
+1. Defina uma nova política de backup com as seguintes configurações (deixe as demais com os valores padrão):
 
     | Setting | Value |
     | ---- | ---- |
     | Policy name | `az104-backup` |
     | Frequency | **Daily** |
     | Time | **12:00 AM** |
-    | Timezone | the name of your local time zone |
+    | Timezone | o nome do seu fuso horário local |
     | Retain instant recovery snapshot(s) for | **2** Days(s) |
 
     ![Screenshot of the backup policy page.](../media/az104-lab10-backup-policy.png)
 
-1. Click **OK** to create the policy and then, in the **Virtual Machines** section, select **Add** (scroll down).
+1. Clique **OK** para criar a política e então, na seção **Virtual Machines**, selecione **Add** (role a página para baixo).
 
-1. On the **Select virtual machines** blade, select **az-104-10-vm0**, click **OK**, and then back on the **Backup** blade, click **Enable backup**.
+1. Na lâmina **Select virtual machines**, selecione **az-104-10-vm0**, clique em **OK**, e então, de volta na lâmina **Backup**, clique em **Enable backup**.
 
-    >**Note**: Wait for the backup to be enabled. This should take approximately 2 minutes.
+    >**Nota**: Aguarde enquanto o backup é habilitado. Isso deve levar aproximadamente 2 minutos.
 
-1. After the deployment, select **Go to resource**.
-   
-1. In the **Protected items** section, click **Backup items**, and then click the **Azure virtual machine** entry.
+1. Após a implantação, selecione **Go to resource**.
 
-1. Select the **View details** link for **az104-10-vm0**, and review the values of the **Backup Pre-Check** and **Last Backup Status** entries.
+1. Na seção **Protected items**, clique em **Backup items**, e então clique na entrada **Azure virtual machine**.
 
-    >**Note:** Notice the backup is pending.
-    
-1. Select **Backup now**, accept the default value in the **Retain Backup Till** drop-down list, and click **OK**.
+1. Selecione o link **View details** para **az104-10-vm0**, e revise os valores das entradas **Backup Pre-Check** e **Last Backup Status**.
 
-    >**Note**: Do not wait for the backup to complete but instead proceed to the next task.
+    >**Nota:** Observe que o backup está pendente.
 
-## Task 4: Monitor Azure Backup
+1. Selecione **Backup now**, aceite o valor padrão na lista suspensa **Retain Backup Till**, e clique em **OK**.
 
-In this task, you will deploy an Azure storage account. Then you will configure the vault to send the logs and metrics to the storage account. This repository can then be used with Log Analytics or other third-party monitoring solutions.
+    >**Nota**: Não espere o backup ser concluído; prossiga para a próxima tarefa.
 
-1. From the Azure portal, search for and select `Storage accounts`.
+## Tarefa 4: Monitore o Azure Backup
 
-1. On the Storage accounts page, select **Create**.
+Nesta tarefa, você implantará uma storage account do Azure. Em seguida, você configurará o vault para enviar os logs e métricas para a storage account. Esse repositório pode então ser usado com Log Analytics ou outras soluções de monitoramento de terceiros.
 
-1. Use the following information to define the storage account, then select **Review + create**.
+1. No Azure portal, pesquise por e selecione `Storage accounts`.
+
+1. Na página Storage accounts, selecione **Create**.
+
+1. Use as seguintes informações para definir a storage account, então selecione **Review + create**.
 
     | Settings | Value |
-    | --- | --- | 
+    | --- | --- |
     | Subscription          | *Your subscription*    |
     | Resource group        | **az104-rg-region1**        |
-    | Storage account name  | Provide a globally unique name   |
+    | Storage account name  | Forneça um nome globalmente único   |
     | Region                | **East US**   |
 
-1. Select **Create**.
+1. Selecione **Create**.
 
-    >**Note**: Wait for the deployment to complete. It should take about a minute.
+    >**Nota**: Aguarde a conclusão da implantação. Deve levar cerca de um minuto.
 
-1. Search and select your Recovery Services vault.
+1. Pesquise e selecione seu Recovery Services vault.
 
-1. In the **Monitoring** blade, select **Diagnostic Settings** and then select **Add diagnostic setting**.
+1. Na lâmina **Monitoring**, selecione **Diagnostic Settings** e então selecione **Add diagnostic setting**.
 
-1. Name the setting `Logs and Metrics to storage`.
+1. Nomeie a configuração `Logs and Metrics to storage`.
 
-1. Place a checkmark next to the following log and metric categories:
+1. Marque as seguintes categorias de logs e métricas:
 
     - **Azure Backup Reporting Data**
     - **Addon Azure Backup Job Data**
@@ -209,96 +212,96 @@ In this task, you will deploy an Azure storage account. Then you will configure 
     - **Azure Site Recovery Jobs**
     - **Azure Site Recovery Events**
 
-1. In the Destination details, place a checkmark next to **Archive to a storage account**.
+1. Nos detalhes de Destino, marque a opção **Archive to a storage account**.
 
-1. In the Storage account drop-down field, select the storage account that you deployed earlier in this task.
+1. No campo de lista suspensa Storage account, selecione a storage account que você implantou nesta tarefa.
 
-1. Select **Save**.
+1. Selecione **Save**.
 
-1. Return to your Recovery Services vault, in the **Monitoring** blade select **Backup jobs**.
+1. Retorne ao seu Recovery Services vault, na lâmina **Monitoring** selecione **Backup jobs**.
 
-1. Locate the backup operation for the **az104-10-vm0** virtual machine. 
+1. Localize a operação de backup para a virtual machine **az104-10-vm0**.
 
-1. **View details** (scroll to the right for the link) of the backup job.
+1. **View details** (role para a direita para encontrar o link) do job de backup.
 
-## Task 5: Enable virtual machine replication
+## Tarefa 5: Habilite replicação de virtual machine
 
-1. In the Azure portal, search for and select `Recovery Services vaults` and, on the **Recovery Services vaults** blade, click **+ Create**.
+1. No Azure portal, pesquise por e selecione `Recovery Services vaults` e, na lâmina **Recovery Services vaults**, clique em **+ Create**.
 
-1. On the **Create Recovery Services vault** blade, specify the following settings:
+1. Na lâmina **Create Recovery Services vault**, especifique as seguintes configurações:
 
     | Settings | Value |
     | --- | --- |
-    | Subscription | the name of your Azure subscription |
-    | Resource group | `az104-rg-region2` (If necessary, select **Create new**) |
+    | Subscription | o nome da sua assinatura do Azure |
+    | Resource group | `az104-rg-region2` (Se necessário, selecione **Create new**) |
     | Vault Name | `az104-rsv-region2` |
     | Region | **West US** |
 
-    >**Note**: Make sure that you specify a **different** region than the virtual machine.
+    >**Nota**: Certifique-se de especificar uma região **diferente** da virtual machine.
 
-1. Click **Review + Create**, ensure that the validation passes and then click **Create**.
+1. Clique em **Review + Create**, verifique se a validação passou e então clique em **Create**.
 
-    >**Note**: Wait for the deployment to complete. The deployment should take a couple of minutes. 
+    >**Nota**: Aguarde a conclusão da implantação. A implantação deve levar alguns minutos.
 
-1. Search for and select the `az104-10-vm0` virtual machine.
+1. Pesquise por e selecione a virtual machine `az104-10-vm0`.
 
-1. In the **Backup + Disaster recovery** blade, select **Disaster recovery**. 
+1. Na lâmina **Backup + Disaster recovery**, selecione **Disaster recovery**.
 
-1. On the **Basics** tab, notice the **Target region**.
+1. Na aba **Basics**, observe o **Target region**.
 
-1. Select **Next: Advanced settings**. Resource selections have been made for you. 
+1. Selecione **Next: Advanced settings**. As seleções de recursos foram feitas para você.
 
-1. Scroll down and **Create** the automation account. 
+1. Role para baixo e **Create** a automation account.
 
-   >**Note:** It is important the settings be populated, or the validation will fail. 
+   >**Nota:** É importante que as configurações estejam populadas; caso contrário, a validação falhará.
 
-1. Select **Review + Start replication** and then **Start replication**.
+1. Selecione **Review + Start replication** e então **Start replication**.
 
-    >**Note**: Enabling replication will take a 10-15 minutes. Watch the notification messages in the upper right of the portal. While you wait, consider reviewing the self-paced training links at the end of this page.
-    
-1. Once the replication is complete, search for and locate your Recovery Services Vault, **az104-rsv-region2**. You may need to **Refresh** the page. 
+    >**Nota**: Habilitar a replicação levará entre 10 e 15 minutos. Observe as mensagens de notificação no canto superior direito do portal. Enquanto aguarda, considere revisar os links de treinamento em ritmo próprio no final desta página.
 
-1. In the **Protected items** section, select **Replicated items**.
+1. Uma vez que a replicação esteja completa, pesquise e localize seu Recovery Services Vault, **az104-rsv-region2**. Pode ser necessário **Refresh** da página.
 
-1. Check that the virtual machine is showing as healthy for the replication health. Note that the status will show the synchronization (starting at 0%) status and ultimately show **Protected** after the initial synchronization completes.
+1. Na seção **Protected items**, selecione **Replicated items**.
+
+1. Verifique se a virtual machine está aparecendo como saudável em **replication health**. Observe que o status mostrará a sincronização (iniciando em 0%) e, finalmente, mostrará **Protected** após a sincronização inicial ser concluída.
 
    ![Screenshot of the replicated items page.](../media/az104-lab10-replicated-items.png)
 
-1. Select the virtual machine to view more details.
-   
->**Did you know?** It is a good practice to [test the failover of a protected VM](https://learn.microsoft.com/azure/site-recovery/tutorial-dr-drill-azure#run-a-test-failover-for-a-single-vm).
+1. Selecione a virtual machine para ver mais detalhes.
 
-## Cleanup your resources
+>**Você sabia?** É uma boa prática [testar o failover de uma VM protegida](https://learn.microsoft.com/azure/site-recovery/tutorial-dr-drill-azure#run-a-test-failover-for-a-single-vm).
 
-If you are working with **your own subscription** take a minute to delete the lab resources. This will ensure resources are freed up and cost is minimized. The easiest way to delete the lab resources is to delete the lab resource group. 
+## Limpe seus recursos
 
-+ In the Azure portal, select the resource group, select **Delete the resource group**, **Enter resource group name**, and then click **Delete**. When the **Delete confirmation** dialog appears stating the action is permanent and cannot be undone, click **Delete** again.
-+ Using Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
-+ Using the CLI, `az group delete --name resourceGroupName`.
+Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e os custos sejam minimizados. A maneira mais fácil de excluir os recursos do laboratório é excluir o resource group do laboratório.
 
-   >**Note:** To delete an Azure Recovery Services vault, you must first remove all dependencies like protected items, backup servers, and storage accounts, disable security features like soft delete, and then delete the vault itself. An example [PowerShell script](https://learn.microsoft.com/azure/backup/scripts/delete-recovery-services-vault) is available. 
++ No Azure portal, selecione o resource group, selecione **Delete the resource group**, **Enter resource group name**, e então clique em **Delete**. Quando o diálogo **Delete confirmation** aparecer informando que a ação é permanente e não pode ser desfeita, clique em **Delete** novamente.
++ Usando o Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
++ Usando o CLI, `az group delete --name resourceGroupName`.
 
-## Extend your learning with Copilot
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
+   >**Nota:** Para excluir um Recovery Services vault do Azure, você primeiro deve remover todas as dependências, como itens protegidos, backup servers e storage accounts, desabilitar recursos de segurança como soft delete, e então excluir o vault. Um exemplo de [script PowerShell](https://learn.microsoft.com/azure/backup/scripts/delete-recovery-services-vault) está disponível.
+
+## Amplie seu aprendizado com o Copilot
+O Copilot pode ajudar você a aprender como usar as ferramentas de script do Azure. O Copilot também pode ajudar em áreas não cobertas pelo laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
 
 + What products does Azure Backup support?
 + Summarize the steps for backing up and restoring an Azure virtual machine with Azure Backup.
 + How can I use Azure PowerShell or the CLI to check the status of an Azure Backup job.
-+ Provide at least five best practices for configuring Azure virtual machine backups.  
++ Provide at least five best practices for configuring Azure virtual machine backups.
 
-## Learn more with self-paced training
+## Aprenda mais com treinamentos em ritmo próprio
 
-+ [Introduction to Azure Backup](https://learn.microsoft.com/training/modules/intro-to-azure-backup/). Describe how the features of Azure Backup work to provide backup solutions for your needs.
-+ [Protect your virtual machines by using Azure Backup](https://learn.microsoft.com/training/modules/protect-virtual-machines-with-azure-backup/). Use Azure Backup to help protect on-premises servers, virtual machines, SQL Server, Azure file shares, and other workloads.
++ [Introduction to Azure Backup](https://learn.microsoft.com/training/modules/intro-to-azure-backup/). Descreva como os recursos do Azure Backup funcionam para fornecer soluções de backup para suas necessidades.
++ [Protect your virtual machines by using Azure Backup](https://learn.microsoft.com/training/modules/protect-virtual-machines-with-azure-backup/). Use o Azure Backup para ajudar a proteger servidores on-premises, virtual machines, SQL Server, Azure file shares e outras cargas de trabalho.
 
 
-## Key takeaways
+## Principais conclusões
 
-Congratulations on completing the lab. Here are the main takeaways for this lab. 
+Parabéns por concluir o laboratório. Aqui estão as principais conclusões deste laboratório.
 
-+ Azure Backup service provides simple, secure, and cost-effective solutions to back up and recover your data.
-+ Azure Backup can protect on-premises and cloud resources including virtual machines and file shares.
-+ Azure Backup policies configure the frequency of backups and the retention period for recovery points. 
-+ Azure Site Recovery is a disaster recovery solution that provides protection for your virtual machines and applications.
-+ Azure Site Recovery replicates your workloads to a secondary site, and in the event of an outage or disaster, you can failover to the secondary site and resume operations with minimal downtime.
-+ A Recovery Services vault stores your backup data and minimizes management overhead.
++ O serviço Azure Backup fornece soluções simples, seguras e econômicas para fazer backup e recuperar seus dados.
++ O Azure Backup pode proteger recursos on-premises e na nuvem, incluindo virtual machines e file shares.
++ Políticas do Azure Backup configuram a frequência dos backups e o período de retenção para os pontos de recuperação.
++ O Azure Site Recovery é uma solução de recuperação de desastres que fornece proteção para suas virtual machines e aplicações.
++ O Azure Site Recovery replica suas cargas de trabalho para um site secundário e, no caso de uma interrupção ou desastre, você pode fazer failover para o site secundário e retomar as operações com tempo de inatividade mínimo.
++ Um Recovery Services vault armazena seus dados de backup e minimiza a sobrecarga de gerenciamento.

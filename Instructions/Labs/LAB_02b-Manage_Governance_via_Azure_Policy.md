@@ -1,8 +1,8 @@
 ---
 lab:
-  title: 'Lab 02b: Manage Governance via Azure Policy'
-  module: Administer Governance and Compliance
-  description: Configure Azure policy to use resource tags. 
+  title: 'Lab 02b: Gerenciar Governança via Azure Policy'
+  module: Administrar Governança e Conformidade
+  description: Configurar Azure Policy para usar tags de recurso.
   duration: 30 minutes
   level: 300
   islab: true
@@ -10,29 +10,27 @@ lab:
     - Azure
     - Azure Policy
     - Resource locks
+layout: default
 ---
 
 # Lab 02b - Manage Governance via Azure Policy
 
 ## Lab introduction
 
-In this lab, you learn how to implement your organization’s governance plans. You learn how Azure policies can ensure operational decisions are enforced across the organization. You learn how to use resource tagging to improve reporting. 
+Neste laboratório, você aprenderá como implementar os planos de governança da sua organização. Você verá como as políticas do Azure podem garantir que decisões operacionais sejam aplicadas em toda a organização. Também aprenderá a usar tags de recurso para melhorar os relatórios.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the region, but the steps are written using **East US**. 
+Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas os passos estão escritos usando **East US**.
 
 ## Estimated timing: 30 minutes
 
 ## Lab scenario
 
-Your organization's cloud footprint has grown considerably in the last year. During a recent audit, you discovered a substantial number of resources that do not have a defined owner, project, or cost center. In order to improve management of Azure resources in your organization, you decide to implement the following functionality:
+A presença em nuvem da sua organização cresceu consideravelmente no último ano. Durante uma auditoria recente, você descobriu um número substancial de recursos que não têm um proprietário, projeto ou centro de custo definido. Para melhorar o gerenciamento dos recursos do Azure na sua organização, você decide implementar a seguinte funcionalidade:
 
-- apply resource tags to attach important metadata to Azure resources
-
-- enforce the use of resource tags for new resources by using Azure policy
-
-- update existing resources with resource tags
-
-- use resource locks to protect configured resources
+- aplicar tags de recurso para anexar metadados importantes aos recursos do Azure
+- impor o uso de tags de recurso para novos recursos usando Azure Policy
+- atualizar recursos existentes com tags de recurso
+- usar resource locks para proteger recursos configurados
 
 ## Architecture diagram
 
@@ -43,17 +41,17 @@ Your organization's cloud footprint has grown considerably in the last year. Dur
 + Task 1: Create and assign tags via the Azure portal.
 + Task 2: Enforce tagging via an Azure Policy.
 + Task 3: Apply tagging via an Azure Policy.
-+ Task 4: Configure and test resource locks. 
++ Task 4: Configure and test resource locks.
 
 ## Task 1: Assign tags via the Azure portal
 
-In this task, you will create and assign a tag to an Azure resource group via the Azure portal. Tags are a critical component of a governance strategy as outlined by the Microsoft Well-Architected Framework and Cloud Adoption Framework. Tags can allow you to quickly identify resource owners, sunset dates, group contacts, and other name/value pairs that your organization deems important. For this task, you assign a tag identifying the resource Cost Center. 
+Nesta tarefa, você criará e atribuirá uma tag a um Resource group via o Azure portal. Tags são um componente crítico de uma estratégia de governança conforme descrito pelo Microsoft Well-Architected Framework e Cloud Adoption Framework. Tags permitem identificar rapidamente proprietários de recursos, datas de descomissionamento, contatos de grupo e outros pares nome/valor que sua organização considere importantes. Para esta tarefa, você atribuirá uma tag que identifica o Cost Center do recurso.
 
-1. Sign in to the **Azure portal** - `https://portal.azure.com`.
-      
-1. Search for and select `Resource groups`.
+1. Faça login no **Azure portal** - `https://portal.azure.com`.
 
-1. From the Resource groups, select **+ Create**.
+1. Pesquise e selecione `Resource groups`.
+
+1. Em Resource groups, selecione **+ Create**.
 
     | Setting | Value |
     | --- | --- |
@@ -61,41 +59,41 @@ In this task, you will create and assign a tag to an Azure resource group via th
     | Resource group name | `az104-rg2` |
     | Region | **East US** |
 
-    >**Note:** For each lab in this course you will create a new resource group. This lets you quickly locate and manage your lab resources. 
+    >**Nota:** Para cada laboratório deste curso, você criará um novo resource group. Isso permite que você localize e gerencie rapidamente seus recursos de laboratório.
 
-1. Select **Next** and move to the **Tags** tab. Provide information for a new tag.
+1. Selecione **Next** e vá até a aba **Tags**. Forneça informações para uma nova tag.
 
     | Setting | Value |
     | --- | --- |
     | Name | Cost Center |
     | Value | 000 |
 
-1. Select **Review + Create**, and then select **Create**.
+1. Selecione **Review + Create**, e então selecione **Create**.
 
 ## Task 2: Enforce tagging via an Azure Policy
 
-In this task, you will assign the built-in *Require a tag and its value on resources* policy to the resource group and evaluate the outcome. Azure Policy can be used to enforce configuration, and in this case, governance, to your Azure resources. 
+Nesta tarefa, você atribuirá a política integrada *Require a tag and its value on resources* ao resource group e avaliará o resultado. Azure Policy pode ser usado para impor configurações e, neste caso, governança, aos seus recursos do Azure.
 
-1. In the Azure portal, search for and select `Policy`. 
+1. No Azure portal, pesquise e selecione `Policy`.
 
-1. In the **Authoring** blade, select **Definitions**. Take a moment to browse through the list of [built-in policy definitions](https://learn.microsoft.com/azure/governance/policy/samples/built-in-policies) that are available for you to use. Notice you can also search for a definition.
+1. No blade **Authoring**, selecione **Definitions**. Reserve um momento para navegar pela lista de [built-in policy definitions](https://learn.microsoft.com/azure/governance/policy/samples/built-in-policies) disponíveis para uso. Observe que você também pode pesquisar uma definição.
 
     ![Screenshot of the policy definition.](../media/az104-lab02b-policytags.png)
 
-1. Search for the `Require a tag and its value on resources` built-in policy. Select the policy and take a minute to review the definition. 
+1. Pesquise pela política integrada `Require a tag and its value on resources`. Selecione a policy e reserve um minuto para revisar a definição.
 
-1. Select **Assign policy**.
+1. Selecione **Assign policy**.
 
-1. Specify the **Scope** by clicking the ellipsis button and selecting the following values. Click **Select** when you are done. 
+1. Especifique o **Scope** clicando no botão de reticências e selecionando os seguintes valores. Clique em **Select** quando terminar.
 
     | Setting | Value |
     | --- | --- |
     | Subscription | *your subscription* |
     | Resource Group | **az104-rg2** |
 
-    >**Note**: You can assign policies on the management group, subscription, or resource group level. You also have the option of specifying exclusions, such as individual subscriptions, resource groups, or resources. In this scenario, we want the tag on all the resources in the resource group.
+    >**Nota**: Você pode atribuir políticas no nível de management group, subscription ou resource group. Você também tem a opção de especificar exclusões, como assinaturas, resource groups ou recursos individuais. Neste cenário, queremos a tag em todos os recursos do resource group.
 
-1. Configure the **Basics** properties of the assignment by specifying the following settings (leave others with their defaults):
+1. Configure as propriedades **Basics** da atribuição especificando as seguintes configurações (deixe as demais nos padrões):
 
     | Setting | Value |
     | --- | --- |
@@ -103,62 +101,62 @@ In this task, you will assign the built-in *Require a tag and its value on resou
     | Description | `Require Cost Center tag and its value on all resources in the resource group`|
     | Policy enforcement | Enabled |
 
-    >**Note**: The **Assignment name** is automatically populated with the policy name you selected, but you can change it. The **Description** is optional. Notice you can disable the policy at any time. 
+    >**Nota**: O **Assignment name** é preenchido automaticamente com o nome da policy que você selecionou, mas você pode alterá-lo. A **Description** é opcional. Observe que você pode desabilitar a policy a qualquer momento.
 
-1. Click **Next** and set **Parameters** to the following values:
+1. Clique em **Next** e defina **Parameters** com os seguintes valores:
 
     | Setting | Value |
     | --- | --- |
     | Tag Name | `Cost Center` |
     | Tag Value | `000` |
 
-1. Click **Next** and review the **Remediation** and **Managed Identity** tabs. Leave the **Create a Managed Identity** checkbox unchecked in the **Managed Identity** tab. 
+1. Clique em **Next** e revise as abas **Remediation** e **Managed Identity**. Deixe a caixa **Create a Managed Identity** desmarcada na aba **Managed Identity**.
 
-1. Click **Review + Create** and then click **Create**.
+1. Clique em **Review + Create** e então clique em **Create**.
 
-    >**Note**: Now you will verify that the new policy assignment is in effect by attempting to create an Azure Storage account in the resource group. You will create the storage account without adding the required tag. 
-    
-    >**Note**: It might take between 5 and 10 minutes for the policy to take effect.
+    >**Nota**: Agora você verificará se a nova policy assignment está em vigor tentando criar uma Storage account no resource group. Você criará a storage account sem adicionar a tag exigida.
 
-1. In the portal, search for and select `Storage Accounts`, and select **+ Create**. 
+    >**Nota**: Pode levar entre 5 e 10 minutos para a policy entrar em vigor.
 
-1. On the **Basics** tab of the **Create storage account** blade, complete the configuration.
+1. No portal, pesquise e selecione `Storage Accounts`, e selecione **+ Create**.
+
+1. Na aba **Basics** do blade **Create storage account**, complete a configuração.
 
     | Setting | Value |
     | --- | --- |
     | Resource group | **az104-rg2** |
     | Storage account name | *any globally unique combination of between 3 and 24 lower case letters and digits, starting with a letter* |
 
-1. Select **Review** and then click **Create**.
+1. Selecione **Review** e então clique em **Create**.
 
-1. You should receive a **Validation failed** message. View the message to identify the reason for the failure. Verify the error message states that the resource deployment was disallowed by the policy. 
+1. Você deverá receber uma mensagem **Validation failed**. Visualize a mensagem para identificar a razão da falha. Verifique se a mensagem de erro indica que a implantação do recurso foi impedida pela policy.
 
-    ![Screenshot of the disallowed policy error.](../media/az104-lab02b-policyerror.png) 
+    ![Screenshot of the disallowed policy error.](../media/az104-lab02b-policyerror.png)
 
->**Note**: By clicking the **Raw Error** tab, you can find more details about the error, including the name of the role definition **Require a tag and its value on resources**. The deployment failed because the storage account you attempted to create did not have a tag named **Cost Center** with its value set to **Default**.
+>**Nota**: Ao clicar na aba **Raw Error**, você pode encontrar mais detalhes sobre o erro, incluindo o nome da role definition **Require a tag and its value on resources**. A implantação falhou porque a storage account que você tentou criar não possuía uma tag chamada **Cost Center** com seu valor configurado como **Default**.
 
 ## Task 3: Apply tagging via an Azure policy
 
-In this task, we will use the new policy definition to remediate any non-compliant resources. In this scenario, we will make any child resources of a resource group inherit the **Cost Center** tag that was defined on the resource group.
+Nesta tarefa, usaremos uma nova definição de policy para remediar quaisquer recursos não conformes. Neste cenário, faremos com que quaisquer recursos filhos de um resource group herdem a tag **Cost Center** que foi definida no resource group.
 
-1. In the Azure portal, search for and select `Policy`. 
+1. No Azure portal, pesquise e selecione `Policy`.
 
-1. In the **Authoring** section, click **Assignments**. 
+1. Na seção **Authoring**, clique em **Assignments**.
 
-1. In the list of assignments, click the ellipsis icon in the row representing the **Require a tag and its value on resources** policy assignment and use the **Delete assignment** menu item to delete the assignment.
+1. Na lista de assignments, clique no ícone de reticências na linha que representa a atribuição da policy **Require a tag and its value on resources** e use o item de menu **Delete assignment** para excluir a atribuição.
 
-1. When prompted with **Do you want to delete the policy assignment?**, select **Yes**.
+1. Quando for solicitado **Do you want to delete the policy assignment?**, selecione **Yes**.
 
-1. Click **Assign policy** and specify the **Scope** by clicking the ellipsis button and selecting the following values:
+1. Clique em **Assign policy** e especifique o **Scope** clicando no botão de reticências e selecionando os seguintes valores:
 
     | Setting | Value |
     | --- | --- |
     | Subscription | your Azure subscription |
     | Resource Group | `az104-rg2` |
 
-1. To specify the **Policy definition**, click the ellipsis button and then search for and select `Inherit a tag from the resource group if missing`.
+1. Para especificar a **Policy definition**, clique no botão de reticências e então pesquise por e selecione `Inherit a tag from the resource group if missing`.
 
-1. Select **Add** and then configure the remaining **Basics** properties of the assignment.
+1. Selecione **Add** e então configure as demais propriedades **Basics** da atribuição.
 
     | Setting | Value |
     | --- | --- |
@@ -166,100 +164,99 @@ In this task, we will use the new policy definition to remediate any non-complia
     | Description | `Inherit the Cost Center tag and its value 000 from the resource group if missing` |
     | Policy enforcement | Enabled |
 
-1. Click **Next** and set **Parameters** to the following values:
+1. Clique em **Next** e defina **Parameters** com os seguintes valores:
 
     | Setting | Value |
     | --- | --- |
     | Tag Name | `Cost Center` |
 
-1. Click **Next** and, on the **Remediation** tab, configure the following settings (leave others with their defaults):
+1. Clique em **Next** e, na aba **Remediation**, configure as seguintes opções (deixe as demais com seus padrões):
 
     | Setting | Value |
     | --- | --- |
     | Create a remediation task | enabled |
     | Policy to remediate | **Inherit a tag from the resource group if missing** |
 
-    >**Note**: This policy definition includes the **Modify** effect. So, a managed identity is required. 
+    >**Nota**: Esta policy definition inclui o efeito **Modify**. Portanto, é necessária uma managed identity.
 
-    ![Screenshot of the policy remediation page. ](../media/az104-lab02b-policyremediation.png) 
+    ![Screenshot of the policy remediation page. ](../media/az104-lab02b-policyremediation.png)
 
-1. Click **Review + Create** and then click **Create**.
+1. Clique em **Review + Create** e então clique em **Create**.
 
-    >**Note**: To verify that the new policy assignment is in effect, you will create another Azure storage account in the same resource group without explicitly adding the required tag. 
-    
-    >**Note**: It might take between 5 and 10 minutes for the policy to take effect.
+    >**Nota**: Para verificar se a nova policy assignment está em vigor, você criará outra storage account no mesmo resource group sem adicionar explicitamente a tag exigida.
 
-1. Search for and select `Storage Account` and click **+ Create**. 
+    >**Nota**: Pode levar entre 5 e 10 minutos para a policy entrar em vigor.
 
-1. On the **Basics** tab of the **Create storage account** blade, verify that you are using the Resource Group that the Policy was applied to and specify the following settings (leave others with their defaults) and click **Review**:
+1. Pesquise e selecione `Storage Account` e clique em **+ Create**.
+
+1. Na aba **Basics** do blade **Create storage account**, verifique que você está usando o Resource Group ao qual a Policy foi aplicada e especifique as seguintes configurações (deixe as demais com seus padrões) e clique em **Review**:
 
     | Setting | Value |
     | --- | --- |
     | Storage account name | *any globally unique combination of between 3 and 24 lower case letters and digits, starting with a letter* |
     | Primary service | Azure Blob Storage or Azure Data Lake Storage |
 
-    >**Note**: Primary service may be listed as Preferred Storage Type
+    >**Nota**: Primary service pode ser listado como Preferred Storage Type
 
-1. Verify that this time the validation passed and click **Create**.
+1. Verifique que desta vez a validação passou e clique em **Create**.
 
-1. Once the new storage account is provisioned, click **Go to resource**.
+1. Uma vez que a nova storage account for provisionada, clique em **Go to resource**.
 
-1. On the **Tags** blade, note that the tag **Cost Center** with the value **000** has been automatically assigned to the resource.
+1. No blade **Tags**, observe que a tag **Cost Center** com o valor **000** foi automaticamente atribuída ao recurso.
 
-    >**Did you know?** If you search for and select **Tags** in the portal, you can view the resources with a specific tag. 
+    >**Você sabia?** Se você pesquisar e selecionar **Tags** no portal, você pode visualizar os recursos com uma tag específica.
 
 ## Task 4: Configure and test resource locks
 
-In this task, you configure and test a resource lock. Locks prevent either deletions or modifications of a resource. 
+Nesta tarefa, você configurará e testará um resource lock. Locks impedem exclusões ou modificações de um recurso.
 
-1. Search for and select your resource group.
-   
-1. In the **Settings** blade, select **Locks**.
+1. Pesquise e selecione seu resource group.
 
-1. Select **Add** and complete the resource lock information. When finished select **Ok**. 
+1. No blade **Settings**, selecione **Locks**.
+
+1. Selecione **Add** e preencha as informações do resource lock. Quando terminar, selecione **Ok**.
 
     | Setting | Value |
     | --- | --- |
     | Lock name | `rg-lock` |
-    | Lock type | **delete** (notice the selection for read-only) |
-    
-1. Navigate to the resource group **Overview** blade, and select **Delete resource group**.
+    | Lock type | **delete** (observe a seleção para read-only) |
 
-1. In the **Enter resource group name to confirm deletion** textbox provide the resource group name, `az104-rg2`. Notice you can copy and paste the resource group name. 
+1. Navegue até o blade **Overview** do resource group e selecione **Delete resource group**.
 
-1. Notice the warning: Deleting this resource group and its dependent resources is a permanent action and cannot be undone. Select **Delete**. When a second Delete confirmation dialog appears, click **Delete** again to confirm.
+1. No textbox **Enter resource group name to confirm deletion** forneça o nome do resource group, `az104-rg2`. Observe que você pode copiar e colar o nome do resource group.
 
-1. You should receive a notification denying the deletion. 
+1. Observe o aviso: Deleting this resource group and its dependent resources is a permanent action and cannot be undone. Selecione **Delete**. Quando uma segunda caixa de confirmação Delete aparecer, clique em **Delete** novamente para confirmar.
 
-    ![Screenshot of the failure to delete message.](../media/az104-lab02b-failuretodelete.png) 
+1. Você deverá receber uma notificação negando a exclusão.
 
-    >**Note:** You will need to remove the lock if you intend to delete the resource group. 
-    
+    ![Screenshot of the failure to delete message.](../media/az104-lab02b-failuretodelete.png)
+
+    >**Nota:** Você precisará remover o lock se pretende deletar o resource group.
+
 ## Cleanup your resources
 
-If you are working with **your own subscription** take a minute to delete the lab resources. This will ensure resources are freed up and cost is minimized. The easiest way to delete the lab resources is to delete the lab resource group. 
+Se você estiver trabalhando com **sua própria subscription**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e os custos sejam minimizados. A maneira mais fácil de excluir os recursos do laboratório é excluir o resource group do laboratório.
 
-+ In the Azure portal, select the resource group, select **Delete the resource group**, **Enter resource group name**, and then click **Delete**.
-+ Using Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
-+ Using the CLI, `az group delete --name resourceGroupName`.
++ No Azure portal, selecione o resource group, selecione **Delete the resource group**, **Enter resource group name**, e então clique em **Delete**.
++ Usando Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
++ Usando o CLI, `az group delete --name resourceGroupName`.
 
 ## Extend your learning with Copilot
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
+Copilot pode ajudá-lo a aprender a usar as ferramentas de script do Azure. Copilot também pode auxiliar em áreas não cobertas no laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (no canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para testar estes prompts.
 + What are the Azure PowerShell and CLI commands for adding and deleting resource locks on a resource group?
 + Tabulate the differences between Azure policy and Azure RBAC, include examples.
 + What are the steps to enforce Azure policy and remediate resources which are not compliant?
 + How can I get a report of Azure resources with specific tags?
 
 ## Learn more with self-paced training
-+ [Azure Policy Initiatives](https://learn.microsoft.com/training/modules/sovereignty-policy-initiatives/). In this module, you learn how Azure Policy initiatives can be used to enforce organizational standards, assess compliance at scale, and manage Azure resources effectively.
++ [Azure Policy Initiatives](https://learn.microsoft.com/training/modules/sovereignty-policy-initiatives/). Neste módulo, você aprende como Azure Policy initiatives podem ser usadas para impor padrões organizacionais, avaliar conformidade em escala e gerenciar recursos do Azure de forma eficaz.
 
 ## Key takeaways
 
-Congratulations on completing the lab. Here are the main takeaways for this lab. 
+Parabéns por completar o laboratório. Aqui estão os principais pontos deste lab.
 
-+ Azure tags are metadata that consists of a key-value pair. Tags describe a particular resource in your environment. In particular, tagging in Azure enables you to label your resources in a logical manner.
-+ Azure Policy establishes conventions for resources. Policy definitions describe resource compliance conditions and the effect to take if a condition is met. A condition compares a resource property field or a value to a required value. There are many built-in policy definitions and you can customize the policies. 
-+ The Azure Policy remediation task feature is used to bring resources into compliance based on a definition and assignment. Resources that are non-compliant to a modify or deployIfNotExist definition assignment, can be brought into compliance using a remediation task.
-+ You can configure a resource lock on a subscription, resource group, or resource. The lock can protect a resource from accidental user deletions and modifications. The lock overrides any user permissions.
-+ Azure Policy is pre-deployment security practice. RBAC and resource locks are post-deployment security practice.
-
++ Azure tags são metadados que consistem em um par chave-valor. Tags descrevem um recurso particular no seu ambiente. Em particular, o uso de tags no Azure permite que você rotule seus recursos de maneira lógica.
++ Azure Policy estabelece convenções para recursos. Policy definitions descrevem condições de conformidade dos recursos e o efeito a ser aplicado se uma condição for atendida. Uma condição compara um campo de propriedade do recurso ou um valor a um valor requerido. Existem muitas built-in policy definitions e você pode customizar as policies.
++ O recurso de remediation task do Azure Policy é usado para trazer recursos para conformidade com base em uma definição e atribuição. Recursos que não estão em conformidade com uma atribuição de definição com efeito modify ou deployIfNotExist podem ser trazidos para conformidade usando uma remediation task.
++ Você pode configurar um resource lock em uma subscription, resource group ou resource. O lock pode proteger um recurso de exclusões e modificações acidentais por usuários. O lock substitui quaisquer permissões de usuário.
++ Azure Policy é uma prática de segurança pré-implantação. RBAC e resource locks são práticas de segurança pós-implantação.

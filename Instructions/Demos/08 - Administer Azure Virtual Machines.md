@@ -1,67 +1,67 @@
 ---
 demo:
-    title: 'Demonstration 08: Administer Azure Virtual Machines'
-    module: 'Administer Azure Virtual Machines'
+    title: 'Demonstração 08: Administrar Azure Virtual Machines'
+    module: 'Administrar Azure Virtual Machines'
+layout: default
 ---
 
 
-# 08 - Administer Azure Virtual Machines
+# 08 - Administrar Azure Virtual Machines
 
-## Demonstration -- Create Virtual Machines in the portal
+## Demonstração -- Criar Virtual Machines no portal
 
-In this demonstration, we will create and access an Azure virtual machine in the portal.
+Nesta demonstração, criaremos e acessaremos uma Virtual Machine do Azure no portal.
 
-**References**
+**Referências**
 
-[Quickstart - Create a Windows VM in the Azure portal](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal)
+[Início rápido - Criar uma Windows VM no Azure portal](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal)
 
-[Quickstart - Create a Linux VM in the Azure portal](https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-portal)
+[Início rápido - Criar uma Linux VM no Azure portal](https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-portal)
 
-[Connect to a virtual machine with Bastion](https://learn.microsoft.com/azure/bastion/tutorial-create-host-portal#connect)
+[Conectar-se a uma Virtual Machine com Bastion](https://learn.microsoft.com/azure/bastion/tutorial-create-host-portal#connect)
 
-**Create the virtual machine**
+**Criar a virtual machine**
 
-**Note:** These steps only cover a few virtual machine parameters. Feel free to explore and cover other areas. You can create either Windows or Linux virtual machine, depending on your audience.
+**Observação:** Estes passos cobrem apenas alguns parâmetros da virtual machine. Sinta-se à vontade para explorar e abordar outras áreas. Você pode criar uma virtual machine Windows ou Linux, dependendo do seu público.
 
-1. Use the Azure portal.
+1. Use o Azure portal.
 
-1. Search for **Virtual machines**. 
+1. Pesquise por **Virtual machines**.
 
-1. Create a basic virtual machine. Review the availability options, images, and inbound rules.
+1. Crie uma virtual machine básica. Revise as opções de disponibilidade, imagens e regras de entrada.
 
-1. Discuss the importance of creating a secure administrator account.
+1. Discuta a importância de criar uma conta de administrador segura.
 
-1. Create the virtual machine and wait for the resource to deploy.  
+1. Crie a virtual machine e aguarde o recurso ser implantado.
 
-**Connect to the virtual machine**
+**Conectar-se à virtual machine**
 
-1. There are several ways to **Connect** to the virtual machine. 
+1. Há várias maneiras de **Conectar-se** à virtual machine.
 
-1. For a Windows server you can use **RDP**, as shown in the QuickStart. 
+1. Para um servidor Windows, você pode usar **RDP**, conforme mostrado no Início rápido.
 
-1. For a Linux server you can **SSH**, as shown in the QuickStart. 
+1. Para um servidor Linux, você pode usar **SSH**, conforme mostrado no Início rápido.
 
-1. For either server you can connect with the **Bastion** service (QuickStart). Review why Bastion is preferred to RDP or SSH. 
+1. Para qualquer um dos servidores, você pode conectar-se com o serviço **Bastion** (Início rápido). Reveja por que o Bastion é preferido em relação ao RDP ou SSH.
 
-## Configure Virtual Machine Availability
+## Configurar disponibilidade da Virtual Machine
 
-In this demonstration, we will explore virtual machine scaling options.
+Nesta demonstração, exploraremos opções de escalonamento para virtual machines.
 
-**References**
+**Referências**
 
-[Create virtual machines in a scale set using Azure portal](https://learn.microsoft.com/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets-portal)
+[Criar virtual machines em um scale set usando o Azure portal](https://learn.microsoft.com/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets-portal)
 
-1. Use the Azure Portal.
+1. Use o Azure Portal.
 
-1. Search for and select **Virtual Machine Scale Sets**. 
+1. Pesquise e selecione **Virtual Machine Scale Sets**.
 
-1. Create a **Virtual Machine Scale Sets**. Review the purpose of virtual machine scale sets. Review the difference between the **Uniform** and **Flexible** orchestration modes. Explain your selection can affect your scaling options. 
+1. Crie um **Virtual Machine Scale Sets**. Revise o propósito dos Virtual Machine Scale Sets. Revise a diferença entre os modos de orquestração **Uniform** e **Flexible**. Explique que sua seleção pode afetar suas opções de escalonamento.
 
-1. Move to **Scaling** tab. 
+1. Vá para a guia **Scaling**.
 
-1. Review how **Manual scale** and **Scale-in policy** is used. 
+1. Reveja como **Manual scale** e **Scale-in policy** são usados.
 
-1. Change to a **Custom** scaling policy. 
+1. Altere para uma política de escalonamento **Custom**.
 
-1. Review how **CPU threshold (%)** is used to scale out and scale in the virtual machine instances. 
-
+1. Reveja como **CPU threshold (%)** é usado para scale out e scale in das instâncias de virtual machine.

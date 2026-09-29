@@ -1,8 +1,8 @@
 ---
 lab:
-  title: 'Lab 06: Implement Network Traffic Management'
-  module: Administer Network Traffic Management
-  description: Create and configure Azure Load Balancer and Application Gateway.
+  title: 'Laboratório 06: Implementar Gerenciamento de Tráfego de Rede'
+  module: Administrar Gerenciamento de Tráfego de Rede
+  description: Criar e configurar Azure Load Balancer e Application Gateway.
   duration: 50 minutes
   level: 400
   islab: true
@@ -10,104 +10,105 @@ lab:
   - Azure
   - Azure Load Balancer
   - Azure Application Gateway
+layout: default
 ---
 
-# Lab 06 - Implement Network Traffic Management
+# Lab 06 - Implementar Gerenciamento de Tráfego de Rede
 
-## Lab introduction
+## Introdução ao laboratório
 
-In this lab, you learn how to configure and test a public Load Balancer and an Application Gateway.
+Neste laboratório, você aprenderá como configurar e testar um Load Balancer público e um Application Gateway.
 
-This lab requires an Azure subscription. Your subscription type may affect the availability of features in this lab. You may change the region, but the steps are written using **East US**.
+Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas os passos estão escritos usando **East US**.
 
-## Estimated timing: 50 minutes
+## Tempo estimado: 50 minutos
 
-## Lab scenario
+## Cenário do laboratório
 
-Your organization has a public website. You need to load balance incoming public requests across different virtual machines. You also need to provide images and videos from different virtual machines. You plan on implementing an Azure Load Balancer and an Azure Application Gateway. All resources are in the same region.
+Sua organização possui um site público. Você precisa balancear as solicitações públicas de entrada entre diferentes máquinas virtuais. Você também precisa fornecer imagens e vídeos a partir de máquinas virtuais diferentes. Você pretende implementar um Azure Load Balancer e um Azure Application Gateway. Todos os recursos estão na mesma região.
 
-## Job skills
+## Habilidades do trabalho
 
-+ Task 1: Use a template to provision an infrastructure.
-+ Task 2: Configure an Azure Load Balancer.
-+ Task 3: Configure an Azure Application Gateway.
++ Tarefa 1: Usar um template para provisionar uma infraestrutura.
++ Tarefa 2: Configurar um Azure Load Balancer.
++ Tarefa 3: Configurar um Azure Application Gateway.
 
-## Task 1: Use a template to provision an infrastructure
+## Tarefa 1: Usar um template para provisionar uma infraestrutura
 
-In this task, you will use a template to deploy one virtual network, one network security group, and three virtual machines.
+Nesta tarefa, você usará um template para implantar uma rede virtual, um network security group e três máquinas virtuais.
 
-1. Download the **\\Allfiles\\Lab06** lab files (template and parameters).
+1. Baixe os arquivos do laboratório **\\Allfiles\\Lab06** (template e parâmetros).
 
-1. Sign in to the **Azure portal** - `https://portal.azure.com`.
+1. Entre no **Azure portal** - `https://portal.azure.com`.
 
-1. Search for and select `Deploy a custom template`.
+1. Pesquise por e selecione `Deploy a custom template`.
 
-1. On the custom deployment page, select **Build your own template in the editor**.
+1. Na página de implantação personalizada, selecione **Build your own template in the editor**.
 
-1. On the edit template page, select **Load file**.
+1. Na página de editar template, selecione **Load file**.
 
-1. Locate and select the **\\Allfiles\\Labs\\06\\az104-06-vms-template.json** file and select **Open**.
+1. Localize e selecione o arquivo **\\Allfiles\\Labs\\06\\az104-06-vms-template.json** e selecione **Open**.
 
-1. Select **Save**.
+1. Selecione **Save**.
 
-1. Select **Edit parameters** and load the **\\Allfiles\\Labs\\06\\az104-06-vms-parameters.json** file.
+1. Selecione **Edit parameters** e carregue o arquivo **\\Allfiles\\Labs\\06\\az104-06-vms-parameters.json**.
 
-1. Select **Save**.
+1. Selecione **Save**.
 
-1. Use the following information to complete the fields on the custom deployment page, leaving all other fields with the default value.
+1. Use as seguintes informações para preencher os campos na página de implantação personalizada, deixando todos os outros campos com o valor padrão.
 
     | Setting       | Value         |
     | ---           | ---           |
-    | Subscription  | your Azure subscription |
-    | Resource group | `az104-rg6` (If necessary, select **Create new**) |
-    | VM size | Select an available size. Use **Standard_D2s_v5** if available. |
-    | Password      | Provide a secure password |
+    | Subscription  | sua assinatura do Azure |
+    | Resource group | `az104-rg6` (Se necessário, selecione **Create new**) |
+    | VM size | Selecione um tamanho disponível. Use **Standard_D2s_v5** se disponível. |
+    | Password      | Forneça uma senha segura |
 
-1. Select **Review + create** and then select **Create**.
+1. Selecione **Review + create** e então selecione **Create**.
 
     > [!NOTE]
-    > The template provides three current VM sizes. Start with **Standard_D2s_v5**. If the deployment fails because the size is unavailable or Azure lacks capacity, select **Standard_D2s_v6** and redeploy to the same resource group. If necessary, retry with **Standard_D2s_v7**. If a retry fails because an existing or partially deployed resource causes a conflict, delete **az104-rg6**. Restart Task 1 from **Search for and select Deploy a custom template**, reload the template and parameter files, select **Create new** to recreate **az104-rg6**, and deploy again with the selected VM size.
+    > O template fornece três tamanhos de VM atuais. Comece com **Standard_D2s_v5**. Se a implantação falhar porque o tamanho não está disponível ou o Azure não tem capacidade, selecione **Standard_D2s_v6** e reimplante no mesmo grupo de recursos. Se necessário, tente novamente com **Standard_D2s_v7**. Se uma nova tentativa falhar porque um recurso existente ou parcialmente implantado causa conflito, exclua **az104-rg6**. Reinicie a Tarefa 1 a partir de **Search for and select Deploy a custom template**, recarregue os arquivos de template e parâmetros, selecione **Create new** para recriar **az104-rg6**, e implante novamente com o tamanho de VM selecionado.
 
-    >**Note**: Wait for the deployment to complete before moving to the next task. The deployment should take approximately 5 minutes.
+    >**Observação**: Aguarde a conclusão da implantação antes de passar para a próxima tarefa. A implantação deve levar aproximadamente 5 minutos.
 
-    >**Note**: Review the resources being deployed. There will be one virtual network with three subnets. Each subnet will have a virtual machine.
+    >**Observação**: Reveja os recursos que estão sendo implantados. Haverá uma rede virtual com três sub-redes. Cada sub-rede terá uma máquina virtual.
 
-## Task 2: Configure an Azure Load Balancer
+## Tarefa 2: Configurar um Azure Load Balancer
 
-In this task, you implement an Azure Load Balancer in front of the two Azure virtual machines in the virtual network. Load Balancers in Azure provide layer 4 connectivity across resources, such as virtual machines. Load Balancer configuration includes a front-end IP address to accept connections, a backend pool, and rules that define how connections should traverse the load balancer.
+Nesta tarefa, você implementa um Azure Load Balancer na frente de duas máquinas virtuais do Azure na rede virtual. Load Balancers no Azure fornecem conectividade na camada 4 entre recursos, como máquinas virtuais. A configuração do Load Balancer inclui um endereço IP front-end para aceitar conexões, um backend pool e regras que definem como as conexões devem atravessar o load balancer.
 
-## Architecture diagram - Load Balancer
+## Diagrama de arquitetura - Load Balancer
 
->**Note**: Notice the Load Balancer is distributing across two virtual machines in the same virtual network.
+>**Observação**: Observe que o Load Balancer está distribuindo entre duas máquinas virtuais na mesma rede virtual.
 
 ![Diagram of the lab tasks.](../media/az104-lab06-lb-architecture.png)
 
-1. In the Azure portal, search for and select `Load balancers`, then click + Create and select **Standard load balancer** from the dropdown menu. on the **Load balancers** blade, click **+ Create**.
+1. No Azure portal, pesquise e selecione `Load balancers`, então clique em + Create e selecione **Standard load balancer** no menu suspenso. no bloco **Load balancers**, clique em **+ Create**.
 
-1. Create a load balancer with the following settings (leave others with their default values) then click **Next : Frontend IP configuration**:
+1. Crie um load balancer com as seguintes configurações (deixe as demais com os valores padrão) então clique em **Next : Frontend IP configuration**:
 
     | Setting | Value |
     | --- | --- |
-    | Subscription | your Azure subscription |
+    | Subscription | sua assinatura do Azure |
     | Resource group | **az104-rg6** |
     | Name | `az104-lb` |
-    | Region | The **same** region that you deployed the VMs |
+    | Region | A **mesma** região onde você implantou as VMs |
     | SKU  | **Standard** |
     | Type | **Public** |
     | Tier | **Regional** |
 
      ![Screenshot of the create load balancer page.](../media/az104-lab06-create-lb1.png)
 
-1. On the **Frontend IP configuration** tab, click **Add a frontend IP configuration** and use the following settings:  
+1. Na aba **Frontend IP configuration**, clique em **Add a frontend IP configuration** e use as seguintes configurações:
 
     | Setting | Value |
     | --- | --- |
     | Name | `az104-fe` |
     | IP type | IP address |
     | Gateway Load balancer | None |
-    | Public IP address | Select **Create new** (use the instructions in the next step) |
+    | Public IP address | Selecione **Create new** (use as instruções no próximo passo) |
 
-1. On the **Add a public IP address** popup, use the following settings before clicking **Save** twice. When completed click **Next : Backend pools >**.
+1. No popup **Add a public IP address**, use as seguintes configurações antes de clicar em **Save** duas vezes. Quando concluído clique em **Next : Backend pools >**.
 
     | Setting | Value |
     | --- | --- |
@@ -117,9 +118,9 @@ In this task, you implement an Azure Load Balancer in front of the two Azure vir
     | Assignment | Static |
     | Routing Preference | **Microsoft network** |
 
-    >**Note:** The Standard SKU provides a static IP address. Static IP addresses are assigned with the resource is created and released when the resource is deleted.  
+    >**Observação:** A SKU Standard fornece um endereço IP estático. Endereços IP estáticos são atribuídos quando o recurso é criado e liberados quando o recurso é excluído.
 
-1. On the **Backend pools** tab, click **Add a backend pool** with the following settings (leave others with their default values). Click **Add** and then **Save**. Click **Next : Inbound rules >**.
+1. Na aba **Backend pools**, clique em **Add a backend pool** com as seguintes configurações (deixe as demais com os valores padrão). Clique em **Add** e então **Save**. Clique em **Next : Inbound rules >**.
 
     | Setting | Value |
     | --- | --- |
@@ -127,20 +128,20 @@ In this task, you implement an Azure Load Balancer in front of the two Azure vir
     | Virtual network | **az104-06-vnet1 (az104-rg6)** |
     | Backend Pool Configuration | **NIC** |
     | Click **Add** to add a virtual machine |  |
-    | az104-06-vm0 | **check the box** |
-    | az104-06-vm1 | **check the box** |
-    
-   > **Note:** When creating the public IP address, verify that the Region matches the region where your VMs are deployed (North Europe). The portal may pre-select a different region such as East US 2 — change it if needed before proceeding.
+    | az104-06-vm0 | **marque a caixa** |
+    | az104-06-vm1 | **marque a caixa** |
 
-1. As you have time, review the other tabs, then click **Review + create**. Ensure there are no validation errors, then click **Create**.
+   > **Nota:** Ao criar o endereço IP público, verifique se a Região corresponde à região onde suas VMs estão implantadas (North Europe). O portal pode pré-selecionar uma região diferente como East US 2 — altere se necessário antes de prosseguir.
 
-1. Wait for the load balancer to deploy then click **Go to resource**.
+1. Se tiver tempo, revise as outras abas, então clique em **Review + create**. Garanta que não haja erros de validação, então clique em **Create**.
 
-**Add a rule to determine how incoming traffic is distributed**
+1. Aguarde a implantação do load balancer e então clique em **Go to resource**.
 
-1. In the **Settings** blade, select **Load balancing rules**.
+**Adicione uma regra para determinar como o tráfego de entrada é distribuído**
 
-1. Select **+ Add**. Add a load balancing rule with the following settings (leave others with their default values).  As you configure the rule use the informational icons to learn about each setting. When finished click **Save**.
+1. No bloco **Settings**, selecione **Load balancing rules**.
+
+1. Selecione **+ Add**. Adicione uma regra de balanceamento com as seguintes configurações (deixe as demais com os valores padrão). Ao configurar a regra use os ícones informativos para aprender sobre cada configuração. Quando terminar clique em **Save**.
 
     | Setting | Value |
     | --- | --- |
@@ -163,64 +164,64 @@ In this task, you implement an Azure Load Balancer in front of the two Azure vir
     | Enable Floating IP | **Disabled** |
     | Outbound source network address translation (SNAT) | **Recommended** |
 
-1. Select **Frontend IP configuration** from the Load Balancer page. Copy the public IP address.
+1. Selecione **Frontend IP configuration** na página do Load Balancer. Copie o endereço IP público.
 
-1. Open another browser tab and navigate to the IP address. Verify that the browser window displays the message **Hello World from az104-06-vm0** or **Hello World from az104-06-vm1**.
+1. Abra outra aba do navegador e navegue até o endereço IP. Verifique que a janela do navegador exibe a mensagem **Hello World from az104-06-vm0** ou **Hello World from az104-06-vm1**.
 
-1. Refresh the window to verify the message changes to the other virtual machine. This demonstrates the load balancer rotating through the virtual machines.
+1. Atualize a janela para verificar se a mensagem alterna para a outra máquina virtual. Isso demonstra o load balancer rotacionando entre as máquinas virtuais.
 
-    > **Note**: You may need to refresh more than once or open a new browser window in InPrivate mode.
+    > **Observação**: Pode ser necessário atualizar mais de uma vez ou abrir uma nova janela do navegador em modo InPrivate.
 
-## Task 3: Configure an Azure Application Gateway
+## Tarefa 3: Configurar um Azure Application Gateway
 
-In this task, you implement an Azure Application Gateway in front of two Azure virtual machines. An Application Gateway provides layer 7 load balancing, Web Application Firewall (WAF), SSL termination, and end-to-end encryption to the resources defined in the backend pool. The Application Gateway routes images to one virtual machine and videos to the other virtual machine.
+Nesta tarefa, você implementa um Azure Application Gateway na frente de duas máquinas virtuais do Azure. Um Application Gateway fornece balanceamento de carga na camada 7, Web Application Firewall (WAF), terminação SSL e criptografia de ponta a ponta para os recursos definidos no backend pool. O Application Gateway roteia imagens para uma máquina virtual e vídeos para a outra máquina virtual.
 
-## Architecture diagram - Application Gateway
+## Diagrama de arquitetura - Application Gateway
 
->**Note**: This Application Gateway is working in the same virtual network as the Load Balancer. This may not be typical in a production environment.
+>**Observação**: Este Application Gateway está funcionando na mesma rede virtual que o Load Balancer. Isso pode não ser típico em um ambiente de produção.
 
 ![Diagram of the lab tasks.](../media/az104-lab06-gw-architecture.png)
 
-1. In the Azure portal, search and select `Virtual networks`.
+1. No Azure portal, pesquise e selecione `Virtual networks`.
 
-1. On the **Virtual networks** blade, in the list of virtual networks, click **az104-06-vnet1**.
+1. No bloco **Virtual networks**, na lista de redes virtuais, clique em **az104-06-vnet1**.
 
-1. On the **az104-06-vnet1** virtual network blade, in the **Settings** section, click **Subnets**, and then click **+ Subnet**.
+1. No bloco da rede virtual **az104-06-vnet1**, na seção **Settings**, clique em **Subnets**, e então clique em **+ Subnet**.
 
-1. Add a subnet with the following settings (leave others with their default values).
+1. Adicione uma sub-rede com as seguintes configurações (deixe as demais com os valores padrão).
 
     | Setting | Value |
     | --- | --- |
     | Name | `subnet-appgw` |
     | Starting address| `10.60.3.224` |
-    | Size | `/27` - Ensure the **starting address** is still **10.60.3.224**|
+    | Size | `/27` - Certifique-se de que o **starting address** ainda é **10.60.3.224**|
 
-1. In the **Private subnet** section, leave **Enable private subnet (no default outbound access)** checked. 
+1. Na seção **Private subnet**, deixe **Enable private subnet (no default outbound access)** marcada.
 
-1. Click **Add**.
+1. Clique em **Add**.
 
-    > **Note**: This subnet will be used by the Azure Application Gateway. The Application Gateway requires a dedicated subnet of /27 or larger size.
+    > **Observação**: Esta sub-rede será usada pelo Azure Application Gateway. O Application Gateway requer uma sub-rede dedicada de tamanho /27 ou maior.
 
-1. In the Azure portal, search and select `Application gateways` and, on the **Application gateways** blade, click **+ Create**.
+1. No Azure portal, pesquise e selecione `Application gateways` e, no bloco **Application gateways**, clique em **+ Create**.
 
-1. On the **Basics** tab, specify the following settings (leave others with their default values):
+1. Na aba **Basics**, especifique as seguintes configurações (deixe as demais com os valores padrão):
 
     | Setting | Value |
     | --- | --- |
-    | Subscription | your Azure subscription |
+    | Subscription | sua assinatura do Azure |
     | Resource group | `az104-rg6` |
     | Application gateway name | `az104-appgw` |
-    | Region | The **same** Azure region that you used in Task 1 |
+    | Region | A **mesma** região do Azure que você usou na Tarefa 1 |
     | Tier | **Standard V2** |
     | Enable autoscaling | **No** |
     | Instance count | `2` |
     | IP address type | **IPv4 only**|
-    | HTTP2 | **Disabled** 
-    | FIPS mode 140-2 | leave default|
+    | HTTP2 | **Disabled**
+    | FIPS mode 140-2 | deixe padrão|
     | Virtual network | **az104-06-vnet1** |
     | Subnet | **subnet-appgw (10.60.3.224/27)** |
 
-1. Click **Next : Frontends >** and specify the following settings (leave others with their default values). When complete, click **OK**.
+1. Clique em **Next : Frontends >** e especifique as seguintes configurações (deixe as demais com os valores padrão). Quando concluído, clique **OK**.
 
     | Setting | Value |
     | --- | --- |
@@ -229,9 +230,9 @@ In this task, you implement an Azure Application Gateway in front of two Azure v
     | Name | `az104-gwpip` |
     | Availability zone | **ZoneRedundant** |
 
-    >**Note:** The Application Gateway can have both a public and private IP address.
- 
-1. Click **Next : Backends >** and then **Add a backend pool**. Specify the following settings (leave others with their default values). When completed click **Add**.
+    >**Observação:** O Application Gateway pode ter tanto um endereço IP público quanto privado.
+
+1. Clique em **Next : Backends >** e então **Add a backend pool**. Especifique as seguintes configurações (deixe as demais com os valores padrão). Quando concluído clique **Add**.
 
     | Setting | Value |
     | --- | --- |
@@ -240,7 +241,7 @@ In this task, you implement an Azure Application Gateway in front of two Azure v
     | Virtual machine | **az104-06-nic1 (10.60.1.4)** |
     | Virtual machine | **az104-06-nic2 (10.60.2.4)** |
 
-1. Click **Add a backend pool**. This is the backend pool for **images**. Specify the following settings (leave others with their default values). When completed click **Add**.
+1. Clique em **Add a backend pool**. Este é o backend pool para **images**. Especifique as seguintes configurações (deixe as demais com os valores padrão). Quando concluído clique **Add**.
 
     | Setting | Value |
     | --- | --- |
@@ -248,7 +249,7 @@ In this task, you implement an Azure Application Gateway in front of two Azure v
     | Add backend pool without targets | **No** |
     | Virtual machine | **az104-06-nic1 (10.60.1.4)** |
 
-1. Click **Add a backend pool**. This is the backend pool for **video**. Specify the following settings (leave others with their default values). When completed click **Add**.
+1. Clique em **Add a backend pool**. Este é o backend pool para **video**. Especifique as seguintes configurações (deixe as demais com os valores padrão). Quando concluído clique **Add**.
 
     | Setting | Value |
     | --- | --- |
@@ -256,7 +257,7 @@ In this task, you implement an Azure Application Gateway in front of two Azure v
     | Add backend pool without targets | **No** |
     | Virtual machine | **az104-06-nic2 (10.60.2.4)** |
 
-1. Select **Next : Configuration >** and then **Add a routing rule**. Complete the information.
+1. Selecione **Next : Configuration >** e então **Add a routing rule**. Complete as informações.
 
     | Setting | Value |
     | --- | --- |
@@ -268,18 +269,18 @@ In this task, you implement an Azure Application Gateway in front of two Azure v
     | Port | `80` |
     | Listener type | **Basic** |
 
-1. Move to the **Backend targets** tab. Select **Add** after completing the basic information.
+1. Vá para a aba **Backend targets**. Selecione **Add** após completar as informações básicas.
 
    | Setting | Value |
     | --- | --- |
     | Backend target | `az104-appgwbe` |
     | Backend settings | `az104-http` (create new) |
 
-   >**Note:** Take a minute to read the information about **Cookie-based affinity** and **Connection draining**.
+   >**Observação:** Tire um minuto para ler as informações sobre **Cookie-based affinity** e **Connection draining**.
 
-1. In the **Path-based routing** section, select **Add multiple targets to create a path-based rule**. You will create two rules. Click **Add** after the first rule and then **Add** after the second rule. 
+1. Na seção **Path-based routing**, selecione **Add multiple targets to create a path-based rule**. Você criará duas regras. Clique em **Add** após a primeira regra e então **Add** após a segunda regra.
 
-    **Rule - routing to the images backend**
+    **Regra - roteando para o backend de images**
 
     | Setting | Value |
     | --- | --- |
@@ -288,7 +289,7 @@ In this task, you implement an Azure Application Gateway in front of two Azure v
     | Backend settings | **az104-http** |
     | Backend target | `az104-imagebe` |
 
-    **Rule - routing to the videos backend**
+    **Regra - roteando para o backend de videos**
 
     | Setting | Value |
     | --- | --- |
@@ -297,59 +298,59 @@ In this task, you implement an Azure Application Gateway in front of two Azure v
     | Backend settings | **az104-http** |
     | Backend target | `az104-videobe` |
 
-1. Be sure to check your changes, then select **Next : Tags >**. No changes are needed.
+1. Certifique-se de verificar suas alterações, então selecione **Next : Tags >**. Nenhuma alteração é necessária.
 
-1. Select **Next : Review + create >** and then click **Create**.
+1. Selecione **Next : Review + create >** e então clique **Create**.
 
-    > **Note**: Wait for the Application Gateway instance to be created. This will take approximately 5-10 minutes. While you wait consider reviewing some of the self-paced training links at the end of this page.
+    > **Observação**: Aguarde a criação da instância do Application Gateway. Isso levará aproximadamente 5-10 minutos. Enquanto aguarda, considere revisar alguns dos links de treinamento autodidata no final desta página.
 
-1. After the application gateway deploys, search for and select **az104-appgw**.
+1. Após o deployment do application gateway, pesquise e selecione **az104-appgw**.
 
-1. In the **Application gateway** resource, in the **Monitoring** section, select **Backend health**.
+1. No recurso **Application gateway**, na seção **Monitoring**, selecione **Backend health**.
 
-1. Ensure both servers in the backend pool display **Healthy**.
+1. Garanta que ambos os servidores no backend pool exibam **Healthy**.
 
-1. On the **Overview** blade, copy the value of the **Frontend public IP address**.
+1. No bloco **Overview**, copie o valor do **Frontend public IP address**.
 
-1. Start another browser window and test this URL - `http://<frontend ip address>/image/`.
+1. Abra outra janela do navegador e teste esta URL - `http://<frontend ip address>/image/`.
 
-1. Verify you are directed to the image server (vm1).
+1. Verifique que você é direcionado para o servidor de imagens (vm1).
 
-1. Start another browser window and test this URL - `http://<frontend ip address>/video/`.
+1. Abra outra janela do navegador e teste esta URL - `http://<frontend ip address>/video/`.
 
-1. Verify you are directed to the video server (vm2).
+1. Verifique que você é direcionado para o servidor de vídeo (vm2).
 
-> **Note**: You may need to refresh more than once or open a new browser window in InPrivate mode.
+> **Observação**: Pode ser necessário atualizar mais de uma vez ou abrir uma nova janela do navegador em modo InPrivate.
 
-## Cleanup your resources
+## Remova seus recursos
 
-If you are working with **your own subscription** take a minute to delete the lab resources. This will ensure resources are freed up and cost is minimized. The easiest way to delete the lab resources is to delete the lab resource group. 
+Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e que o custo seja minimizado. A maneira mais simples de excluir os recursos do laboratório é excluir o resource group do laboratório.
 
-+ In the Azure portal, select the resource group, select **Delete the resource group**, **Enter resource group name**, and then click **Delete**. When the second confirmation dialog appears, click Delete again.
-+ Using Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
-+ Using the CLI, `az group delete --name resourceGroupName`.
++ No Azure portal, selecione o resource group, selecione **Delete the resource group**, **Enter resource group name**, e então clique em **Delete**. Quando o segundo diálogo de confirmação aparecer, clique em Delete novamente.
++ Usando o Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
++ Usando o CLI, `az group delete --name resourceGroupName`.
 
-## Extend your learning with Copilot
+## Amplie seu aprendizado com o Copilot
 
-Copilot can assist you in learning how to use the Azure scripting tools. Copilot can also assist in areas not covered in the lab or where you need more information. Open an Edge browser and choose Copilot (top right) or navigate to *copilot.microsoft.com*. Take a few minutes to try these prompts.
+O Copilot pode ajudar você a aprender como usar as ferramentas de script do Azure. O Copilot também pode ajudar em áreas não cobertas no laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
 
-+ Compare and contrast the Azure Load Balancer with the Azure Application Gateway. Help me decide in which scenarios I should use each product.
-+ What tools are available to troubleshoot connections to an Azure Load Balancer? 
-+ What are the basic steps for configuring the Azure Application Gateway? Provide a high-level checklist. 
-+ Create a table highlighting three Azure load balancing solutions. For each solution show supported protocols, routing policies, session affinity, and TLS offloading.
-  
-## Learn more with self-paced training
++ Compare e contraste o Azure Load Balancer com o Azure Application Gateway. Ajude-me a decidir em quais cenários devo usar cada produto.
++ Quais ferramentas estão disponíveis para solucionar problemas de conexões a um Azure Load Balancer?
++ Quais são os passos básicos para configurar o Azure Application Gateway? Forneça um checklist em alto nível.
++ Crie uma tabela destacando três soluções de balanceamento de carga do Azure. Para cada solução mostre protocolos suportados, políticas de roteamento, afinidade de sessão e offloading de TLS.
 
-+ [Introduction to Azure Load Balancer](https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/). This module explains what Azure Load Balancer does, how it works, and when you should choose to use Load Balancer as a solution to meet your organization's needs.
-+ [Introduction to Azure Application Gateway](https://learn.microsoft.com/training/modules/intro-to-azure-application-gateway/). This module explains what Azure Application Gateway does, how it works, and when you should choose to use Application Gateway as a solution to meet your organization's needs.
+## Saiba mais com treinamento autodidata
 
-## Key takeaways
++ [Introduction to Azure Load Balancer](https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/). Este módulo explica o que o Azure Load Balancer faz, como funciona e quando você deve escolher usar o Load Balancer como solução para atender às necessidades da sua organização.
++ [Introduction to Azure Application Gateway](https://learn.microsoft.com/training/modules/intro-to-azure-application-gateway/). Este módulo explica o que o Azure Application Gateway faz, como funciona e quando você deve escolher usar o Application Gateway como solução para atender às necessidades da sua organização.
 
-Congratulations on completing the lab. Here are the key points for this lab.
+## Principais conclusões
 
-+ Azure Load Balancer is an excellent choice for distributing network traffic across multiple virtual machines at the transport layer (OSI layer 4 - TCP and UDP).
-+ Public Load Balancers are used to load balance internet traffic to your VMs. An internal (or private) load balancer is used where private IPs are needed at the frontend only.
-+ The Basic load balancer is for small-scale applications that don't need high availability or redundancy. The Standard load balancer is for high performance and ultra-low latency.
-+ Azure Application Gateway is a web traffic (OSI layer 7) load balancer that enables you to manage traffic to your web applications.
-+ The Application Gateway Standard tier offers all the L7 functionality, including load balancing, The WAF tier adds a firewall to check for malicious traffic.
-+ An Application Gateway can make routing decisions based on additional attributes of an HTTP request, for example URI path or host headers.
+Parabéns por concluir o laboratório. Aqui estão os pontos principais deste laboratório.
+
++ Azure Load Balancer é uma excelente opção para distribuir tráfego de rede entre múltiplas máquinas virtuais na camada de transporte (camada 4 do OSI - TCP e UDP).
++ Load Balancers públicos são usados para balancear o tráfego da internet para suas VMs. Um load balancer interno (ou privado) é usado quando são necessários IPs privados no frontend apenas.
++ O Basic load balancer é para aplicações de pequena escala que não precisam de alta disponibilidade ou redundância. O Standard load balancer é para alto desempenho e latência ultrabaixa.
++ Azure Application Gateway é um balanceador de carga para tráfego web (camada 7 do OSI) que permite gerenciar o tráfego para suas aplicações web.
++ A camada Standard do Application Gateway oferece toda a funcionalidade L7, incluindo balanceamento de carga. A camada WAF adiciona um firewall para verificar tráfego malicioso.
++ Um Application Gateway pode tomar decisões de roteamento com base em atributos adicionais de uma requisição HTTP, por exemplo URI path ou host headers.

@@ -1,27 +1,28 @@
 ---
 demo:
-    title: 'Demonstration Instructions'
-    module: 'All'
+    title: 'Instruções de Demonstração'
+    module: 'Todos'
+layout: default
 ---
 
-# Purpose
+# Propósito
 
-This directory provides instructor demonstrations for the AZ-104 Azure Administrator course. **It is not intended for you to do every demonstration. Pick the ones most applicable to your audience.**
+Este diretório fornece demonstrações para instrutores do curso AZ-104 Azure Administrator. **Não se destina a que você faça todas as demonstrações. Escolha as que forem mais aplicáveis ao seu público.**
 
-# Things to think about
+# Pontos a considerar
 
-- Most areas have a demonstration. Take the time to work through each one and decide which to use. Some of the demonstrations are simple show and tell walk-throughs of the Azure portal; others require scripting skills.
+- A maioria das áreas tem uma demonstração. Reserve um tempo para percorrer cada uma e decidir quais usar. Algumas demonstrações são simples apresentações e walkthroughs do Azure portal; outras exigem habilidades de script.
 
-- Consider having the students follow along as you do the demonstration or have one of the students "drive" and coach them through the steps.
+- Considere fazer com que os alunos acompanhem enquanto você realiza a demonstração ou que um dos alunos "assuma o controle" e você os oriente pelos passos.
 
-- Consider doing the demonstration first and then using the slides to answer questions and ensure everything is covered.
+- Considere fazer a demonstração primeiro e, em seguida, usar os slides para responder perguntas e garantir que tudo seja coberto.
 
-- Consider the overlap with the formal labs and make the best use of your time.
+- Considere a sobreposição com os laboratórios formais e faça o melhor uso do seu tempo.
 
-- These demonstrations are provided for an instructor with Azure administration experience. The steps are at a higher level than the course labs that students will perform.
+- Essas demonstrações são fornecidas para um instrutor com experiência em administração do Azure. Os passos estão em um nível mais alto do que os laboratórios do curso que os alunos irão executar.
 
-- These demonstrations provide a minimal set of features to show your students. As time permits feel free to add, show, and discuss more things.
+- Essas demonstrações fornecem um conjunto mínimo de recursos para mostrar aos seus alunos. Conforme o tempo permitir, sinta-se à vontade para adicionar, mostrar e discutir mais coisas.
 
-- The *Summary and Resources* page identifies where Learn sandboxes are available. Consider using a sandbox to walk students through the steps.
+- A página *Resumo e Recursos* identifica onde os Learn sandboxes estão disponíveis. Considere usar um sandbox para guiar os alunos pelos passos.
 
-- If you don't have a demonstration environment consider using the Tutorial and QuickStart pages that are provided. 
+- Se você não tiver um ambiente de demonstração, considere usar as páginas Tutorial e QuickStart que são fornecidas.
