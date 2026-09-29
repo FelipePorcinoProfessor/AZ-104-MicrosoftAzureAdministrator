@@ -19,34 +19,30 @@ Nesta demonstração, exploraremos as identidades do Entra ID.
 
 **Referência**: [Criar um grupo básico e adicionar membros](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal#create-a-basic-group-and-add-members)
 
-**Observação:** Dependendo da sua assinatura, nem todas as áreas da blade Microsoft Entra ID estarão disponíveis.
+**Observação:** Dependendo da sua assinatura, nem todas as áreas da página (blade) Microsoft Entra ID estarão disponíveis.
 
 **Revise informações de licença e domínio**
 
-1.  Acesse o portal do Azure e navegue até a blade **Microsoft Entra ID**.
+1.  Acesse o portal do Azure e navegue até a página (blade) **Microsoft Entra ID**.
 
-2.  Na blade Overview, revise as **Tenant information**, incluindo licença e domínio primário.
+2.  Na página (blade) **Visão geral (Overview)**, revise as **Informações do locatário (Tenant information)**, incluindo licença e domínio primário.
 
 **Explorar contas de usuário**
 
-1.  Selecione a blade **Users**.
+1.  Selecione a página (blade) **Usuários (Users)**.
 
-2.  Explique as opções para **New user** e **New guest user**.
+2.  Explique as opções para **Novo usuário (New user)** e **Novo usuário convidado (New guest user)**.
 
-3.  Selecione **New user** e discuta as diferenças entre **Create
-    user** e **Invite user**.
+3.  Selecione **Novo usuário (New user)** e discuta as diferenças entre **Criar usuário (Create user)** e **Convidar usuário (Invite user)**.
 
-4.  Crie um **New user** revisando os parâmetros **Identity**, **Groups and
-    roles**, **Settings**, e **Job Info**.
+4.  Crie um **Novo usuário (New user)** revisando os parâmetros **Identidade (Identity)**, **Grupos e funções (Groups and roles)**, **Configurações (Settings)**, e **Informações do cargo (Job Info)**.
 
-5.  Após a criação do usuário, revise **Reset password**, **Delete
-    user**, e **Sign-ins**.
+5.  Após a criação do usuário, revise **Redefinir senha (Reset password)**, **Excluir usuário (Delete user)**, e **Entradas de autenticação (Sign-ins)**.
 
 **Explorar contas de grupo**
 
-1.  Retorne à página **Microsoft Entra ID** e selecione a blade **Groups**.
+1.  Retorne à página (blade) **Microsoft Entra ID** e selecione a página (blade) **Grupos (Groups)**.
 
-2.  Crie um **New group** ou selecione um grupo existente para revisar.
+2.  Crie um **Novo grupo (New group)** ou selecione um grupo existente para revisar.
 
-3.  Revise as informações sobre um grupo, incluindo **Membership
-    type** e **Type**.
+3.  Revise as informações sobre um grupo, incluindo **Tipo de associação (Membership type)** e **Tipo (Type)**.

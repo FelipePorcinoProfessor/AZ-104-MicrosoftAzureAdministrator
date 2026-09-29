@@ -49,80 +49,80 @@ Nesta tarefa, você usará um template para implantar uma virtual machine. A má
 
 1. Pesquise por e selecione `Deploy a custom template`.
 
-1. Na página de implantação personalizada, selecione **Build your own template in the editor**.
+1. Na página de implantação personalizada, selecione Criar seu próprio template no editor (Build your own template in the editor).
 
-1. Na página de edição do template, selecione **Load file**.
+1. Na página de edição do template, selecione Carregar arquivo (Load file).
 
-1. Localize e selecione o arquivo **\\Allfiles\\Lab10\\az104-10-vms-edge-template.json** e selecione **Open**.
+1. Localize e selecione o arquivo **\\Allfiles\\Lab10\\az104-10-vms-edge-template.json** e selecione Abrir (Open).
 
-   > [!NOTE]
+   > [!NOTA]
    > Reserve um momento para revisar o template. Estamos implantando uma virtual network e uma virtual machine para que possamos demonstrar backup e recuperação.
 
-1. **Save** suas alterações.
+1. Salvar (Save) suas alterações.
 
-1. Selecione **Edit parameters** e depois **Load file**.
+1. Selecione Editar parâmetros (Edit parameters) e depois Carregar arquivo (Load file).
 
 1. Carregue e selecione o arquivo **\\Allfiles\\Lab10\\az104-10-vms-edge-parameters.json**.
 
-1. **Save** suas alterações.
+1. Salvar (Save) suas alterações.
 
 1. Use as seguintes informações para preencher os campos da implantação personalizada, deixando todos os outros campos com seus valores padrão:
 
-    | Setting       | Value         |
-    | ---           | ---           |
-    | Subscription  | Your Azure subscription |
-    | Resource group| `az104-rg-region1` (Se necessário, selecione **Create new**) |
-    | Region        | **East US**   |
-    | VM size       | Selecione um tamanho disponível. Use **Standard_D2s_v5** se disponível. |
-    | Username      | **localadmin**   |
-    | Password      | Forneça uma senha complexa |
+    | Configuração | Valor |
+    | --- | --- |
+    | Assinatura (Subscription) | o nome da sua assinatura do Azure (Subscription) |
+    | Grupo de recursos (Resource group) | `az104-rg-region1` (Se necessário, selecione Criar novo (Create new)) |
+    | Região (Region) | **East US** |
+    | Tamanho da VM (VM size) | Selecione um tamanho disponível. Use **Standard_D2s_v5** se disponível. |
+    | Nome de usuário (Username) | **localadmin** |
+    | Senha (Password) | Forneça uma senha complexa |
 
-1. Selecione **Review + Create**, então selecione **Create**.
+1. Selecione Revisar + Criar (Review + Create), então selecione Criar (Create).
 
-    > [!NOTE]
-    > O template fornece três tamanhos de VM atuais. Comece com **Standard_D2s_v5**. Se a implantação falhar porque o tamanho não está disponível ou o Azure não tem capacidade, selecione **Standard_D2s_v6** e reimplante no mesmo resource group. Se necessário, tente novamente com **Standard_D2s_v7**. Se uma nova tentativa falhar porque um recurso existente ou parcialmente implantado causa um conflito, exclua **az104-rg-region1**. Reinicie a Tarefa 1 a partir de **Search for and select Deploy a custom template**, recarregue os arquivos de template e de parâmetros, selecione **Create new** para recriar **az104-rg-region1**, e implante novamente com o tamanho de VM selecionado.
+    > [!NOTA]
+    > O template fornece três tamanhos de VM atuais. Comece com **Standard_D2s_v5**. Se a implantação falhar porque o tamanho não está disponível ou o Azure não tem capacidade, selecione **Standard_D2s_v6** e reimplante no mesmo grupo de recursos. Se necessário, tente novamente com **Standard_D2s_v7**. Se uma nova tentativa falhar porque um recurso existente ou parcialmente implantado causa um conflito, exclua **az104-rg-region1**. Reinicie a Tarefa 1 a partir de Pesquise por e selecione Deploy a custom template, recarregue os arquivos de template e de parâmetros, selecione Criar novo (Create new) para recriar **az104-rg-region1**, e implante novamente com o tamanho de VM selecionado.
 
-    > [!NOTE]
-    > Aguarde a implantação do template e, em seguida, selecione **Go to resource**. Você deverá ter uma virtual machine em uma virtual network.
+    > [!NOTA]
+    > Aguarde a implantação do template e, em seguida, selecione Ir para o recurso (Go to resource). Você deverá ter uma virtual machine em uma virtual network.
 
 ## Tarefa 2: Crie e configure um Recovery Services vault
 
 Nesta tarefa, você criará um Recovery Services vault. Um Recovery Services vault fornece armazenamento para os dados das virtual machines.
 
-1. No Azure portal, pesquise por e selecione `Recovery Services vaults` e, na lâmina **Recovery Services vaults**, clique em **+ Create**.
+1. No Azure portal, pesquise por e selecione `Recovery Services vaults` e, na lâmina Recovery Services vaults, clique em + Criar (+ Create).
 
-1. Na lâmina **Create Recovery Services vault**, especifique as seguintes configurações:
+1. Na lâmina Criar Recovery Services vault (Create Recovery Services vault), especifique as seguintes configurações:
 
-    | Settings | Value |
+    | Configurações | Valor |
     | --- | --- |
-    | Subscription | o nome da sua assinatura do Azure |
-    | Resource group | `az104-rg-region1`  |
-    | Vault Name | `az104-rsv-region1` |
-    | Region | **East US** |
+    | Assinatura (Subscription) | o nome da sua assinatura do Azure (Subscription) |
+    | Grupo de recursos (Resource group) | `az104-rg-region1`  |
+    | Nome do Vault (Vault Name) | `az104-rsv-region1` |
+    | Região (Region) | **East US** |
 
     >**Nota**: Certifique-se de que você especificou a mesma região para a qual implantou as virtual machines na tarefa anterior.
 
     ![Screenshot of the recovery services vault.](../media/az104-lab10-create-rsv.png)
 
-1. Clique em **Review + Create**, verifique se a validação foi bem-sucedida e então clique em **Create**.
+1. Clique em Revisar + Criar (Review + Create), verifique se a validação foi bem-sucedida e então clique em Criar (Create).
 
     >**Nota**: Aguarde a conclusão da implantação. A implantação deve levar alguns minutos.
 
-1. Quando a implantação for concluída, clique em **Go to Resource**.
+1. Quando a implantação for concluída, clique em Ir para o recurso (Go to Resource).
 
-1. Na seção **Settings**, clique em **Properties**.
+1. Na seção Configurações (Settings), clique em Propriedades (Properties).
 
-1. Selecione o link **Update** sob o rótulo **Backup Configuration**.
+1. Selecione o link Atualizar (Update) sob o rótulo Configuração de Backup (Backup Configuration).
 
-1. Na lâmina **Backup Configuration**, revise as opções para **Storage replication type**. Mantenha a configuração padrão **Geo-redundant** e feche a lâmina.
+1. Na lâmina Configuração de Backup (Backup Configuration), revise as opções para Tipo de replicação de armazenamento (Storage replication type). Mantenha a configuração padrão **Geo-redundant** e feche a lâmina.
 
     >**Nota**: Esta configuração só pode ser alterada se não houver itens de backup existentes.
 
     >**Você sabia?** A opção [Cross Region Restore](https://learn.microsoft.com/azure/backup/backup-create-recovery-services-vault#set-cross-region-restore) permite restaurar dados em uma região secundária pareada do Azure.
 
-1. Selecione o link **Update** sob o rótulo **Security Settings > Soft Delete Settings**.
+1. Selecione o link Atualizar (Update) sob o rótulo Configurações de Segurança > Configurações de Soft Delete (Security Settings > Soft Delete Settings).
 
-1. Na lâmina **Soft delete Settings**, verifique que o **Soft delete retention period** é **14** dias e feche a lâmina.
+1. Na lâmina Configurações de Soft Delete (Soft delete Settings), verifique que o Período de retenção de exclusão suave (Soft delete retention period) é **14** dias e feche a lâmina.
 
 >**Você sabia?** O Azure possui dois tipos de vaults: Recovery Services vaults e Backup vaults. A principal diferença está nas fontes de dados que podem ser protegidas. Aprenda mais sobre [as diferenças](https://learn.microsoft.com/answers/questions/405915/what-is-difference-between-recovery-services-vault).
 
@@ -132,48 +132,48 @@ Nesta tarefa, você implementará backup a nível de virtual machine do Azure. C
 
    >**Nota**: Antes de iniciar esta tarefa, certifique-se de que a implantação iniciada na primeira tarefa deste laboratório foi concluída com sucesso.
 
-1. Na lâmina do Recovery Services vault, clique em **Overview**, em seguida clique em **+ Backup**.
+1. Na lâmina do Recovery Services vault, clique em Visão geral (Overview), em seguida clique em + Backup.
 
-1. Na lâmina **Backup Goal**, especifique as seguintes configurações:
+1. Na lâmina Objetivo de Backup (Backup Goal), especifique as seguintes configurações:
 
-    | Settings | Value |
+    | Configurações | Valor |
     | --- | --- |
-    | Where is your workload running? | **Azure** (observe suas outras opções) |
-    | What do you want to backup? | **Virtual machine** (observe suas outras opções)|
+    | Onde sua carga de trabalho está sendo executada? (Where is your workload running?) | **Azure** (observe suas outras opções) |
+    | O que você deseja proteger? (What do you want to backup?) | **Máquina virtual** (Virtual machine) |
 
-1. Selecione **Backup**.
+1. Selecione Fazer backup (Backup).
 
-1. Observe que existem dois **Policy sub types**: **Enhanced** e **Standard**. Revise as opções e selecione **Standard**.
+1. Observe que existem dois Subtipos de política (Policy sub types): **Enhanced** e **Standard**. Revise as opções e selecione **Standard**.
 
-1. Em **Backup policy**, selecione **Create a new policy**.
+1. Em Política de backup (Backup policy), selecione Criar uma nova política (Create a new policy).
 
 1. Defina uma nova política de backup com as seguintes configurações (deixe as demais com os valores padrão):
 
-    | Setting | Value |
+    | Configuração | Valor |
     | ---- | ---- |
-    | Policy name | `az104-backup` |
-    | Frequency | **Daily** |
-    | Time | **12:00 AM** |
-    | Timezone | o nome do seu fuso horário local |
-    | Retain instant recovery snapshot(s) for | **2** Days(s) |
+    | Nome da política (Policy name) | `az104-backup` |
+    | Frequência (Frequency) | **Daily** |
+    | Hora (Time) | **12:00 AM** |
+    | Fuso horário (Timezone) | o nome do seu fuso horário local |
+    | Reter snapshot(s) de recuperação instantânea por (Retain instant recovery snapshot(s) for) | **2** Dias(s) |
 
     ![Screenshot of the backup policy page.](../media/az104-lab10-backup-policy.png)
 
-1. Clique **OK** para criar a política e então, na seção **Virtual Machines**, selecione **Add** (role a página para baixo).
+1. Clique em OK para criar a política e então, na seção Virtual Machines, selecione Adicionar (Add) (role a página para baixo).
 
-1. Na lâmina **Select virtual machines**, selecione **az-104-10-vm0**, clique em **OK**, e então, de volta na lâmina **Backup**, clique em **Enable backup**.
+1. Na lâmina Selecionar virtual machines (Select virtual machines), selecione **az-104-10-vm0**, clique em OK, e então, de volta na lâmina Backup, clique em Habilitar backup (Enable backup).
 
     >**Nota**: Aguarde enquanto o backup é habilitado. Isso deve levar aproximadamente 2 minutos.
 
-1. Após a implantação, selecione **Go to resource**.
+1. Após a implantação, selecione Ir para o recurso (Go to resource).
 
-1. Na seção **Protected items**, clique em **Backup items**, e então clique na entrada **Azure virtual machine**.
+1. Na seção Itens protegidos (Protected items), clique em Itens de backup (Backup items), e então clique na entrada Azure virtual machine.
 
-1. Selecione o link **View details** para **az104-10-vm0**, e revise os valores das entradas **Backup Pre-Check** e **Last Backup Status**.
+1. Selecione o link Ver detalhes (View details) para **az104-10-vm0**, e revise os valores das entradas Pré-verificação de backup (Backup Pre-Check) e Último status do backup (Last Backup Status).
 
     >**Nota:** Observe que o backup está pendente.
 
-1. Selecione **Backup now**, aceite o valor padrão na lista suspensa **Retain Backup Till**, e clique em **OK**.
+1. Selecione Fazer backup agora (Backup now), aceite o valor padrão na lista suspensa Reter backup até (Retain Backup Till), e clique em OK.
 
     >**Nota**: Não espere o backup ser concluído; prossiga para a próxima tarefa.
 
@@ -183,24 +183,24 @@ Nesta tarefa, você implantará uma storage account do Azure. Em seguida, você 
 
 1. No Azure portal, pesquise por e selecione `Storage accounts`.
 
-1. Na página Storage accounts, selecione **Create**.
+1. Na página Storage accounts (Contas de armazenamento), selecione Criar (Create).
 
-1. Use as seguintes informações para definir a storage account, então selecione **Review + create**.
+1. Use as seguintes informações para definir a storage account, então selecione Revisar + criar (Review + create).
 
-    | Settings | Value |
+    | Configurações | Valor |
     | --- | --- |
-    | Subscription          | *Your subscription*    |
-    | Resource group        | **az104-rg-region1**        |
-    | Storage account name  | Forneça um nome globalmente único   |
-    | Region                | **East US**   |
+    | Assinatura (Subscription)          | o nome da sua assinatura |
+    | Grupo de recursos (Resource group)        | **az104-rg-region1**        |
+    | Nome da conta de armazenamento (Storage account name)  | Forneça um nome globalmente único   |
+    | Região (Region)                | **East US**   |
 
-1. Selecione **Create**.
+1. Selecione Criar (Create).
 
     >**Nota**: Aguarde a conclusão da implantação. Deve levar cerca de um minuto.
 
 1. Pesquise e selecione seu Recovery Services vault.
 
-1. Na lâmina **Monitoring**, selecione **Diagnostic Settings** e então selecione **Add diagnostic setting**.
+1. Na lâmina Monitoramento (Monitoring), selecione Configurações de diagnóstico (Diagnostic Settings) e então selecione Adicionar configuração de diagnóstico (Add diagnostic setting).
 
 1. Nomeie a configuração `Logs and Metrics to storage`.
 
@@ -212,58 +212,58 @@ Nesta tarefa, você implantará uma storage account do Azure. Em seguida, você 
     - **Azure Site Recovery Jobs**
     - **Azure Site Recovery Events**
 
-1. Nos detalhes de Destino, marque a opção **Archive to a storage account**.
+1. Nos detalhes de Destino, marque a opção Arquivar em uma conta de armazenamento (Archive to a storage account).
 
-1. No campo de lista suspensa Storage account, selecione a storage account que você implantou nesta tarefa.
+1. No campo de lista suspensa Conta de armazenamento (Storage account), selecione a storage account que você implantou nesta tarefa.
 
-1. Selecione **Save**.
+1. Selecione Salvar (Save).
 
-1. Retorne ao seu Recovery Services vault, na lâmina **Monitoring** selecione **Backup jobs**.
+1. Retorne ao seu Recovery Services vault, na lâmina Monitoramento (Monitoring) selecione Jobs de backup (Backup jobs).
 
 1. Localize a operação de backup para a virtual machine **az104-10-vm0**.
 
-1. **View details** (role para a direita para encontrar o link) do job de backup.
+1. Verifique os detalhes (Ver detalhes / View details) do job de backup (role para a direita para encontrar o link).
 
 ## Tarefa 5: Habilite replicação de virtual machine
 
-1. No Azure portal, pesquise por e selecione `Recovery Services vaults` e, na lâmina **Recovery Services vaults**, clique em **+ Create**.
+1. No Azure portal, pesquise por e selecione `Recovery Services vaults` e, na lâmina Recovery Services vaults, clique em + Criar (+ Create).
 
-1. Na lâmina **Create Recovery Services vault**, especifique as seguintes configurações:
+1. Na lâmina Criar Recovery Services vault (Create Recovery Services vault), especifique as seguintes configurações:
 
-    | Settings | Value |
+    | Configurações | Valor |
     | --- | --- |
-    | Subscription | o nome da sua assinatura do Azure |
-    | Resource group | `az104-rg-region2` (Se necessário, selecione **Create new**) |
-    | Vault Name | `az104-rsv-region2` |
-    | Region | **West US** |
+    | Assinatura (Subscription) | o nome da sua assinatura do Azure (Subscription) |
+    | Grupo de recursos (Resource group) | `az104-rg-region2` (Se necessário, selecione Criar novo (Create new)) |
+    | Nome do Vault (Vault Name) | `az104-rsv-region2` |
+    | Região (Region) | **West US** |
 
     >**Nota**: Certifique-se de especificar uma região **diferente** da virtual machine.
 
-1. Clique em **Review + Create**, verifique se a validação passou e então clique em **Create**.
+1. Clique em Revisar + Criar (Review + Create), verifique se a validação passou e então clique em Criar (Create).
 
     >**Nota**: Aguarde a conclusão da implantação. A implantação deve levar alguns minutos.
 
 1. Pesquise por e selecione a virtual machine `az104-10-vm0`.
 
-1. Na lâmina **Backup + Disaster recovery**, selecione **Disaster recovery**.
+1. Na lâmina Backup + Disaster recovery, selecione Disaster recovery (Recuperação de desastre).
 
-1. Na aba **Basics**, observe o **Target region**.
+1. Na aba Básicos (Basics), observe a Região de destino (Target region).
 
-1. Selecione **Next: Advanced settings**. As seleções de recursos foram feitas para você.
+1. Selecione Avançar: Configurações avançadas (Next: Advanced settings). As seleções de recursos foram feitas para você.
 
-1. Role para baixo e **Create** a automation account.
+1. Role para baixo e Crie a automation account (Create an automation account).
 
    >**Nota:** É importante que as configurações estejam populadas; caso contrário, a validação falhará.
 
-1. Selecione **Review + Start replication** e então **Start replication**.
+1. Selecione Revisar + Iniciar replicação (Review + Start replication) e então Iniciar replicação (Start replication).
 
     >**Nota**: Habilitar a replicação levará entre 10 e 15 minutos. Observe as mensagens de notificação no canto superior direito do portal. Enquanto aguarda, considere revisar os links de treinamento em ritmo próprio no final desta página.
 
-1. Uma vez que a replicação esteja completa, pesquise e localize seu Recovery Services Vault, **az104-rsv-region2**. Pode ser necessário **Refresh** da página.
+1. Uma vez que a replicação esteja completa, pesquise e localize seu Recovery Services Vault, **az104-rsv-region2**. Pode ser necessário Atualizar (Refresh) da página.
 
-1. Na seção **Protected items**, selecione **Replicated items**.
+1. Na seção Itens protegidos (Protected items), selecione Itens replicados (Replicated items).
 
-1. Verifique se a virtual machine está aparecendo como saudável em **replication health**. Observe que o status mostrará a sincronização (iniciando em 0%) e, finalmente, mostrará **Protected** após a sincronização inicial ser concluída.
+1. Verifique se a virtual machine está aparecendo como saudável em integridade de replicação (replication health). Observe que o status mostrará a sincronização (iniciando em 0%) e, finalmente, mostrará Protegido (Protected) após a sincronização inicial ser concluída.
 
    ![Screenshot of the replicated items page.](../media/az104-lab10-replicated-items.png)
 
@@ -273,9 +273,9 @@ Nesta tarefa, você implantará uma storage account do Azure. Em seguida, você 
 
 ## Limpe seus recursos
 
-Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e os custos sejam minimizados. A maneira mais fácil de excluir os recursos do laboratório é excluir o resource group do laboratório.
+Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e os custos sejam minimizados. A maneira mais fácil de excluir os recursos do laboratório é excluir o grupo de recursos do laboratório.
 
-+ No Azure portal, selecione o resource group, selecione **Delete the resource group**, **Enter resource group name**, e então clique em **Delete**. Quando o diálogo **Delete confirmation** aparecer informando que a ação é permanente e não pode ser desfeita, clique em **Delete** novamente.
++ No Azure portal, selecione o grupo de recursos, selecione Excluir o grupo de recursos (Delete the resource group), Digite o nome do grupo de recursos (Enter resource group name), e então clique em Excluir (Delete). Quando o diálogo Confirmação de exclusão (Delete confirmation) aparecer informando que a ação é permanente e não pode ser desfeita, clique em Excluir (Delete) novamente.
 + Usando o Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
 + Usando o CLI, `az group delete --name resourceGroupName`.
 
@@ -284,10 +284,10 @@ Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto 
 ## Amplie seu aprendizado com o Copilot
 O Copilot pode ajudar você a aprender como usar as ferramentas de script do Azure. O Copilot também pode ajudar em áreas não cobertas pelo laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
 
-+ What products does Azure Backup support?
-+ Summarize the steps for backing up and restoring an Azure virtual machine with Azure Backup.
-+ How can I use Azure PowerShell or the CLI to check the status of an Azure Backup job.
-+ Provide at least five best practices for configuring Azure virtual machine backups.
++ Quais produtos o Azure Backup suporta?
++ Resuma os passos para fazer backup e restaurar uma virtual machine do Azure com o Azure Backup.
++ Como posso usar o Azure PowerShell ou o CLI para verificar o status de um job do Azure Backup?
++ Forneça pelo menos cinco práticas recomendadas para configurar backups de virtual machines do Azure.
 
 ## Aprenda mais com treinamentos em ritmo próprio
 

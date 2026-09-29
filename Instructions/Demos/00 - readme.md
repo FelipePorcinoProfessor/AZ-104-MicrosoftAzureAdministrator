@@ -11,7 +11,7 @@ Este diretório fornece demonstrações para instrutores do curso AZ-104 Azure A
 
 # Pontos a considerar
 
-- A maioria das áreas tem uma demonstração. Reserve um tempo para percorrer cada uma e decidir quais usar. Algumas demonstrações são simples apresentações e walkthroughs do Azure portal; outras exigem habilidades de script.
+- A maioria das áreas tem uma demonstração. Reserve um tempo para percorrer cada uma e decidir quais usar. Algumas demonstrações são simples apresentações e orientações passo a passo no portal do Azure; outras exigem habilidades de script.
 
 - Considere fazer com que os alunos acompanhem enquanto você realiza a demonstração ou que um dos alunos "assuma o controle" e você os oriente pelos passos.
 
@@ -23,6 +23,6 @@ Este diretório fornece demonstrações para instrutores do curso AZ-104 Azure A
 
 - Essas demonstrações fornecem um conjunto mínimo de recursos para mostrar aos seus alunos. Conforme o tempo permitir, sinta-se à vontade para adicionar, mostrar e discutir mais coisas.
 
-- A página *Resumo e Recursos* identifica onde os Learn sandboxes estão disponíveis. Considere usar um sandbox para guiar os alunos pelos passos.
+- A página *Resumo e Recursos* indica onde os ambientes sandbox do Microsoft Learn estão disponíveis. Considere usar um desses ambientes para guiar os alunos pelos passos.
 
-- Se você não tiver um ambiente de demonstração, considere usar as páginas Tutorial e QuickStart que são fornecidas.
+- Se você não tiver um ambiente de demonstração, considere usar as páginas de tutorial e Início Rápido (Quickstart) que são fornecidas.

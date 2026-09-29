@@ -8,9 +8,9 @@ layout: default
 
 # 08 - Administrar Azure Virtual Machines
 
-## Demonstração -- Criar Virtual Machines no portal
+## Demonstração -- Criar Máquinas Virtuais (Virtual machines) no portal
 
-Nesta demonstração, criaremos e acessaremos uma Virtual Machine do Azure no portal.
+Nesta demonstração, criaremos e acessaremos uma Máquina Virtual do Azure no portal.
 
 **Referências**
 
@@ -20,23 +20,23 @@ Nesta demonstração, criaremos e acessaremos uma Virtual Machine do Azure no po
 
 [Conectar-se a uma Virtual Machine com Bastion](https://learn.microsoft.com/azure/bastion/tutorial-create-host-portal#connect)
 
-**Criar a virtual machine**
+**Criar a máquina virtual**
 
-**Observação:** Estes passos cobrem apenas alguns parâmetros da virtual machine. Sinta-se à vontade para explorar e abordar outras áreas. Você pode criar uma virtual machine Windows ou Linux, dependendo do seu público.
+**Observação:** Estes passos cobrem apenas alguns parâmetros da máquina virtual. Sinta-se à vontade para explorar e abordar outras áreas. Você pode criar uma máquina virtual Windows ou Linux, dependendo do seu público.
 
-1. Use o Azure portal.
+1. Use o portal do Azure.
 
-1. Pesquise por **Virtual machines**.
+1. Pesquise por **Máquinas Virtuais (Virtual machines)**.
 
-1. Crie uma virtual machine básica. Revise as opções de disponibilidade, imagens e regras de entrada.
+1. Crie uma máquina virtual básica. Revise as opções de disponibilidade, imagens e regras de entrada.
 
 1. Discuta a importância de criar uma conta de administrador segura.
 
-1. Crie a virtual machine e aguarde o recurso ser implantado.
+1. Crie a máquina virtual e aguarde o recurso ser implantado.
 
-**Conectar-se à virtual machine**
+**Conectar-se à máquina virtual**
 
-1. Há várias maneiras de **Conectar-se** à virtual machine.
+1. Há várias maneiras de **conectar-se** à máquina virtual.
 
 1. Para um servidor Windows, você pode usar **RDP**, conforme mostrado no Início rápido.
 
@@ -44,24 +44,24 @@ Nesta demonstração, criaremos e acessaremos uma Virtual Machine do Azure no po
 
 1. Para qualquer um dos servidores, você pode conectar-se com o serviço **Bastion** (Início rápido). Reveja por que o Bastion é preferido em relação ao RDP ou SSH.
 
-## Configurar disponibilidade da Virtual Machine
+## Configurar disponibilidade da Máquina Virtual
 
-Nesta demonstração, exploraremos opções de escalonamento para virtual machines.
+Nesta demonstração, exploraremos opções de escalonamento para Máquinas Virtuais (Virtual machines).
 
 **Referências**
 
 [Criar virtual machines em um scale set usando o Azure portal](https://learn.microsoft.com/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets-portal)
 
-1. Use o Azure Portal.
+1. Use o portal do Azure.
 
-1. Pesquise e selecione **Virtual Machine Scale Sets**.
+1. Pesquise e selecione **Conjuntos de Dimensionamento de Máquinas Virtuais (Virtual Machine Scale Sets)**.
 
-1. Crie um **Virtual Machine Scale Sets**. Revise o propósito dos Virtual Machine Scale Sets. Revise a diferença entre os modos de orquestração **Uniform** e **Flexible**. Explique que sua seleção pode afetar suas opções de escalonamento.
+1. Crie um **Conjunto de Dimensionamento de Máquinas Virtuais (Virtual Machine Scale Set)**. Revise o propósito dos **Conjuntos de Dimensionamento de Máquinas Virtuais (Virtual Machine Scale Sets)**. Revise a diferença entre os modos de orquestração **Uniform** e **Flexible**. Explique que sua seleção pode afetar suas opções de escalonamento.
 
-1. Vá para a guia **Scaling**.
+1. Vá para a guia **Escalonamento (Scaling)**.
 
-1. Reveja como **Manual scale** e **Scale-in policy** são usados.
+1. Revise como **Escalonamento manual (Manual scale)** e **Política de redução (Scale-in policy)** são usados.
 
-1. Altere para uma política de escalonamento **Custom**.
+1. Altere para uma política de escalonamento **Personalizada (Custom)**.
 
-1. Reveja como **CPU threshold (%)** é usado para scale out e scale in das instâncias de virtual machine.
+1. Revise como **Limiar de CPU (%) (CPU threshold (%))** é usado para aumentar (scale out) e reduzir (scale in) o número de instâncias da máquina virtual.

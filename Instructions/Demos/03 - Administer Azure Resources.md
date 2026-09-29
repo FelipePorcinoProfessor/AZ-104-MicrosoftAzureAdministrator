@@ -18,7 +18,7 @@ Ou, você pode usar qualquer outro cenário sugerido nesta página: [Executar ta
 
 1. Acesse o portal e a janela do Copilot.
 
-1. Use um dos prompts sugeridos ou escolha um de sua autoria.
+1. Use uma das instruções sugeridas ou escolha uma de sua autoria.
 
 ## Demonstração -- Azure Portal
 
@@ -32,15 +32,15 @@ Nesta demonstração, exploramos o Azure Portal.
 
 1. Acesse o Azure Portal.
 
-1. Selecione o ícone **Support & Troubleshooting** na barra superior. Revise os links **Support resources**.
+1. Selecione o ícone **Suporte e solução de problemas** (Support & Troubleshooting) na barra superior. Revise os links **Recursos de suporte** (Support resources).
 
-1. Selecione o ícone **Settings** na barra superior. Revise as configurações **Appearance + startup views**.
+1. Selecione o ícone **Configurações** (Settings) na barra superior. Revise as configurações **Aparência + visualizações de inicialização** (Appearance + startup views).
 
-1. Use o menu lateral e selecione **Dashboard**. **Edit** o dashboard usando a **Tile Gallery**. Discuta as opções de personalização.
+1. Use o menu lateral e selecione **Painel** (Dashboard). **Edite** (Edit) o painel usando a **Galeria de Blocos** (Tile Gallery). Discuta as opções de personalização.
 
 1. Mostre como pesquisar e localizar recursos.
 
-1. Use o menu superior esquerdo para localizar **All services**.
+1. Use o menu superior esquerdo para localizar **Todos os serviços** (All services).
 
 1. Se houver tempo, reveja outros recursos.
 
@@ -58,35 +58,35 @@ Nesta demonstração, experimentamos o Cloud Shell.
 
 1.  Clique no ícone **Cloud Shell** na barra superior.
 
-1.  Na página Welcome to the Shell, observe suas seleções para Bash ou PowerShell. Selecione **PowerShell**.
+1.  Na página "Bem-vindo ao Shell" (Welcome to the Shell), observe suas seleções para Bash ou PowerShell. Selecione **PowerShell**.
 
-1.  Explique como o Azure Cloud Shell requer um Azure file share para persistir arquivos. Se necessário, configure o storage share.
+1.  Explique como o Azure Cloud Shell requer um Azure file share para persistir arquivos. Se necessário, configure o compartilhamento de armazenamento.
 
 **Experimente com o Azure PowerShell e o Bash**
 
 1. Certifique-se de que o shell **PowerShell** esteja selecionado e execute alguns comandos. Por exemplo, **Get-AzSubscription** e **Get-AzResourceGroup**.
 
-1. Mostre como o auto-complete funciona. Mostre como limpar a tela, **cls**.
+1. Mostre como o autocompletar funciona. Mostre como limpar a tela, **cls**.
 
 1. Certifique-se de que o shell **Bash** esteja selecionado e execute alguns comandos. Por exemplo, **az account list** e **az resource list**.
 
 1. Pergunte se os alunos têm alguma dúvida sobre o uso dos comandos do PowerShell ou do Bash.
 
-**Experimente o editor do Cloud Shell (opcional)**
+**Experimente o Editor do Cloud Shell (Cloud Editor) (opcional)**
 
-1. Para usar o Cloud Editor, selecione o ícone de **chaves**.
+1. Para usar o Editor do Cloud Shell (Cloud Editor), selecione o ícone de **chaves**.
 
 1. Selecione um arquivo no painel de navegação à esquerda. Por exemplo, **.profile**.
 
-1. Observe na barra superior do editor as opções para Settings (Text Size and Font) e Upload/Download files.
+1. Observe na barra superior do editor as opções para **Configurações** (Tamanho do Texto e Fonte) (Settings (Text Size and Font)) e **Carregar/Baixar arquivos** (Upload/Download files).
 
-1. Observe os três pontos (**\...**) no canto direito para **Save**, **Close Editor**, e **Open File**.
+1. Observe os três pontos (**\...**) no canto direito para **Salvar** (Save), **Fechar Editor** (Close Editor) e **Abrir Arquivo** (Open File).
 
-1. Experimente conforme houver tempo, então **close** o Cloud Editor.
+1. Experimente conforme houver tempo, então **feche** o Editor do Cloud Shell (Cloud Editor).
 
 1. Feche o Cloud Shell.
 
-## Demonstração -- QuickStart Templates
+## Demonstração -- Modelos QuickStart
 
 Nesta demonstração, exploramos os QuickStart Templates.
 
@@ -96,10 +96,10 @@ Nesta demonstração, exploramos os QuickStart Templates.
 
 1. Pergunte aos alunos se há templates específicos de interesse. Caso não, selecione um template. Por exemplo, o template [Implantar uma VM Windows simples com tags](https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/vm-simple-windows/).
 
-1. Explique como o botão **Deploy to Azure** permite implantar o template diretamente pelo Azure Portal.
+1. Explique como o botão **Implantar no Azure** (Deploy to Azure) permite implantar o template diretamente pelo Azure Portal.
 
-1. **Deploy** o template JSON e discuta como você pode editar o template e o arquivo de parâmetros. Revise a finalidade dos arquivos. Se houver tempo, revise a sintaxe.
+1. **Implante** (Deploy) o template JSON e discuta como você pode editar o template e o arquivo de parâmetros. Revise a finalidade dos arquivos. Se houver tempo, revise a sintaxe.
 
-1. Retorne à galeria de exemplos de código e localize um template em Bicep. Por exemplo, [Criar uma Standard Storage Account](https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/storage-account-create/).
+1. Retorne à galeria de exemplos de código e localize um template em Bicep. Por exemplo, [Criar uma Conta de Armazenamento Standard](https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/storage-account-create/).
 
-1. **Deploy** o template Bicep e discuta como você pode editar o template e o arquivo de parâmetros. Se houver tempo, revise a sintaxe.
+1. **Implante** (Deploy) o template Bicep e discuta como você pode editar o template e o arquivo de parâmetros. Se houver tempo, revise a sintaxe.

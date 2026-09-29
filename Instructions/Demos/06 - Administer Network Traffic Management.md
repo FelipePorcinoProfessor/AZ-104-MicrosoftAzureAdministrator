@@ -8,59 +8,59 @@ layout: default
 
 # 06 - Administrar o Gerenciamento de Tráfego de Rede
 
-## Configure Azure Load Balancer
+## Configurar o Azure Load Balancer
 
-Nesta demonstração, aprenderemos como criar um public load balancer.
+Nesta demonstração, aprenderemos como criar um load balancer público.
 
-**Observação:** Esta demonstração requer uma virtual network com pelo menos uma subnet.
+**Observação:** Esta demonstração requer uma rede virtual com pelo menos uma sub-rede.
 
-**Reference**: [Quickstart: Create a public load balancer to load balance VMs using the Azure portal](https://learn.microsoft.com/azure/load-balancer/quickstart-load-balancer-standard-public-portal)
+**Referência**: [Introdução rápida: Criar um Azure Load Balancer público para balancear VMs usando o portal do Azure](https://learn.microsoft.com/azure/load-balancer/quickstart-load-balancer-standard-public-portal)
 
-**Mostrar o recurso help me choose do portal**
+**Mostrar o recurso 'Balanceamento de carga — me ajude a escolher (Load balancing - help me choose)' no portal**
 
-1. Acesse o Azure portal.
+1. Acesse o portal do Azure.
 
-1. Pesquise por e selecione **Load balancing - help me choose**.
+1. Pesquise e selecione **Balanceamento de carga — me ajude a escolher (Load balancing - help me choose)**.
 
 1. Use o assistente para percorrer diferentes cenários.
 
-**Criar um load balancer**
+**Criar um Azure Load Balancer**
 
-1. Continue no Azure portal.
+1. Permaneça no portal do Azure.
 
-1. Pesquise por e selecione **Load balancer**. **Create** um load balancer.
+1. Pesquise e selecione **Azure Load Balancer**. **Criar (Create)** um Azure Load Balancer.
 
-1. Na guia **Basics**, discuta **SKU**, **Type** e **Tier**.
+1. Na guia **Básicos (Basics)**, discuta **SKU**, **Tipo (Type)** e **Camada (Tier)**.
 
-1. Na guia **Frontend IP configuration**, discuta o uso de um public IP address.
+1. Na guia **Configuração de IP de frontend (Frontend IP configuration)**, discuta o uso de um endereço IP público.
 
-1. Na guia **Backend pools**, selecione a virtual network com o intervalo de endereços IP.
+1. Na guia **Pools de backend (Backend pools)**, selecione a Virtual Network (rede virtual) com o intervalo de endereços IP.
 
-1. Na guia **Inbound rules**, crie uma load balancing rule. Discuta parâmetros como **Protocol**, **Ports**, **Health probes** e **Session persistence**.
+1. Na guia **Regras de entrada (Inbound rules)**, crie uma **regra de balanceamento (Load balancing rule)**. Discuta parâmetros como **Protocolo (Protocol)**, **Portas (Ports)**, **Sondas de integridade (Health probes)** e **Persistência de sessão (Session persistence)**.
 
 
-## Configure Azure Application Gateway
+## Configurar o Azure Application Gateway
 
 Nesta demonstração, aprenderemos como criar um Azure Application Gateway.
 
-**Observação**: Para simplificar, crie novas virtual networks e subnets conforme avança na configuração.
+**Observação**: Para simplificar, crie novas redes virtuais e sub-redes conforme avança na configuração.
 
-**Reference**: [Quickstart: Direct web traffic with Azure Application Gateway - Azure portal](https://learn.microsoft.com/azure/application-gateway/quick-create-portal)
+**Referência**: [Introdução rápida: Direcionar tráfego da web com o Azure Application Gateway - portal do Azure](https://learn.microsoft.com/azure/application-gateway/quick-create-portal)
 
 **Criar o Azure Application Gateway**
 
-1. Acesse o Azure portal.
+1. Acesse o portal do Azure.
 
-1. Pesquise por e selecione **Azure Application Gateway**.
+1. Pesquise e selecione **Azure Application Gateway**.
 
-1. **Create** um novo gateway.
+1. **Criar (Create)** um novo gateway.
 
-1. Na guia **Basics**, discuta **Tiers**, **Autoscaling** e **Instance counts**.
+1. Na guia **Básicos (Basics)**, discuta **Camadas (Tiers)**, **Dimensionamento automático (Autoscaling)** e **Contagem de instâncias (Instance counts)**.
 
-1. Na guia **Frontends**, discuta os tipos de IP address.
+1. Na guia **Frontends (Frontends)**, discuta os tipos de endereço IP.
 
-1. Na guia **Backends**, discuta quando usar um backend pool vazio.
+1. Na guia **Backends (Backends)**, discuta quando usar um pool de backend vazio.
 
-1. Na guia **Configuration**, discuta as routing rules. Compare com as load balancer rules.
+1. Na guia **Configuração (Configuration)**, discuta as **regras de roteamento (routing rules)**. Compare com as **regras do Load Balancer (load balancer rules)**.
 
-1. Explique que, após o gateway ser criado, você adicionaria backend targets e faria testes.
+1. Explique que, após o gateway ser criado, você adicionaria **alvos de backend (backend targets)** e realizaria testes.

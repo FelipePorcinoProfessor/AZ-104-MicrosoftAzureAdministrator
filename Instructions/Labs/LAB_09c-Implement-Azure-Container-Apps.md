@@ -1,6 +1,6 @@
 ---
 lab:
-  title: 'Lab 09c: Implementar Azure Container Apps'
+  title: 'Laboratório 09c: Implementar Azure Container Apps'
   module: Administrar opções de computação PaaS
   description: Implementar e implantar Azure Container Apps.
   duration: 15 minutes
@@ -12,7 +12,7 @@ lab:
 layout: default
 ---
 
-# Lab 09c - Implementar Azure Container Apps
+# Laboratório 09c - Implementar Azure Container Apps
 
 ## Introdução do laboratório
 
@@ -28,7 +28,7 @@ Sua organização tem um aplicativo web que é executado em uma máquina virtual
 
 ## Diagrama de arquitetura
 
-![Diagram of the tasks.](../media/az104-lab09b-aca-architecture.png)
+![Diagrama das tarefas.](../media/az104-lab09b-aca-architecture.png)
 
 ## Habilidades do trabalho
 
@@ -41,50 +41,50 @@ Azure Container Apps leva o conceito de um cluster Kubernetes gerenciado um pass
 
 1. No portal do Azure, pesquise por e selecione `Container Apps`.
 
-1. Selecione **+ Create**, no menu suspenso, **Container App**. Observe as outras opções.
+1. Selecione **+ Criar (+ Create)**, no menu suspenso, **App de contêiner (Container App)**. Observe as outras opções.
 
-1. Use as seguintes informações para preencher os detalhes na guia **Basics**.
+1. Use as seguintes informações para preencher os detalhes na guia **Básicos (Basics)**.
 
-    | Setting | Action |
+    | Configuração | Ação |
     |---|---|
-    | Subscription | Selecione sua assinatura do Azure |
-    | Resource group | `az104-rg9` |
-    | Container app name |  `my-app` |
-    | Region    | **East US** |
-    | Container Apps Environment | Selecione **Create new environment** > Defina o nome do ambiente como `my-environment` > **Create** |
+    | Assinatura | Selecione sua assinatura do Azure |
+    | Grupo de recursos | `az104-rg9` |
+    | Nome do Container App |  `my-app` |
+    | Região    | **East US** |
+    | Ambiente do Container Apps | Selecione **Criar novo ambiente (Create new environment)** > Defina o nome do ambiente como `my-environment` > **Criar (Create)** |
 
-1. Clique na guia **Next: Container** e certifique-se de que **Use quickstart image** esteja marcado. Pode ser necessário rolar para cima para visualizar essa configuração.
+1. Clique na guia **Próximo: Contêiner (Next: Container)** e certifique-se de que a opção **Usar imagem de início rápido (Use quickstart image)** esteja marcada. Pode ser necessário rolar para cima para visualizar essa configuração.
 
-1. Certifique-se de que **Quickstart image** esteja definida como **Simple hello world container**.
+1. Certifique-se de que a **Imagem de início rápido (Quickstart image)** esteja definida como **Simple hello world container**.
 
-1. Em **Application ingress settings**, configure as opções de ingress conforme necessário e, em seguida, clique em **Next: Tags**.
+1. Em **Configurações de ingresso do aplicativo (Application ingress settings)**, configure as opções de ingresso conforme necessário e, em seguida, clique em **Próximo: Marcas (Next: Tags)**.
 
-1. Selecione **Review and create** e depois **Create**.
+1. Selecione **Revisar e criar (Review and create)** e depois **Criar (Create)**.
 
-    >**Observação:** Aguarde a implantação do container app. Isso levará alguns minutos.
+    >**Observação:** Aguarde a implantação do app de contêiner. Isso levará alguns minutos.
 
 ## Tarefa 2: Testar e verificar a implantação do Azure Container App
 
-Por padrão, o container app do Azure que você criar aceitará tráfego na porta 80 usando o aplicativo de exemplo Hello World. Azure Container Apps fornecerá um nome DNS para o aplicativo. Copie e navegue até essa URL para garantir que o aplicativo esteja em execução.
+Por padrão, o app de contêiner do Azure que você criar aceitará tráfego na porta 80 usando o aplicativo de exemplo Hello World. Azure Container Apps fornecerá um nome DNS para o aplicativo. Copie e navegue até essa URL para garantir que o aplicativo esteja em execução.
 
-1. Selecione **Go to resource** para visualizar seu novo container app.
+1. Selecione **Ir para o recurso (Go to resource)** para visualizar seu novo app de contêiner.
 
-1. Selecione o link ao lado de *Application URL* para visualizar seu aplicativo.
+1. Selecione o link ao lado de *URL do aplicativo (Application URL)* para visualizar seu aplicativo.
 
-    ![Screenshot of the ACA overview page in the portal.](../media/az104-lab09b-aca-overview.png)
+    ![Captura de tela da página de visão geral do ACA no portal.](../media/az104-lab09b-aca-overview.png)
 
-1. Verifique se você recebe a mensagem **Your container app is running with a Hello World image**.
+1. Verifique se você recebe a mensagem **Seu container app está em execução com uma imagem Hello World**.
 
 ## Limpeza dos seus recursos
 
 Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto para excluir os recursos do laboratório. Isso garantirá que os recursos sejam liberados e que o custo seja minimizado. A maneira mais fácil de excluir os recursos do laboratório é excluir o grupo de recursos do laboratório.
 
-+ No portal do Azure, selecione o grupo de recursos, selecione **Delete the resource group**, **Enter resource group name**, e então clique em **Delete**.
-+ Usando Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
++ No portal do Azure, selecione o grupo de recursos, selecione **Excluir o grupo de recursos (Delete the resource group)**, **Digite o nome do grupo de recursos (Enter resource group name)**, e então clique em **Excluir (Delete)**.
++ Usando o Azure PowerShell, `Remove-AzResourceGroup -Name resourceGroupName`.
 + Usando o CLI, `az group delete --name resourceGroupName`.
 
 ## Amplie seu aprendizado com o Copilot
-O Copilot pode ajudá-lo a aprender como usar as ferramentas de script do Azure. O Copilot também pode ajudar em áreas não cobertas no laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
+O Copilot pode ajudá-lo a aprender como usar as ferramentas de script do Azure. O Copilot também pode ajudar em áreas não cobertas no laboratório ou onde você precisa de mais informações. Abra o navegador Edge e escolha Copilot (canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
 
 + Resuma os passos para criar e configurar um Azure Container App.
 + Compare e contraste Azure Container Apps com Azure Kubernetes Service.
