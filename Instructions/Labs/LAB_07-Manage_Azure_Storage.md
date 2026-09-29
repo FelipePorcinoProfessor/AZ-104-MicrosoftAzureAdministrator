@@ -258,7 +258,7 @@ Nesta tarefa, você criará e configurará Azure File shares. Você usará o Sto
 
     >**Observação:** A storage account agora deve ser acessada apenas a partir da virtual network que você acabou de criar.
 
-1. Selecione o **Explorador de Armazenamento (Storage browser)** e **Atualizar (Refresh)** a página. Navegue até seu file share ou conteúdo de blob.
+1. Selecione o **Navegador de Armazenamento (Storage browser)** e **Atualizar (Refresh)** a página. Navegue até seu file share ou conteúdo de blob.
 
     >**Observação:** Você deverá receber uma mensagem *não autorizado a executar esta operação (not authorized to perform this operation)*. Você não está se conectando a partir da virtual network. Pode levar alguns minutos para que isso entre em vigor. Você ainda pode conseguir visualizar o file share, mas não os arquivos ou blobs na storage account.
 
