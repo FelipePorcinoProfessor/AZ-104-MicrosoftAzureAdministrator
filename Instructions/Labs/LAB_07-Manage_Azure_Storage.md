@@ -227,22 +227,22 @@ Nesta tarefa, você criará e configurará Azure File shares. Você usará o Sto
 
 ### Restringir o acesso de rede à storage account
 
-1. No portal, pesquise e selecione **Fundação de rede (Network foundation)**.
+1. No portal, pesquise e selecione **Redes Virtuais**.
 
-1. Em `Virtual networks` clique **Criar (Create)**. Na guia **Básicos (Basics)**, defina **Grupo de recursos (Resource group)** como `az104-rg7` e dê à virtual network um **nome (name)**, `vnet1`.
+1. Em `Redes Virtuais` clique **Criar (Create)**. Na guia **Básicos (Basics)**, defina **Grupo de recursos (Resource group)** como `az104-rg7` e dê à virtual network um **nome (name)**, `vnet1`.
 
 1. Aceite os padrões para os demais parâmetros, selecione **Revisar + criar (Review + create)**, e então **Criar (Create)**.
 
 1. Aguarde a virtual network ser implantada, e então selecione **Ir para o recurso (Go to resource)**.
 
-1. Na seção **Configurações (Settings)**, selecione a lâmina **Endpoints de serviço (Service endpoints)**.
-    + Selecione **Adicionar (Add)**.
+1. Na seção **Configurações (Settings)**, selecione a lâmina **Pontos de extremidade de serviço (Service endpoints)**.
+    + Selecione **Adicionar pontos de extremidade de serviço (Add)**.
     + No drop-down **Serviço (Service)** selecione **Microsoft.Storage**.
     + Deixe o drop-down **Políticas de endpoint de serviço (Service endpoint policies)** em seu padrão de **0 selecionados (0 selected)**.
     + No drop-down **Sub-redes (Subnets)** marque a sub-rede **Default**.
     + Clique **Adicionar (Add)** para salvar suas alterações.
 
-1. Retorne para sua storage account.
+1. Retorne para sua **Conta de Armazenamento**.
 
 1. Na lâmina **Segurança + rede (Security + networking)**, selecione **Rede (Networking)**.
 
