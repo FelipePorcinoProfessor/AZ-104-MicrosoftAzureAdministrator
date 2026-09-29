@@ -133,7 +133,7 @@ Nesta tarefa, você criará um container de blob e fará upload de uma imagem. B
 
 1. No menu à esquerda da storage account, em **Configurações (Settings)**, selecione **Configuração (Configuration)** e configure **Permitir acesso por chave da conta de armazenamento (Allow storage account key access)** para **Habilitado (Enabled)**, em seguida clique **Salvar (Save)**.
 
-1. Em seguida, navegue até **Controle de Acesso (IAM) (Access Control (IAM))**, clique **Adicionar atribuição de função (Add role assignment)**, selecione a função **Storage Blob Data Contributor**, e atribua-a à sua conta de usuário, então clique **Revisar + atribuir (Review + assign)**.
+1. Em seguida, navegue até **Controle de Acesso (IAM) (Access Control (IAM))**, clique **Adicionar atribuição de função (Add role assignment)**, selecione a função **Colaborador de Dados do Storage Blob**, e atribua-a à sua conta de usuário, então clique **Revisar + atribuir (Review + assign)**.
 
 1. Em seguida, faça os mesmos passos do passo anterior para atribuir a função **Storage File Data Privileged Contributor**.
 
