@@ -23,6 +23,8 @@ jobs:
       - name: Configurar Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Configurar Ruby
         uses: ruby/setup-ruby@v1
         with:
