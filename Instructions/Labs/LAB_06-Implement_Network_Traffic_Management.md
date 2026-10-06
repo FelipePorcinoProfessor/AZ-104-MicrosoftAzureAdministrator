@@ -83,7 +83,7 @@ Nesta tarefa, você implementa um Azure Balanceador de carga na frente de duas m
 
 ![Diagrama das tarefas do laboratório.](../media/az104-lab06-lb-architecture.png)
 
-1. No Azure portal, pesquise e selecione `Balanceador de cargas`, então clique em **+ Criar (+ Create)** e selecione **Standard Balanceador de carga** no menu suspenso. No bloco **Balanceador de cargas (Balanceadores de carga)**, clique em **+ Criar (+ Create)**.
+1. No Azure portal, pesquise e selecione `Balanceador de cargas`, então clique em **+ Criar (+ Create)** e selecione **Standard Balanceador de carga** no menu suspenso. No bloco **Load balancers (Balanceadores de carga)**, clique em **+ Criar (+ Create)**.
 
 1. Crie um Balanceador de carga com as seguintes configurações (deixe as demais com os valores padrão) então clique em **Próximo : Configuração de IP de front-end (Next : Frontend IP configuration)**:
 
