@@ -37,7 +37,7 @@ Sua organização possui um site público. Você precisa balancear as solicitaç
 
 Nesta tarefa, você usará um template para implantar uma rede virtual, um network security group e três máquinas virtuais.
 
-1. Baixe os arquivos do laboratório + [\\Allfiles\\Lab06]([https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/](https://github.com/FelipePorcinoProfessor/AZ-104-MicrosoftAzureAdministrator/tree/master/Allfiles/Labs/06)).  (template e parâmetros).
+1. Baixe os arquivos do laboratório + [\\Allfiles\\Lab06](https://github.com/FelipePorcinoProfessor/AZ-104-MicrosoftAzureAdministrator/tree/master/Allfiles/Labs/06).  (template e parâmetros).
 
 1. Entre no **Azure portal** - `https://portal.azure.com`.
 
