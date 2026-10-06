@@ -2,13 +2,13 @@
 lab:
   title: 'Laboratório 06: Implementar Gerenciamento de Tráfego de Rede'
   module: Administrar Gerenciamento de Tráfego de Rede
-  description: Criar e configurar Azure Load Balancer e Application Gateway.
+  description: Criar e configurar Azure Balanceador de carga e Application Gateway.
   duration: 50 minutes
   level: 400
   islab: true
   primarytopics:
   - Azure
-  - Azure Load Balancer
+  - Azure Balanceador de carga
   - Azure Application Gateway
 layout: default
 ---
@@ -17,7 +17,7 @@ layout: default
 
 ## Introdução ao laboratório
 
-Neste laboratório, você aprenderá como configurar e testar um Load Balancer público e um Application Gateway.
+Neste laboratório, você aprenderá como configurar e testar um Balanceador de carga público e um Application Gateway.
 
 Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode afetar a disponibilidade de recursos neste laboratório. Você pode alterar a região, mas os passos estão escritos usando **East US**.
 
@@ -25,12 +25,12 @@ Este laboratório requer uma assinatura do Azure. O tipo da sua assinatura pode 
 
 ## Cenário do laboratório
 
-Sua organização possui um site público. Você precisa balancear as solicitações públicas de entrada entre diferentes máquinas virtuais. Você também precisa fornecer imagens e vídeos a partir de máquinas virtuais diferentes. Você pretende implementar um Azure Load Balancer e um Azure Application Gateway. Todos os recursos estão na mesma região.
+Sua organização possui um site público. Você precisa balancear as solicitações públicas de entrada entre diferentes máquinas virtuais. Você também precisa fornecer imagens e vídeos a partir de máquinas virtuais diferentes. Você pretende implementar um Azure Balanceador de carga e um Azure Application Gateway. Todos os recursos estão na mesma região.
 
 ## Habilidades do trabalho
 
 + Tarefa 1: Usar um template para provisionar uma infraestrutura.
-+ Tarefa 2: Configurar um Azure Load Balancer.
++ Tarefa 2: Configurar um Azure Balanceador de carga.
 + Tarefa 3: Configurar um Azure Application Gateway.
 
 ## Tarefa 1: Usar um template para provisionar uma infraestrutura
@@ -73,19 +73,19 @@ Nesta tarefa, você usará um template para implantar uma rede virtual, um netwo
 
     >**Observação**: Reveja os recursos que estão sendo implantados. Haverá uma rede virtual com três sub-redes. Cada sub-rede terá uma máquina virtual.
 
-## Tarefa 2: Configurar um Azure Load Balancer
+## Tarefa 2: Configurar um Azure Balanceador de carga
 
-Nesta tarefa, você implementa um Azure Load Balancer na frente de duas máquinas virtuais do Azure na rede virtual. Load Balancers no Azure fornecem conectividade na camada 4 entre recursos, como máquinas virtuais. A configuração do Load Balancer inclui um endereço IP front-end para aceitar conexões, um backend pool e regras que definem como as conexões devem atravessar o load balancer.
+Nesta tarefa, você implementa um Azure Balanceador de carga na frente de duas máquinas virtuais do Azure na rede virtual. Balanceador de cargas no Azure fornecem conectividade na camada 4 entre recursos, como máquinas virtuais. A configuração do Balanceador de carga inclui um endereço IP front-end para aceitar conexões, um backend pool e regras que definem como as conexões devem atravessar o Balanceador de carga.
 
-## Diagrama de arquitetura - Load Balancer
+## Diagrama de arquitetura - Balanceador de carga
 
->**Observação**: Observe que o Load Balancer está distribuindo entre duas máquinas virtuais na mesma rede virtual.
+>**Observação**: Observe que o Balanceador de carga está distribuindo entre duas máquinas virtuais na mesma rede virtual.
 
 ![Diagrama das tarefas do laboratório.](../media/az104-lab06-lb-architecture.png)
 
-1. No Azure portal, pesquise e selecione `Load balancers`, então clique em **+ Criar (+ Create)** e selecione **Standard load balancer** no menu suspenso. No bloco **Load balancers (Balanceadores de carga)**, clique em **+ Criar (+ Create)**.
+1. No Azure portal, pesquise e selecione `Balanceador de cargas`, então clique em **+ Criar (+ Create)** e selecione **Standard Balanceador de carga** no menu suspenso. No bloco **Balanceador de cargas (Balanceadores de carga)**, clique em **+ Criar (+ Create)**.
 
-1. Crie um load balancer com as seguintes configurações (deixe as demais com os valores padrão) então clique em **Próximo : Configuração de IP de front-end (Next : Frontend IP configuration)**:
+1. Crie um Balanceador de carga com as seguintes configurações (deixe as demais com os valores padrão) então clique em **Próximo : Configuração de IP de front-end (Next : Frontend IP configuration)**:
 
     | Configuração | Valor |
     | --- | --- |
@@ -97,7 +97,7 @@ Nesta tarefa, você implementa um Azure Load Balancer na frente de duas máquina
     | Tipo (Type) | **Public** |
     | Camada (Tier) | **Regional** |
 
-     ![Captura de tela da página de criação do Load Balancer.](../media/az104-lab06-create-lb1.png)
+     ![Captura de tela da página de criação do Balanceador de carga.](../media/az104-lab06-create-lb1.png)
 
 1. Na aba **Configuração de IP de front-end (Frontend IP configuration)**, clique em **Adicionar uma configuração de IP de front-end (Add a frontend IP configuration)** e use as seguintes configurações:
 
@@ -105,7 +105,7 @@ Nesta tarefa, você implementa um Azure Load Balancer na frente de duas máquina
     | --- | --- |
     | Nome (Name) | `az104-fe` |
     | Tipo de IP (IP type) | IP address |
-    | Gateway Load balancer | None |
+    | Gateway Balanceador de carga | None |
     | Endereço IP público (Public IP address) | Selecione **Criar novo (Create new)** (use as instruções no próximo passo) |
 
 1. No popup **Adicionar um endereço IP público (Add a public IP address)**, use as seguintes configurações antes de clicar em **Salvar (Save)** duas vezes. Quando concluído clique em **Próximo : Pools de backend (Next : Backend pools >)**.
@@ -135,7 +135,7 @@ Nesta tarefa, você implementa um Azure Load Balancer na frente de duas máquina
 
 1. Se tiver tempo, revise as outras abas, então clique em **Revisar + criar (Review + create)**. Garanta que não haja erros de validação, então clique em **Criar (Create)**.
 
-1. Aguarde a implantação do load balancer e então clique em **Ir para o recurso (Go to resource)**.
+1. Aguarde a implantação do Balanceador de carga e então clique em **Ir para o recurso (Go to resource)**.
 
 **Adicione uma regra para determinar como o tráfego de entrada é distribuído**
 
@@ -164,11 +164,11 @@ Nesta tarefa, você implementa um Azure Load Balancer na frente de duas máquina
     | Habilitar IP flutuante (Enable Floating IP) | **Desabilitado (Disabled)** |
     | Tradução de endereço de rede de origem de saída (SNAT) | **Recomendado (Recommended)** |
 
-1. Selecione **Configuração de IP de front-end (Frontend IP configuration)** na página do Load Balancer. Copie o endereço IP público.
+1. Selecione **Configuração de IP de front-end (Frontend IP configuration)** na página do Balanceador de carga. Copie o endereço IP público.
 
 1. Abra outra aba do navegador e navegue até o endereço IP. Verifique que a janela do navegador exibe a mensagem **Hello World from az104-06-vm0** ou **Hello World from az104-06-vm1**.
 
-1. Atualize a janela para verificar se a mensagem alterna para a outra máquina virtual. Isso demonstra o load balancer rotacionando entre as máquinas virtuais.
+1. Atualize a janela para verificar se a mensagem alterna para a outra máquina virtual. Isso demonstra o Balanceador de carga rotacionando entre as máquinas virtuais.
 
     > **Observação**: Pode ser necessário atualizar mais de uma vez ou abrir uma nova janela do navegador em modo InPrivate.
 
@@ -178,7 +178,7 @@ Nesta tarefa, você implementa um Azure Application Gateway na frente de duas m�
 
 ## Diagrama de arquitetura - Application Gateway
 
->**Observação**: Este Application Gateway está funcionando na mesma rede virtual que o Load Balancer. Isso pode não ser típico em um ambiente de produção.
+>**Observação**: Este Application Gateway está funcionando na mesma rede virtual que o Balanceador de carga. Isso pode não ser típico em um ambiente de produção.
 
 ![Diagrama das tarefas do laboratório.](../media/az104-lab06-gw-architecture.png)
 
@@ -334,23 +334,23 @@ Se você estiver trabalhando com **sua própria assinatura**, reserve um minuto 
 
 O Copilot pode ajudar você a aprender como usar as ferramentas de script do Azure. O Copilot também pode ajudar em áreas não cobertas no laboratório ou onde você precisa de mais informações. Abra um navegador Edge e escolha Copilot (canto superior direito) ou navegue até *copilot.microsoft.com*. Reserve alguns minutos para experimentar estes prompts.
 
-+ Compare e contraste o Azure Load Balancer com o Azure Application Gateway. Ajude-me a decidir em quais cenários devo usar cada produto.
-+ Quais ferramentas estão disponíveis para solucionar problemas de conexões a um Azure Load Balancer?
++ Compare e contraste o Azure Balanceador de carga com o Azure Application Gateway. Ajude-me a decidir em quais cenários devo usar cada produto.
++ Quais ferramentas estão disponíveis para solucionar problemas de conexões a um Azure Balanceador de carga?
 + Quais são os passos básicos para configurar o Azure Application Gateway? Forneça uma lista de verificação em alto nível.
 + Crie uma tabela destacando três soluções de balanceamento de carga do Azure. Para cada solução mostre protocolos suportados, políticas de roteamento, afinidade de sessão e offloading de TLS.
 
 ## Saiba mais com treinamento autodidata
 
-+ [Introdução ao Azure Load Balancer](https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/). Este módulo explica o que o Azure Load Balancer faz, como funciona e quando você deve escolher usar o Load Balancer como solução para atender às necessidades da sua organização.
++ [Introdução ao Azure Balanceador de carga](https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/). Este módulo explica o que o Azure Balanceador de carga faz, como funciona e quando você deve escolher usar o Balanceador de carga como solução para atender às necessidades da sua organização.
 + [Introdução ao Azure Application Gateway](https://learn.microsoft.com/training/modules/intro-to-azure-application-gateway/). Este módulo explica o que o Azure Application Gateway faz, como funciona e quando você deve escolher usar o Application Gateway como solução para atender às necessidades da sua organização.
 
 ## Principais conclusões
 
 Parabéns por concluir o laboratório. Aqui estão os pontos principais deste laboratório.
 
-+ Azure Load Balancer é uma excelente opção para distribuir tráfego de rede entre múltiplas máquinas virtuais na camada de transporte (camada 4 do OSI - TCP e UDP).
-+ Load Balancers públicos são usados para balancear o tráfego da internet para suas VMs. Um load balancer interno (ou privado) é usado quando são necessários IPs privados no frontend apenas.
-+ O Basic load balancer é para aplicações de pequena escala que não precisam de alta disponibilidade ou redundância. O Standard load balancer é para alto desempenho e latência ultrabaixa.
++ Azure Balanceador de carga é uma excelente opção para distribuir tráfego de rede entre múltiplas máquinas virtuais na camada de transporte (camada 4 do OSI - TCP e UDP).
++ Balanceador de cargas públicos são usados para balancear o tráfego da internet para suas VMs. Um Balanceador de carga interno (ou privado) é usado quando são necessários IPs privados no frontend apenas.
++ O Basic Balanceador de carga é para aplicações de pequena escala que não precisam de alta disponibilidade ou redundância. O Standard Balanceador de carga é para alto desempenho e latência ultrabaixa.
 + Azure Application Gateway é um balanceador de carga para tráfego web (camada 7 do OSI) que permite gerenciar o tráfego para suas aplicações web.
 + A camada Standard do Application Gateway oferece toda a funcionalidade L7, incluindo balanceamento de carga. A camada WAF adiciona um firewall para verificar tráfego malicioso.
 + Um Application Gateway pode tomar decisões de roteamento com base em atributos adicionais de uma requisição HTTP, por exemplo URI path ou host headers.
