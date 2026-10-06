@@ -184,7 +184,7 @@ Nesta tarefa, você implementa um Azure Application Gateway na frente de duas m�
 
 1. No Azure portal, pesquise e selecione `Virtual networks`.
 
-1. No bloco **Redes virtuais (Virtual networks)**, na lista de redes virtuais, clique em **az104-06-vnet1**.
+1. No bloco **Rede virtual (Virtual networks)**, na lista de redes virtuais, clique em **az104-06-vnet1**.
 
 1. No bloco da rede virtual **az104-06-vnet1**, na seção **Configurações (Settings)**, clique em **Sub-redes (Subnets)**, e então clique em **+ Sub-rede (+ Subnet)**.
 
@@ -202,7 +202,7 @@ Nesta tarefa, você implementa um Azure Application Gateway na frente de duas m�
 
     > **Observação**: Esta sub-rede será usada pelo Azure Application Gateway. O Application Gateway requer uma sub-rede dedicada de tamanho /27 ou maior.
 
-1. No Azure portal, pesquise e selecione `Application gateways` e, no bloco **Application gateways (Gateways de aplicação)**, clique em **+ Criar (+ Create)**.
+1. No Azure portal, pesquise *Balanceamento de carga e entrega de conteúdo* dentro do recurso na barra de pesquisa busque `Gateways de aplicativo` e, no bloco **Application gateways (Gateways de aplicação)**, clique em **+ Criar (+ Create)**.
 
 1. Na aba **Básico (Basics)**, especifique as seguintes configurações (deixe as demais com os valores padrão):
 
