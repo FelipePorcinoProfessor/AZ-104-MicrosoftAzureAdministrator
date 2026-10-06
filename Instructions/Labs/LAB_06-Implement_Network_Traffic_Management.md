@@ -202,7 +202,7 @@ Nesta tarefa, você implementa um Azure Application Gateway na frente de duas m�
 
     > **Observação**: Esta sub-rede será usada pelo Azure Application Gateway. O Application Gateway requer uma sub-rede dedicada de tamanho /27 ou maior.
 
-1. No Azure portal, pesquise *Balanceamento de carga e entrega de conteúdo* dentro do recurso na barra de pesquisa busque `Gateways de aplicativo` e, no bloco **Application gateways (Gateways de aplicação)**, clique em **+ Criar (+ Create)**.
+1. No Azure portal, pesquise *Balanceamento de carga e entrega de conteúdo* dentro do recurso na barra de pesquisa busque `Gateways de aplicativo` e, no bloco **Application gateways (Gateways de aplicação)**, clique em **+ Criar (+ Create) | Application Gateway**.
 
 1. Na aba **Básico (Basics)**, especifique as seguintes configurações (deixe as demais com os valores padrão):
 
