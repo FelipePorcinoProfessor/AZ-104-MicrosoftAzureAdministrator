@@ -166,7 +166,7 @@ Nesta tarefa, você implementa um Azure Balanceador de carga na frente de duas m
 
 1. Selecione **Configuração de IP de front-end (Frontend IP configuration)** na página do Balanceador de carga. Copie o endereço IP público.
 
-1. Abra outra aba do navegador e navegue até o endereço IP. Verifique que a janela do navegador exibe a mensagem **Hello World from az104-06-vm0** ou **Hello World from az104-06-vm1**.
+1. Abra outra aba do navegador e navegue até o endereço IP (se não funcionar com https tente http). Verifique que a janela do navegador exibe a mensagem **Hello World from az104-06-vm0** ou **Hello World from az104-06-vm1**.
 
 1. Atualize a janela para verificar se a mensagem alterna para a outra máquina virtual. Isso demonstra o Balanceador de carga rotacionando entre as máquinas virtuais.
 
