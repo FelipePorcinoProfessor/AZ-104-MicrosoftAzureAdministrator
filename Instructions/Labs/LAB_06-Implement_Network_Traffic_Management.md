@@ -182,7 +182,7 @@ Nesta tarefa, você implementa um Azure Application Gateway na frente de duas m�
 
 ![Diagrama das tarefas do laboratório.](../media/az104-lab06-gw-architecture.png)
 
-1. No Azure portal, pesquise e selecione `Virtual networks`.
+1. No Azure portal, pesquise e selecione `Rede virtual`.
 
 1. No bloco **Rede virtual (Virtual networks)**, na lista de redes virtuais, clique em **az104-06-vnet1**.
 
