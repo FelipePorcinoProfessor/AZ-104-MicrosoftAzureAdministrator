@@ -41,7 +41,7 @@ Nesta tarefa, você usará um template para implantar uma rede virtual, um netwo
 
 1. Entre no **Azure portal** - `https://portal.azure.com`.
 
-1. Pesquise por e selecione `Deploy a custom template`.
+1. Pesquise por e selecione `Implantar um modelo personalizado`.
 
 1. Na página de implantação personalizada, selecione **Crie seu próprio template no editor (Build your own template in the editor)**.
 
