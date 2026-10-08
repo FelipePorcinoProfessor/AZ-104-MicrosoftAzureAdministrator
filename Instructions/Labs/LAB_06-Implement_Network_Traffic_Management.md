@@ -62,7 +62,7 @@ Nesta tarefa, você usará um template para implantar uma rede virtual, um netwo
     | Assinatura (Subscription)  | sua assinatura do Azure |
     | Grupo de recursos (Resource group) | `az104-rg6` (Se necessário, selecione **Criar novo (Create new)**) |
     | Tamanho da VM (VM size) | Selecione um tamanho disponível. Use **Standard_D2s_v5** se disponível. |
-    | Senha (Password)      | Forneça uma senha segura |
+    | Senha (Password)      | **Password1234@** |
 
 1. Selecione **Revisar + criar (Review + create)** e então selecione **Criar (Create)**.
 
